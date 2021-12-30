@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Server {
@@ -18,16 +20,20 @@ public class Server {
 
         try {
             serverSocket = new ServerSocket(60000);
+            System.out.println("Server is waiting for clients!");
             clientSocket = serverSocket.accept();
+            System.out.println("A new Client has been connected!");
             out = new PrintWriter(clientSocket.getOutputStream());
             in = new BufferedReader (new InputStreamReader(clientSocket.getInputStream()));
 
             Thread sender= new Thread(new Runnable() {
                 String msg; //variable that will contains the data writter by the user
+                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
                 @Override   // annotation to override the run method
                 public void run() {
                     while(true){
                         msg = sc.nextLine(); //reads data from user's keybord
+                        System.out.println("Server " + formatter.format(new Date()) + " : "  + msg );
                         out.println(msg);    // write data stored in msg in the clientSocket
                         out.flush();   // forces the sending of the data
                     }
@@ -37,13 +43,14 @@ public class Server {
 
             Thread receive= new Thread(new Runnable() {
                 String msg ;
+                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
                 @Override
                 public void run() {
                     try {
                         msg = in.readLine();
                         //tant que le client est connecté
                         while(msg!=null){
-                            System.out.println("Client : "+msg);
+                            System.out.println(msg);
                             msg = in.readLine();
                         }
 

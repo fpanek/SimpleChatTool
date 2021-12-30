@@ -6,7 +6,7 @@ import java.net.InetAddress;
 
 public class scanNetwork {
     public static void main(String[] args) throws Exception {
-        int[] bounds = scanNetwork.rangeFromCidr("192.168.1.255/24");
+        int[] bounds = scanNetwork.rangeFromCidr("192.168.0.249/24");
 
         for (int i = bounds[0]; i <= bounds[1]; i++) {
             String address = InetRange.intToIp(i);
