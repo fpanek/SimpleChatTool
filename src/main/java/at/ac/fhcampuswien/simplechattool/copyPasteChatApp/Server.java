@@ -48,7 +48,6 @@ public class Server {
                 public void run() {
                     try {
                         msg = in.readLine();
-                        //tant que le client est connecté
                         while(msg!=null){
                             System.out.println(msg);
                             msg = in.readLine();

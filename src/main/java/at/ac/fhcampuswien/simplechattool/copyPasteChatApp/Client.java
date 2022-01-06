@@ -9,16 +9,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+
 public class Client {
 
-    //private static String host;
-
     public static void main(String[] args){
-        final Socket clientSocket; // socket used by client to send and recieve data from server
-        final BufferedReader in;   // object to read data from socket
-        final PrintWriter out;     // object to write data into socket
-        final PrintWriter nickname;
-        final Scanner sc = new Scanner(System.in); // object to read data from user's keyboard
+        final Socket clientSocket;
+        final BufferedReader in;
+        final PrintWriter out;
+        final Scanner sc = new Scanner(System.in);
+
 
         try {
 
@@ -42,10 +41,8 @@ public class Client {
                 String msg;
                 SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
-                @Override
                 public void run() {
                     while(true){
-
                         msg = sc.nextLine();
                         System.out.println(username + " " + formatter.format(new Date()) + " : "  + msg );
                         out.println(username + " " + formatter.format(new Date()) + " : "  + msg );
@@ -53,11 +50,13 @@ public class Client {
                     }
                 }
             });
+
             sender.start();
-            Thread receiver = new Thread(new Runnable() {
+            Thread receiver = new Thread(new Runnable()
+            {
                 String msg;
                 SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-                @Override
+
                 public void run() {
                     try {
                         msg = in.readLine();
@@ -70,6 +69,7 @@ public class Client {
                         System.out.println("Server out of service");
                         out.close();
                         clientSocket.close();
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
