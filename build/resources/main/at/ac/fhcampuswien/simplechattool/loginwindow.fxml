@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.simplechattool.LoginController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ebe9f5;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="input_server" layoutX="177.0" layoutY="134.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter hostname or IP" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font></TextField>
+            <Button fx:id="btn_login" alignment="CENTER" layoutX="177.0" layoutY="337.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;" text="LOGIN" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Label fx:id="warning_msg" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="306.0" textAlignment="CENTER" textFill="#bc0a0a">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="206.0" layoutY="61.0" text="Simple Chat Tool" textAlignment="CENTER" textFill="#0e0030">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="input_port" layoutX="177.0" layoutY="200.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter port number" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </TextField>
+            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="input_nickname" layoutX="177.0" layoutY="266.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter your nickname" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </TextField>
+            <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="277.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../OneDrive/Pictures/noun-chat-137086.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
