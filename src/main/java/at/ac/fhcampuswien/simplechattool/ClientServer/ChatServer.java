@@ -1,4 +1,9 @@
-package at.ac.fhcampuswien.simplechattool.copyPasteChatApp;
+/*
+Based on https://medium.com/nerd-for-tech/create-a-chat-app-with-java-sockets-8449fdaa933
+last visited: 10.01.2022
+ */
+
+package at.ac.fhcampuswien.simplechattool.ClientServer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,9 +13,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
+import java.util.Scanner; // will be replaced by GUI
 
-public class Server {
+public class ChatServer {
     public static void main(String[] args){
         final ServerSocket serverSocket ;
         final Socket clientSocket ;
@@ -53,7 +58,7 @@ public class Server {
                             msg = in.readLine();
                         }
 
-                        System.out.println("Client déconecté");
+                        System.out.println("Client Disconnect");
 
                         out.close();
                         clientSocket.close();
@@ -67,7 +72,5 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
