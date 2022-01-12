@@ -5,7 +5,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import at.ac.fhcampuswien.simplechattool.LoginController;
 import at.ac.fhcampuswien.simplechattool.ChatController;
 
@@ -21,6 +26,7 @@ public class Client {
     private boolean option = true;
     private ChatController chatView;
 
+
     public Client(ChatController chatView) {
         this.chatView = chatView;
     }
@@ -34,6 +40,23 @@ public class Client {
     }
 
     public void setConnection(String server, int port) {
+        boolean success = false;
+        while(!success) {
+            try {
+                InetAddress host = InetAddress.getByName(server);
+                System.out.println("Server " + server + " is Online");
+                success = true;
+
+            } catch (UnknownHostException e) {
+                System.out.println("Server is offline, please provide a correct server");
+                System.exit(0);
+            }
+        }
+        if( port < 0 || port > 65535)
+        {
+            System.out.print("Enter the right port number ..! " );
+            System.exit(0);
+        }
         try {
             clientSocket = new Socket(server, port);
             Thread clientThread = new Thread(new Runnable() {
@@ -56,6 +79,10 @@ public class Client {
         try {
             outputStream = clientSocket.getOutputStream();
             outData = new DataOutputStream(outputStream);
+            //Add Date?
+            //SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            //outData.write(formatter.format(new Date()).toString());
+            //Add username?
             outData.writeUTF(msg);
             outData.flush();
         } catch (IOException e) {

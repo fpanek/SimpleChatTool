@@ -5,42 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c703b09-d2b4-438e-98b4-1ad533bcc356" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/noun-chat-137086.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/img/noun-lock-1009749.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/SimpleChatTool.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/SimpleChatToolApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/controller/basicChatController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/Client$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/Client$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/Server$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/Server$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/getOwnIP.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ChatController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Client$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Server$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/scanNetwork$InetRange.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/scanNetwork.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/SimpleChatToolApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/controller/basicChatController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/getOwnIP.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,31 +48,44 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="22slmIyR2Kdmokwb0TN1LkGvLXG" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="at.ac.fhcampuswien.simplechattool" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.Server">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Client (1)">
+    <configuration name="ChatServer (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.ac.fhcampuswien.simplechattool.copyPasteChatApp.ChatServer" />
+      <module name="SimpleChatTool.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.ac.fhcampuswien.simplechattool.copyPasteChatApp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.ac.fhcampuswien.simplechattool.ClientServer.ChatServer" />
+      <module name="SimpleChatTool.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.ac.fhcampuswien.simplechattool.ClientServer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.ac.fhcampuswien.simplechattool.Client" />
       <module name="SimpleChatTool.main" />
       <extension name="coverage">
@@ -101,11 +99,11 @@
       </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="at.ac.fhcampuswien.simplechattool.Server" />
+      <option name="MAIN_CLASS_NAME" value="at.ac.fhcampuswien.simplechattool.copyPasteChatApp.Server" />
       <module name="SimpleChatTool.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.ac.fhcampuswien.simplechattool.*" />
+          <option name="PATTERN" value="at.ac.fhcampuswien.simplechattool.copyPasteChatApp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -126,25 +124,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="getOwnIP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="at.ac.fhcampuswien.simplechattool.copyPasteChatApp.getOwnIP" />
-      <module name="SimpleChatTool.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.ac.fhcampuswien.simplechattool.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Client (1)" />
+        <item itemvalue="Application.ChatServer (1)" />
+        <item itemvalue="Application.ChatServer" />
         <item itemvalue="Application.SimpleChatToolApplication" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.getOwnIP" />
       </list>
     </recent_temporary>
   </component>
@@ -164,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640887655600</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="tes">
+      <created>1640887806135</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640887806135</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -172,7 +165,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -180,12 +185,8 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+    <MESSAGE value="tes" />
+    <option name="LAST_COMMIT_MESSAGE" value="tes" />
   </component>
 </project>
