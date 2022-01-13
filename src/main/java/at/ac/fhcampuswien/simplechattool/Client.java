@@ -42,7 +42,7 @@ public class Client {
     private DataOutputStream outData;
     private boolean option = true;
     private ChatController chatView;
-
+    private Client cl;
 
     public Client(ChatController chatView) {
         this.chatView = chatView;
@@ -58,6 +58,10 @@ public class Client {
 
     public void setUsername(String name) {
         username = name;
+    }
+
+    public Client getClient(){
+        return cl;
     }
 
     public void setConnection(String server, int port) {

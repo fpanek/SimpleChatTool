@@ -32,10 +32,11 @@
                <font>
                   <Font name="System Italic" size="14.0" />
                </font></TextField>
-                <Button id="btn_send" fx:id="btn_send" layoutX="488.0" layoutY="289.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Send" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font></Button>
+                <Button id="btn_sendMessage" fx:id="btn_SendMessage" layoutX="488.0" layoutY="289.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Send" textFill="WHITE">
+                   <font>
+                      <Font size="15.0" />
+                   </font>
+                </Button>
             <TextFlow id="textflow" fx:id="textFlow" layoutX="12.0" layoutY="14.0" prefHeight="262.0" prefWidth="466.0" style="-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;" AnchorPane.leftAnchor="12.0" />
             <Button id="btn_send" fx:id="btn_disconnect" layoutX="488.0" layoutY="325.0" mnemonicParsing="false" onAction="#disconnectChat" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Disconnect" textFill="WHITE">
                <font>

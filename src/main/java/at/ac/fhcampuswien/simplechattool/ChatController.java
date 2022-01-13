@@ -18,6 +18,8 @@ public class ChatController {
         @FXML
         private Button btn_send;
         @FXML
+        private Button btn_SendMessage;
+        @FXML
         private TextField field_text;
         @FXML
         private TextFlow textFlow;
@@ -55,6 +57,13 @@ public class ChatController {
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
                 }
                 */
+                Client client = LoginController.getMyClient();
+                System.out.println("Message to addClientMessage:" + msg + "username" + client.getUsername());
+                Message message = new Message(client.getUsername(), msg);
+                String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
+                Text text = new Text(addMessage);
+                textFlow.getChildren().add(text);
+                textFlow.getChildren().add(new Text(System.lineSeparator()));
 
         }
 
@@ -75,29 +84,38 @@ public class ChatController {
         }
 
         @FXML
-        public void sendMessage(ActionEvent event) {
+        public void sendMessage() {
+                Client client = LoginController.getMyClient();
+                //System.out.println("Button for Message send pressed before any if...");
                 if (field_text.getText().isEmpty()) {
                         Text warning = new Text("Please enter a non-empty message!");
                         warning.setFill(Color.RED);
                         textFlow.getChildren().add(warning);
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
                 } else {
+                        System.out.println("Button for Message send pressed");
                         String msg = field_text.getText();
-                        if (mode == 1) {
+                        System.out.println("Message read from input: " + msg);
+                        //client.sendMessage("Automated Message after pressing Button:");
+                        client.sendMessage(msg);
+                        /*
+                        if (this.mode == 1) {
                                 client.sendMessage(msg);
                         } /* else {
                                 server.sendMessage(msg);
                         } */
+
                         addClientMessage(msg);
+
                 }
 
-                String msg = field_text.getText();
-                if (mode == 1) {
-                        client.sendMessage(msg);
-                } /*else {
-                        server.sendMessage(msg);
-                } */
-                addClientMessage(msg);
+                //String msg = field_text.getText();
+                //if (this.mode == 1) {
+                //        client.sendMessage(msg);
+                //} /*else {
+                //        server.sendMessage(msg);
+               // } */
+                //addClientMessage(msg);
                 field_text.clear();
         }
 
@@ -108,6 +126,8 @@ public class ChatController {
                 } /*else {
                         server.closeConnection();
                 }*/
+                Client client = LoginController.getMyClient();
+                client.closeConnection();
                 LoginController login = new LoginController();
                 login.changeScene("loginwindow.fxml");
 

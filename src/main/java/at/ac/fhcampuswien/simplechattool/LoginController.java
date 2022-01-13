@@ -31,6 +31,8 @@ public class LoginController extends Application implements Runnable {
     private String nickname;
     private static Stage stg;
 
+    private static Client myClient;
+
 
     public void start(Stage primaryStage) throws Exception {
         stg = primaryStage;
@@ -57,6 +59,10 @@ public class LoginController extends Application implements Runnable {
         stg.getScene().setRoot(pane);
     }
 
+    public static Client getMyClient() {
+        return myClient;
+    }
+
     @FXML
     public void userLogin(ActionEvent event) throws IOException {
         checkLogin();
@@ -67,19 +73,23 @@ public class LoginController extends Application implements Runnable {
         if (input_server.getText().isEmpty() || input_port.getText().isEmpty() || input_nickname.getText().isEmpty()) {
             warning_msg.setText("Error: Please enter your data!");
         } else if (!input_nickname.getText().isEmpty()) {
-            this.nickname = input_nickname.getText();
-            this.server = input_server.getText();
-            this.port = Integer.parseInt(input_port.getText());
+            //this.nickname = input_nickname.getText();
+            server = input_server.getText();
+            port = Integer.parseInt(input_port.getText());
+            System.out.println("Username from ipnut " + input_nickname.getText() + "method: " );
             Client client = new Client();
             client.setConnection(server, port);
+            client.setUsername(input_nickname.getText());
             System.out.println(server + " " + port);
+            //client.setUsername(input_nickname.getText());
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }
-            client.sendMessage("testing");
+            //client.sendMessage("Automated Test Message");
             changeScene("basic-chat.fxml");
+            myClient = client;
         }
     }
 

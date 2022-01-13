@@ -10,7 +10,7 @@ import java.util.Scanner;
 import at.ac.fhcampuswien.simplechattool.LoginController;
 import at.ac.fhcampuswien.simplechattool.ChatController;
 
-/*
+
 public class Server {
     private String username;
     private Socket myService;
@@ -22,8 +22,7 @@ public class Server {
     private boolean option = true;
     private ChatController chatView;
 
-    public Server(ChatController chatView) {
-        this.chatView = chatView;
+    public Server() {
     }
 
     public String getUsername() {
@@ -38,12 +37,14 @@ public class Server {
         try {
             serviceSocket = new ServerSocket(port);
             System.out.println("Server listening on port " + port);
+            System.out.println("Client not connected...");
             myService = serviceSocket.accept();
+            System.out.println("Client accepted");
             Thread serverThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (option) {
-                        listenData(chatView);
+                        listenData();
                     }
                 }
             });
@@ -55,13 +56,21 @@ public class Server {
         }
     }
 
-    public void listenData(ChatController chatView) {
+    public void listenData() {
         try {
             inputStream = myService.getInputStream();
             inputData = new DataInputStream(inputStream);
-            chatView.addRemoteMessage(inputData.readUTF());
+            //chatView.addRemoteMessage(inputData.readUTF());
+            System.out.println(inputData.readUTF());
+
         } catch (IOException ex) {
             System.err.println("ERROR: Error listening to data");
+            try{
+                myService.close();
+            } catch (IOException exx){
+                ex.printStackTrace();
+            }
+            ex.printStackTrace();
         }
     }
 
@@ -88,22 +97,29 @@ public class Server {
     }
 
     public static void main(String [] args) throws Exception {
-        ChatController chatView = new ChatController();
-        Server server = new Server(chatView);
+        //ChatController chatView = new ChatController();
+        //Server[] server = new Server[10];
+        Server server = new Server();
 
-        LoginController loginController = new LoginController();
-        String username = loginController.getUsername();
+        //LoginController loginController = new LoginController();
+        String username = "Server";
+        //server[0] = new Server();
         server.setUsername(username);
 
-        int port = loginController.getPort();
-        server.setConnection(port);
+        int port = 60000;
 
-        chatView.setServer(server);
+
+        //while(true){
+        //    server[0].setConnection(port);
+        //}
+        server.setConnection(port);
+        //chatView.setServer(server);
     }
 
 }
-*/
 
+
+/*
 public class Server {
 
     public static void main(String[] args){
@@ -164,6 +180,6 @@ public class Server {
             e.printStackTrace();
         }
 
-
     }
 }
+ */
