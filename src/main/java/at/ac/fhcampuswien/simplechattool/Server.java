@@ -96,25 +96,39 @@ public class Server {
         }
     }
 
-    public static void main(String [] args) throws Exception {
+
+    //public static void main(String [] args) throws Exception {
+
+
+
+        //Server server = new Server();
+        //String username = "Server";
+        //server.setUsername(username);
+        //int port = 60000;
+        //server.setConnection(port);
+
+
+
+
+        /*
+        Server[] server = new Server[10];
+        server[0] = new Server();
+        server[0].setConnection(60000);
+        server[1] = new Server();
+        server[1].setConnection(60000);
         //ChatController chatView = new ChatController();
         //Server[] server = new Server[10];
-        Server server = new Server();
 
         //LoginController loginController = new LoginController();
-        String username = "Server";
         //server[0] = new Server();
-        server.setUsername(username);
 
-        int port = 60000;
 
 
         //while(true){
         //    server[0].setConnection(port);
         //}
-        server.setConnection(port);
         //chatView.setServer(server);
-    }
+    }*/
 
 }
 

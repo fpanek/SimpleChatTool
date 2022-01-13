@@ -1,10 +1,6 @@
 package at.ac.fhcampuswien.simplechattool;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -42,7 +38,8 @@ public class Client {
     private DataOutputStream outData;
     private boolean option = true;
     private ChatController chatView;
-    private Client cl;
+    private ChatController chatViewMeins;
+
 
     public Client(ChatController chatView) {
         this.chatView = chatView;
@@ -60,8 +57,10 @@ public class Client {
         username = name;
     }
 
-    public Client getClient(){
-        return cl;
+
+
+    public ChatController getChatController(){
+        return chatViewMeins;
     }
 
     public void setConnection(String server, int port) {
@@ -86,7 +85,8 @@ public class Client {
             clientSocket = new Socket(server, port);
             Thread clientThread = new Thread(() -> {
                 while(option) {
-                    listenData(chatView);
+                    listenData(clientSocket);
+
                 }
             });
             clientThread.start();
@@ -112,11 +112,21 @@ public class Client {
         }
     }
 
-    public void listenData(ChatController chatView) {
+    public void listenData(Socket clientSocket) {
         try {
+            Client client = LoginController.getMyClient();
             inputStream = clientSocket.getInputStream();
             inData = new DataInputStream(inputStream);
-            chatView.addRemoteMessage(inData.readUTF());
+            //String outTest = new BufferedReader(new InputStreamReader(inputStream));
+            //System.out.print("Received Message: " + inData.readUTF());
+            //ChatController asdf = getChatController();
+            //asdf.addRemoteMessage(inData.readUTF());
+            //asdf.addClientMessage(inData.readUTF());
+            //chatView.addRemoteMessage("adsfasdlfkjlk");
+            //System.out.println(inData);
+            Message newMessage = new Message(client.getUsername(), "Textiwas");
+
+            //client.chatView.addRemoteMessage(inData.readUTF());
         } catch(IOException e) {
             System.err.println("ERROR: Error listening to data");
         }
@@ -134,7 +144,7 @@ public class Client {
 
 
 
-    public static void main(String [] args) throws Exception {
+    public  static void main(String [] args) throws Exception {
         ChatController chatView = new ChatController();
         Client client = new Client(chatView);
 
@@ -147,7 +157,10 @@ public class Client {
         client.setConnection(ip, port);
 
         chatView.setClient(client);
+        //chatViewMeins = chatView;
     }
+
+
 }
 
 /*

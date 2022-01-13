@@ -68,6 +68,7 @@ public class ChatController {
         }
 
         public void addRemoteMessage(String msg) {
+                /*
                 if (mode == 1) {
                         Message message = new Message("Partner", msg);
                         String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
@@ -81,6 +82,16 @@ public class ChatController {
                         textFlow.getChildren().add(text);
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
                 }
+                */
+
+                System.out.println("Message to GUI: " + msg);
+                //Message message = new Message("Partner", msg);
+                //String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
+                //Text text = new Text(addMessage);
+                //textFlow.getChildren().add(text);
+                Text text = new Text(msg);
+                textFlow.getChildren().add(text);
+                textFlow.getChildren().add(new Text(System.lineSeparator()));
         }
 
         @FXML
