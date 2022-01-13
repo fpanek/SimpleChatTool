@@ -47,13 +47,15 @@ public class ChatController {
                         Text text = new Text(addMessage);
                         textFlow.getChildren().add(text);
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
-                } else {
+                } /*else {
                         Message message = new Message(server.getUsername(), msg);
                         String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
                         Text text = new Text(addMessage);
                         textFlow.getChildren().add(text);
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
                 }
+                */
+
         }
 
         public void addRemoteMessage(String msg) {
@@ -83,18 +85,18 @@ public class ChatController {
                         String msg = field_text.getText();
                         if (mode == 1) {
                                 client.sendMessage(msg);
-                        } else {
+                        } /* else {
                                 server.sendMessage(msg);
-                        }
+                        } */
                         addClientMessage(msg);
                 }
 
                 String msg = field_text.getText();
                 if (mode == 1) {
                         client.sendMessage(msg);
-                } else {
+                } /*else {
                         server.sendMessage(msg);
-                }
+                } */
                 addClientMessage(msg);
                 field_text.clear();
         }
@@ -103,9 +105,9 @@ public class ChatController {
         public void disconnectChat() throws Exception {
                 if(mode == 1) {
                         client.closeConnection();
-                } else {
+                } /*else {
                         server.closeConnection();
-                }
+                }*/
                 LoginController login = new LoginController();
                 login.changeScene("loginwindow.fxml");
 

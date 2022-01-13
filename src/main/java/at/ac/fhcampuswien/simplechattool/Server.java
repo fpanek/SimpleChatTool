@@ -1,15 +1,16 @@
 package at.ac.fhcampuswien.simplechattool;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
 import at.ac.fhcampuswien.simplechattool.LoginController;
 import at.ac.fhcampuswien.simplechattool.ChatController;
 
+/*
 public class Server {
     private String username;
     private Socket myService;
@@ -101,9 +102,9 @@ public class Server {
     }
 
 }
+*/
 
-
-/*public class Server {
+public class Server {
 
     public static void main(String[] args){
         final ServerSocket serverSocket ;
@@ -165,4 +166,4 @@ public class Server {
 
 
     }
-} */
+}

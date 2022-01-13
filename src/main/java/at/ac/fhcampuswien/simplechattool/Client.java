@@ -8,13 +8,30 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 
 import at.ac.fhcampuswien.simplechattool.LoginController;
 import at.ac.fhcampuswien.simplechattool.ChatController;
 
-// Source: https://github.com/dvcarrillo/sockets-chat
+/*
+Sources:
+https://github.com/dvcarrillo/sockets-chat
+https://github.com/ashmeet4293/Chat-Application-in-java-using-javafx
+https://luisgcenci.medium.com/building-a-group-chat-app-with-javafx-multithread-socket-programming-in-java-c8c11fd8c927
+*/
 
 public class Client {
     private String username;
@@ -29,6 +46,10 @@ public class Client {
 
     public Client(ChatController chatView) {
         this.chatView = chatView;
+    }
+
+    public Client() {
+
     }
 
     public String getUsername() {
@@ -59,12 +80,9 @@ public class Client {
         }
         try {
             clientSocket = new Socket(server, port);
-            Thread clientThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while(option) {
-                        listenData(chatView);
-                    }
+            Thread clientThread = new Thread(() -> {
+                while(option) {
+                    listenData(chatView);
                 }
             });
             clientThread.start();
@@ -109,6 +127,8 @@ public class Client {
             System.err.println("ERROR: Error closing connection");
         }
     }
+
+
 
     public static void main(String [] args) throws Exception {
         ChatController chatView = new ChatController();

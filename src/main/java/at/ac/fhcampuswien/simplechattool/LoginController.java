@@ -12,8 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
-public class LoginController {
+public class LoginController extends Application implements Runnable {
     @FXML
     private Button btn_login;
     @FXML
@@ -30,10 +31,6 @@ public class LoginController {
     private String nickname;
     private static Stage stg;
 
-    public LoginController() throws Exception {
-        Stage primaryStage = new Stage();
-        start(primaryStage);
-    }
 
     public void start(Stage primaryStage) throws Exception {
         stg = primaryStage;
@@ -73,10 +70,25 @@ public class LoginController {
             this.nickname = input_nickname.getText();
             this.server = input_server.getText();
             this.port = Integer.parseInt(input_port.getText());
+            Client client = new Client();
+            client.setConnection(server, port);
+            System.out.println(server + " " + port);
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            client.sendMessage("testing");
             changeScene("basic-chat.fxml");
         }
     }
 
     public static void main(String[] args) {
+        Application.launch(args);
+    }
+
+    @Override
+    public void run() {
+
     }
 }
