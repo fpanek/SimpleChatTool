@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +33,7 @@ public class LoginController  {
     private static Stage stg;
 
     private static Client myClient;
+    private static LoginData logindata;
 
 /*
     public void start(Stage primaryStage) throws Exception {
@@ -42,7 +44,9 @@ public class LoginController  {
         primaryStage.show();
     }
 */
-
+    public LoginData getLogindataObject(){
+        return logindata;
+    }
 
     public String getIP() {
         return server;
@@ -57,10 +61,11 @@ public class LoginController  {
     }
 
     public void changeScene(String fxml) throws IOException {
+
+
         Stage stg = Client.getStage();
         Parent pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxml)));
         stg.getScene().setRoot(pane);
-        //stg.setScene();
     }
 
     public static Client getMyClient() {
@@ -82,20 +87,24 @@ public class LoginController  {
             server = input_server.getText();
             port = Integer.parseInt(input_port.getText());
             System.out.println("Username from ipnut " + input_nickname.getText() + "method: " );
-            Client client = new Client();
-            client.setConnection(server, port);
-            client.setUsername(input_nickname.getText());
+            logindata = LoginData.getLogindata();
+            logindata.setUsername(input_nickname.getText());
+            logindata.setServerIP(input_server.getText());
+            logindata.setServerPort(Integer.parseInt(input_port.getText()));
+            //Client client = new Client();
+            //client.setConnection(server, port);
+            //client.setUsername(input_nickname.getText());
             System.out.println(server + " " + port);
 
             //client.setUsername(input_nickname.getText());
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt();
-            }
+            //try {
+            //    TimeUnit.SECONDS.sleep(1);
+            //} catch (InterruptedException ie) {
+            //    Thread.currentThread().interrupt();
+            //}
             //client.sendMessage("Automated Test Message");
             changeScene("basic-chat.fxml");
-            myClient = client;
+            //myClient = client;
         }
     }
 

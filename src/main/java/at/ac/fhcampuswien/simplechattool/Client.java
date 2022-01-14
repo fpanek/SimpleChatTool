@@ -6,7 +6,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Objects;
 
+import at.ac.fhcampuswien.simplechattool.ChatController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -43,11 +46,19 @@ public class Client extends Application{
     private ChatController chatView;
     private static Stage stg;
     private static String msg;
+    public ChatController controller;
+    private static String Message;
 
-
+    public  TextFlow textFlow;
 
     public Client() {
 
+    }
+
+    public static String retrieveMessage(){
+        String temp = Message;
+        Message = "";
+        return temp;
     }
 
     public static String getMsg(){
@@ -133,12 +144,35 @@ public class Client extends Application{
             //ChatController controller = loader.getController();
             //controller.addRemoteMessage("ascbouyh");
             //chatView.addRemoteMessage(inData.readUTF());
+            //ChatController mycontroller = ChatController.getChatControllerInstance();
+            //FXMLLoader loader = new FXMLLoader();
+            //ChatController controller = loader.getController();
+            //controller.addClientMessage("asdfaf");
+            //mycontroller.addRemoteMessage(inData.readUTF());
+            //ChatController chatController = ChatController.getChatControllerInstance();
+            //chatController.addClientMessage("asdf");
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("SecondWindow.fxml"));
+            //Parent root = loader.load();
+            //ChatController chatController = loader.getController();
+            //chatController.addClientMessage("sdfasdfwer");
 
             System.out.print("Received Message: " + inData.readUTF());
-
+            //Message = inData.readUTF();
             //controller.addRemoteMessage("asdfasdf");
             //Text text = new Text("sdfdsf");
             //addRemoteMessage("asdfasdf");
+
+            //AnchorPane frame = FXMLLoader.load(getClass().getResource("basic-chat.fxml"));
+            //textFlow.getChildren().add("asdf");
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("basic-chat.fxml"));
+            //Parent root = loader.load();
+            //ChatController c = loader.getController();
+            //c.addClientMessage("haloasdf");
+
+
+            ChatController c = ChatController.getChatcontroller();
+            c.addClientMessage("asdfasdf");
+
         } catch(IOException e) {
             System.err.println("ERROR: Error listening to data");
         }
@@ -165,11 +199,20 @@ public class Client extends Application{
         //ChatController chatview
         //ChatController unserController = ChatController.getChatController();
         //chatView = unserController;
-        stg = primaryStage;
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginwindow.fxml")));
+
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Client.class.getResource("loginwindow.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Simple Chat Tool");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
+        stg = primaryStage;
+        //stg = primaryStage;
+        //Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginwindow.fxml")));
+        //primaryStage.setTitle("Simple Chat Tool");
+        //primaryStage.setScene(new Scene(root, 600, 400));
+        //primaryStage.show();
     }
 
 
