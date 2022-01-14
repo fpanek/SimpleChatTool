@@ -22,41 +22,24 @@ public class ChatController {
         @FXML
         private TextField field_text;
         @FXML
-        private TextFlow textFlow;
+        public  TextFlow textFlow;
 
         private Client client;
         private Server server;
         private int mode;
+        private static ChatController chatController;
 
         public ChatController() {
-                mode = 0;
+               //chatController = new ChatController();
         }
 
-        public void setClient(Client cli) {
-                mode = 1;
-                this.client = cli;
+        public static ChatController getChatController(){
+                return chatController;
         }
 
-        public void setServer(Server serv) {
-                mode = 2;
-                this.server = serv;
-        }
+
 
         public void addClientMessage(String msg) {
-                if (mode == 1) {
-                        Message message = new Message(client.getUsername(), msg);
-                        String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
-                        Text text = new Text(addMessage);
-                        textFlow.getChildren().add(text);
-                        textFlow.getChildren().add(new Text(System.lineSeparator()));
-                } /*else {
-                        Message message = new Message(server.getUsername(), msg);
-                        String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
-                        Text text = new Text(addMessage);
-                        textFlow.getChildren().add(text);
-                        textFlow.getChildren().add(new Text(System.lineSeparator()));
-                }
-                */
                 Client client = LoginController.getMyClient();
                 System.out.println("Message to addClientMessage:" + msg + "username" + client.getUsername());
                 Message message = new Message(client.getUsername(), msg);
@@ -67,22 +50,8 @@ public class ChatController {
 
         }
 
-        public void addRemoteMessage(String msg) {
-                /*
-                if (mode == 1) {
-                        Message message = new Message("Partner", msg);
-                        String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
-                        Text text = new Text(addMessage);
-                        textFlow.getChildren().add(text);
-                        textFlow.getChildren().add(new Text(System.lineSeparator()));
-                } else {
-                        Message message = new Message("Partner", msg);
-                        String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
-                        Text text = new Text(addMessage);
-                        textFlow.getChildren().add(text);
-                        textFlow.getChildren().add(new Text(System.lineSeparator()));
-                }
-                */
+        public  void addRemoteMessage(String msg) {
+                Client client = LoginController.getMyClient();
 
                 System.out.println("Message to GUI: " + msg);
                 //Message message = new Message("Partner", msg);
@@ -97,7 +66,7 @@ public class ChatController {
         @FXML
         public void sendMessage() {
                 Client client = LoginController.getMyClient();
-                //System.out.println("Button for Message send pressed before any if...");
+                //System.out.0.println("Button for Message send pressed before any if...");
                 if (field_text.getText().isEmpty()) {
                         Text warning = new Text("Please enter a non-empty message!");
                         warning.setFill(Color.RED);
@@ -109,34 +78,17 @@ public class ChatController {
                         System.out.println("Message read from input: " + msg);
                         //client.sendMessage("Automated Message after pressing Button:");
                         client.sendMessage(msg);
-                        /*
-                        if (this.mode == 1) {
-                                client.sendMessage(msg);
-                        } /* else {
-                                server.sendMessage(msg);
-                        } */
-
                         addClientMessage(msg);
 
                 }
 
-                //String msg = field_text.getText();
-                //if (this.mode == 1) {
-                //        client.sendMessage(msg);
-                //} /*else {
-                //        server.sendMessage(msg);
-               // } */
+
                 //addClientMessage(msg);
                 field_text.clear();
         }
 
         @FXML
         public void disconnectChat() throws Exception {
-                if(mode == 1) {
-                        client.closeConnection();
-                } /*else {
-                        server.closeConnection();
-                }*/
                 Client client = LoginController.getMyClient();
                 client.closeConnection();
                 LoginController login = new LoginController();

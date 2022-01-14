@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class LoginController extends Application implements Runnable {
+public class LoginController  {
     @FXML
     private Button btn_login;
     @FXML
@@ -33,7 +33,7 @@ public class LoginController extends Application implements Runnable {
 
     private static Client myClient;
 
-
+/*
     public void start(Stage primaryStage) throws Exception {
         stg = primaryStage;
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginwindow.fxml")));
@@ -41,6 +41,8 @@ public class LoginController extends Application implements Runnable {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
+*/
+
 
     public String getIP() {
         return server;
@@ -55,6 +57,7 @@ public class LoginController extends Application implements Runnable {
     }
 
     public void changeScene(String fxml) throws IOException {
+        Stage stg = Client.getStage();
         Parent pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxml)));
         stg.getScene().setRoot(pane);
     }
@@ -64,7 +67,8 @@ public class LoginController extends Application implements Runnable {
     }
 
     @FXML
-    public void userLogin(ActionEvent event) throws IOException {
+    public void userLogin(ActionEvent action) throws IOException {
+        System.out.println("Button login pressed");
         checkLogin();
     }
 
@@ -97,8 +101,5 @@ public class LoginController extends Application implements Runnable {
         Application.launch(args);
     }
 
-    @Override
-    public void run() {
 
-    }
 }
