@@ -44,9 +44,7 @@ public class Client extends Application{
     private static Stage stg;
     private static String msg;
 
-    public Client(ChatController chatView) {
-        this.chatView = chatView;
-    }
+
 
     public Client() {
 
@@ -119,7 +117,7 @@ public class Client extends Application{
         try {
             inputStream = clientSocket.getInputStream();
             inData = new DataInputStream(inputStream);
-            System.out.print("Received Message: " + inData.readUTF());
+
             //ChatController unserController = ChatController.getChatController();
             //ChatController.addRemoteMessage("234sdfg");
             //unserController.addClientMessage("234asdf");
@@ -127,7 +125,18 @@ public class Client extends Application{
             //chatView.addClientMessage("234asasdf");
             //ChatController myController =
             //String msg = inData.readUTF();
+            //FXMLLoader asdf = new FXMLLoader();
+            //ChatController meins = asdf.getController();
+            //meins.addRemoteMessage("234");
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("basic-chat.fxml"));
+            //Parent root = loader.load();
+            //ChatController controller = loader.getController();
+            //controller.addRemoteMessage("ascbouyh");
+            //chatView.addRemoteMessage(inData.readUTF());
 
+            System.out.print("Received Message: " + inData.readUTF());
+
+            //controller.addRemoteMessage("asdfasdf");
             //Text text = new Text("sdfdsf");
             //addRemoteMessage("asdfasdf");
         } catch(IOException e) {
@@ -154,8 +163,8 @@ public class Client extends Application{
     @Override
     public void start (Stage primaryStage) throws Exception{
         //ChatController chatview
-        ChatController unserController = new ChatController();
-        chatView = unserController;
+        //ChatController unserController = ChatController.getChatController();
+        //chatView = unserController;
         stg = primaryStage;
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginwindow.fxml")));
         primaryStage.setTitle("Simple Chat Tool");

@@ -27,10 +27,15 @@ public class ChatController {
         private Client client;
         private Server server;
         private int mode;
-        private static ChatController chatController;
+        private static ChatController chatController = new ChatController();
 
-        public ChatController() {
+        private ChatController() {
                //chatController = new ChatController();
+                System.out.println("Object now created:....");
+        }
+
+        public static ChatController getChatControllerInstance(){
+                return chatController;
         }
 
         public static ChatController getChatController(){
@@ -52,7 +57,7 @@ public class ChatController {
 
         public  void addRemoteMessage(String msg) {
                 Client client = LoginController.getMyClient();
-
+                System.out.println("mehtot for rempote output");
                 System.out.println("Message to GUI: " + msg);
                 //Message message = new Message("Partner", msg);
                 //String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();

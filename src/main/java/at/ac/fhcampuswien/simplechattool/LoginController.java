@@ -60,6 +60,7 @@ public class LoginController  {
         Stage stg = Client.getStage();
         Parent pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxml)));
         stg.getScene().setRoot(pane);
+        //stg.setScene();
     }
 
     public static Client getMyClient() {
@@ -85,6 +86,7 @@ public class LoginController  {
             client.setConnection(server, port);
             client.setUsername(input_nickname.getText());
             System.out.println(server + " " + port);
+
             //client.setUsername(input_nickname.getText());
             try {
                 TimeUnit.SECONDS.sleep(1);
