@@ -33,7 +33,7 @@ public class Message {
     }
 
     public String getMessage(){
-        return "[ " + getTime() + " " + getUsername() + " ] --> " + getText();
+        return "[" + getTime() + " " + getUsername() + "] " + getText();
     }
 
     public void setUsername(String username) {
