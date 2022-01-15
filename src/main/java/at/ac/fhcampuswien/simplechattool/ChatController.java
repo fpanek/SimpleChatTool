@@ -16,7 +16,7 @@ import at.ac.fhcampuswien.simplechattool.Message;
 
 import java.util.ResourceBundle;
 
-public class ChatController  implements Initializable{
+public class ChatController {
         @FXML
         private Button btn_disconnect;
         @FXML
@@ -42,18 +42,12 @@ public class ChatController  implements Initializable{
 
         private static Client myClient;
 
-        @Override
-        public void initialize(URL location, ResourceBundle resources){
-                // Implementing the Initializable interface means that this method
-                // will be called when the controller instance is created
 
-        }
 
         public ChatController() {
-                //System.out.println("Chat Controller created: " + Integer.toHexString(hashCode()));
                 myClient = client;
                 chatcontroller = this;
-                //ScrollPaneChat.setVvalue(1.0);
+                System.out.println("initialize wihtou mehtod Calleasdfasdf");
         }
 
         public static Client getClientFromChatController(){
@@ -67,12 +61,10 @@ public class ChatController  implements Initializable{
 
         public void addClientMessage(String msg) {
                 Client client = ChatController.getClientFromChatController();
-                //System.out.println("Message to addClientMessage:" + msg + "username" + client.getUsername());
                 Message message = new Message(client.getUsername(), msg);
                 Text text = new Text(message.getMessage());
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
-                //System.out.println("Chat Controller addClientMessage Instance: " + Integer.toHexString(hashCode()));
                 ScrollPaneChat.setVvalue(1.0);
         }
 
@@ -115,21 +107,18 @@ public class ChatController  implements Initializable{
                         textFlow.getChildren().add(warning);
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
                 } else {
-                        //System.out.println("Button for Message send pressed");
+                        //Message message = new Message()
                         String msg = field_text.getText();
-                        //System.out.println("Message read from input: " + msg);
-                        //client.sendMessage("Automated Message after pressing Button:");
-                        //client.sendMessage(msg);
                         client.sendMessage(msg);
                         addClientMessage(msg);
                 }
-                //addClientMessage(msg);
                 field_text.clear();
         }
 
         @FXML
         public void disconnectChat() throws Exception {
-                Client client = LoginController.getMyClient();
+                Client client = ChatController.getClientFromChatController();
+                client.sendMessage("CloseSocket");
                 client.closeConnection();
                 LoginController login = new LoginController();
                 login.changeScene("loginwindow.fxml");

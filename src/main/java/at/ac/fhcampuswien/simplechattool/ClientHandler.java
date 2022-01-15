@@ -2,6 +2,7 @@ package at.ac.fhcampuswien.simplechattool;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 import java.text.DateFormat;
@@ -32,15 +33,15 @@ public class ClientHandler extends Thread{
         while (true)
         {
             try {
-                System.out.println("Bist du da?..");
 
                 // Ask user what he wants
                 //dos.writeUTF("What do you want");
                 //dos.flush();
                 // receive the answer from client
                 received = dis.readUTF();
-                System.out.println("received: " + received + "Port: " + s.getPort());
-                if(received.equals("Exit"))
+
+                System.out.println("Port: " + s.getPort() + " received Message: " + received);
+                if(received.equals("CloseSocket"))
                 {
                     System.out.println("Client " + this.s + " sends exit...");
                     System.out.println("Closing this connection.");
@@ -70,10 +71,16 @@ public class ClientHandler extends Thread{
                         //dos.writeUTF("Invalid input");
                         break;
                 }
+
+
             } catch (IOException e) {
                 System.err.println("Client disconnectd");
-                System.exit(0);
-                //e.printStackTrace();
+                try{
+                    this.s.close();
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                break;
             }
         }
 
@@ -86,5 +93,6 @@ public class ClientHandler extends Thread{
         }catch(IOException e){
             e.printStackTrace();
         }
+
     }
 }

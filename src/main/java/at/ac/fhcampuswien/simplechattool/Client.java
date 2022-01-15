@@ -139,8 +139,8 @@ public class Client extends Application{
             String Message =  inData.readUTF();
             //System.out.println("Message as Tring: " + Message);
             Platform.runLater(()->{
-                    ChatController x = ChatController.getChatcontroller();
-                    x.addRemoteMessage(Message);
+                    ChatController chatcontroller = ChatController.getChatcontroller();
+                    chatcontroller.addRemoteMessage(Message);
             });
         } catch(IOException e) {
             System.err.println("ERROR: Error listening to data");
