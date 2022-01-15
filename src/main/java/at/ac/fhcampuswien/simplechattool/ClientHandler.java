@@ -68,7 +68,7 @@ public class ClientHandler extends Thread{
                         break;
 
                     default:
-                        dos.writeUTF("Invalid input");
+                        //dos.writeUTF("Invalid input");
                         break;
                 }
             } catch (IOException e) {

@@ -41,15 +41,13 @@ public class ChatController  implements Initializable{
 
         @Override
         public void initialize(URL location, ResourceBundle resources){
-// Implementing the Initializable interface means that this method
+                // Implementing the Initializable interface means that this method
                 // will be called when the controller instance is created
 
         }
 
         public ChatController() {
-
-                System.out.println("");
-                System.out.println("Chat Controller created: " + Integer.toHexString(hashCode()));
+                //System.out.println("Chat Controller created: " + Integer.toHexString(hashCode()));
                 myClient = client;
                 chatcontroller = this;
         }
@@ -66,7 +64,7 @@ public class ChatController  implements Initializable{
         public void addClientMessage(String msg) {
                 //Client client = LoginController.getMyClient();
                 Client client = ChatController.getClientFromChatController();
-                System.out.println("Message to addClientMessage:" + msg + "username" + client.getUsername());
+                //System.out.println("Message to addClientMessage:" + msg + "username" + client.getUsername());
                 Message message = new Message(client.getUsername(), msg);
                 String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
                 Text text = new Text(addMessage);
@@ -84,7 +82,8 @@ public class ChatController  implements Initializable{
                 //String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
                 //Text text = new Text(addMessage);
                 //textFlow.getChildren().add(text);
-                Text text = new Text(msg);
+                String Message = "Message from Partner: " + msg;
+                Text text = new Text(Message);
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
         }

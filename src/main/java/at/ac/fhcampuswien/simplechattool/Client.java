@@ -110,12 +110,7 @@ public class Client extends Application{
                 protected Object call() throws Exception {
                     while (true) {
                         listenData(clientSocket);
-                        System.out.println("Executing Threaaad  - still alive");
-                        try {
-                            TimeUnit.SECONDS.sleep(1);
-                        } catch (InterruptedException ie) {
-                            Thread.currentThread().interrupt();
-                        }
+                        //System.out.println("Executing Threaaad  - still alive");
                     }
                 }
             };
@@ -135,8 +130,8 @@ public class Client extends Application{
             outData = new DataOutputStream(outputStream);
             outData.writeUTF(msg);
             outData.flush();
-            ChatController c = ChatController.getChatcontroller();
-            c.addRemoteMessage("Message from Button: haloasdf");
+            //ChatController c = ChatController.getChatcontroller();
+            //c.addRemoteMessage("Message from Button: haloasdf");
         } catch (IOException e) {
             System.err.println("ERROR: Error sending data");
         }
@@ -159,7 +154,6 @@ public class Client extends Application{
             Platform.runLater(()->{
                     ChatController x = ChatController.getChatcontroller();
                     x.addRemoteMessage(Message);
-                    //sendMessage("asdflllllllllll");
             });
         } catch(IOException e) {
             System.err.println("ERROR: Error listening to data");
