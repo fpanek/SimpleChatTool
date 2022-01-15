@@ -36,8 +36,7 @@ public class ClientHandler extends Thread{
                 System.out.println("Bist du da?..");
 
                 // Ask user what he wants
-                dos.writeUTF("What do you want?[Date | Time]..\n"+
-                        "Type Exit to terminate connection.");
+                dos.writeUTF("What do you want");
                 dos.flush();
                 // receive the answer from client
                 received = dis.readUTF();
@@ -73,7 +72,9 @@ public class ClientHandler extends Thread{
                         break;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("Client disconnectd");
+                System.exit(0);
+                //e.printStackTrace();
             }
         }
 

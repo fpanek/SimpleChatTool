@@ -24,6 +24,8 @@ public class ChatController  implements Initializable{
         @FXML
         private Button btn_SendMessage;
         @FXML
+        private Button btn_StartServer;
+        @FXML
         private TextField field_text;
         @FXML
         public  TextFlow textFlow;
@@ -51,10 +53,10 @@ public class ChatController  implements Initializable{
                 System.out.println("");
                 System.out.println("Chat Controller created: " + Integer.toHexString(hashCode()));
 
-                LoginData logindata = LoginData.getLogindata();
-                Client client = new Client();
-                client.setConnection(logindata.getServerIP(), logindata.getServerPort());
-                client.setUsername(logindata.getUsername());
+                //LoginData logindata = LoginData.getLogindata();
+                //Client client = new Client();
+                //client.setConnection(logindata.getServerIP(), logindata.getServerPort());
+                //client.setUsername(logindata.getUsername());
                 myClient = client;
                 //addRemoteMessage("sdfsdfewre");
                 chatcontroller = this;
@@ -79,13 +81,16 @@ public class ChatController  implements Initializable{
                 Text text = new Text(addMessage);
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
+                System.out.println("Chat Controller addClientMessage Instance: " + Integer.toHexString(hashCode()));
+
 
         }
 
         public  void addRemoteMessage(String msg) {
-                Client client = LoginController.getMyClient();
-                System.out.println("mehtot for rempote output");
-                System.out.println("Message to GUI: " + msg);
+                System.out.println("Chat Controller addRemoteMessage Instance: " + Integer.toHexString(hashCode()));
+
+                //Client client = LoginController.getMyClient();
+                //System.out.println("Message to GUI: " + msg);
                 //Message message = new Message("Partner", msg);
                 //String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
                 //Text text = new Text(addMessage);
@@ -93,6 +98,20 @@ public class ChatController  implements Initializable{
                 Text text = new Text(msg);
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
+        }
+
+        @FXML
+        public void startServer(){
+                System.out.println("Using Chat Controller: " + Integer.toHexString(hashCode()));
+                LoginData logindata = LoginData.getLogindata();
+                Client client = new Client();
+                myClient = client;
+                client.setConnection(logindata.getServerIP(), logindata.getServerPort());
+                client.setUsername(logindata.getUsername());
+                //WorkerClass myThread = new WorkerClass();
+                //myThread.start();
+                //new Thread(myThread).start();
+
         }
 
         @FXML

@@ -5,10 +5,12 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import at.ac.fhcampuswien.simplechattool.ChatController;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,19 +49,14 @@ public class Client extends Application{
     private static Stage stg;
     private static String msg;
     public ChatController controller;
-    private static String Message;
-
+    //private static String Message;
+    String Message;
     public  TextFlow textFlow;
 
     public Client() {
 
     }
 
-    public static String retrieveMessage(){
-        String temp = Message;
-        Message = "";
-        return temp;
-    }
 
     public static String getMsg(){
         return msg;
@@ -80,6 +77,8 @@ public class Client extends Application{
 
 
     public void setConnection(String server, int port) {
+        ChatController c = ChatController.getChatcontroller();
+        //c.addClientMessage("ooooooo");
         boolean success = false;
         while(!success) {
             try {
@@ -99,17 +98,52 @@ public class Client extends Application{
         }
         try {
             clientSocket = new Socket(server, port);
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.println("Adding to gui..");
+            //ChatController c = ChatController.getChatcontroller();
+            //c.addClientMessage("haloasdf");
+            //ChatController c = ChatController.getChatcontroller();
+            c.addRemoteMessage("Connection established - Ready to chat:");
+
+            Task clientThread = new Task() {
+                @Override
+                protected Object call() throws Exception {
+                    while (true) {
+                        listenData(clientSocket);
+                        System.out.println("Executing Threaaad  - still alive");
+                        //ChatController c = ChatController.getChatcontroller();
+                        //c.addRemoteMessage("ooooooo");
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException ie) {
+                            Thread.currentThread().interrupt();
+                        }
+                        //ChatController d = ChatController.getChatcontroller();
+                        //d.addRemoteMessage("teeeeest");
+                    }
+                    //return null;
+                }
+            };
+
+            new Thread(clientThread).start();
+            /*
             Thread clientThread = new Thread(() -> {
                 while(option) {
                     listenData(clientSocket);
-
                 }
             });
             clientThread.start();
+
+             */
             System.out.println("Connection successful to server " + server + " and port " + port + ".");
         } catch (IOException e) {
             System.err.println("ERROR: Connection error");
-            System.exit(0);
+            e.printStackTrace();
+            //System.exit(0);
         }
     }
 
@@ -119,9 +153,19 @@ public class Client extends Application{
             outData = new DataOutputStream(outputStream);
             outData.writeUTF(msg);
             outData.flush();
+            ChatController c = ChatController.getChatcontroller();
+            c.addRemoteMessage("Message from Button: haloasdf");
         } catch (IOException e) {
             System.err.println("ERROR: Error sending data");
         }
+    }
+
+    public void setMesage(String Message){
+        this.Message = Message;
+    }
+
+    public String getMessage(){
+        return Message;
     }
 
     public void listenData(Socket clientSocket) {
@@ -129,49 +173,25 @@ public class Client extends Application{
             inputStream = clientSocket.getInputStream();
             inData = new DataInputStream(inputStream);
 
-            //ChatController unserController = ChatController.getChatController();
-            //ChatController.addRemoteMessage("234sdfg");
-            //unserController.addClientMessage("234asdf");
-            //unserController.addClientMessage("sdf");
-            //chatView.addClientMessage("234asasdf");
-            //ChatController myController =
-            //String msg = inData.readUTF();
-            //FXMLLoader asdf = new FXMLLoader();
-            //ChatController meins = asdf.getController();
-            //meins.addRemoteMessage("234");
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("basic-chat.fxml"));
-            //Parent root = loader.load();
-            //ChatController controller = loader.getController();
-            //controller.addRemoteMessage("ascbouyh");
-            //chatView.addRemoteMessage(inData.readUTF());
-            //ChatController mycontroller = ChatController.getChatControllerInstance();
-            //FXMLLoader loader = new FXMLLoader();
-            //ChatController controller = loader.getController();
-            //controller.addClientMessage("asdfaf");
-            //mycontroller.addRemoteMessage(inData.readUTF());
-            //ChatController chatController = ChatController.getChatControllerInstance();
-            //chatController.addClientMessage("asdf");
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("SecondWindow.fxml"));
-            //Parent root = loader.load();
-            //ChatController chatController = loader.getController();
-            //chatController.addClientMessage("sdfasdfwer");
 
-            System.out.print("Received Message: " + inData.readUTF());
+
+
+            //System.out.print("Received Message: " + inData.readUTF());
+            String Message = (String) inData.readUTF();
+
+            System.out.println("Message as Tring: " + Message);
+            //System.out.print("Received Message after STringoutadsf: " + inData.readUTF());
+
+            Platform.runLater(()->{
+                    ChatController x = ChatController.getChatcontroller();
+                    x.addRemoteMessage(Message);
+                    //sendMessage("asdflllllllllll");
+            });
             //Message = inData.readUTF();
             //controller.addRemoteMessage("asdfasdf");
             //Text text = new Text("sdfdsf");
             //addRemoteMessage("asdfasdf");
 
-            //AnchorPane frame = FXMLLoader.load(getClass().getResource("basic-chat.fxml"));
-            //textFlow.getChildren().add("asdf");
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("basic-chat.fxml"));
-            //Parent root = loader.load();
-            //ChatController c = loader.getController();
-            //c.addClientMessage("haloasdf");
-
-
-            ChatController c = ChatController.getChatcontroller();
-            c.addClientMessage("asdfasdf");
 
         } catch(IOException e) {
             System.err.println("ERROR: Error listening to data");

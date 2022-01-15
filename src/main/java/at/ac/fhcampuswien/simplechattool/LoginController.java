@@ -61,8 +61,6 @@ public class LoginController  {
     }
 
     public void changeScene(String fxml) throws IOException {
-
-
         Stage stg = Client.getStage();
         Parent pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxml)));
         stg.getScene().setRoot(pane);
