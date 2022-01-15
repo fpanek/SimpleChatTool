@@ -68,12 +68,10 @@ public class ChatController  implements Initializable{
 
 
         public void addClientMessage(String msg) {
-                //Client client = LoginController.getMyClient();
                 Client client = ChatController.getClientFromChatController();
                 //System.out.println("Message to addClientMessage:" + msg + "username" + client.getUsername());
                 Message message = new Message(client.getUsername(), msg);
-                String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
-                Text text = new Text(addMessage);
+                Text text = new Text(message.getMessage());
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
                 //System.out.println("Chat Controller addClientMessage Instance: " + Integer.toHexString(hashCode()));
@@ -84,26 +82,15 @@ public class ChatController  implements Initializable{
                 Text text = new Text(msg);
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
-                //ChatController meins = ChatController.getChatcontroller();
-                //meins.ScrollPaneChat.setVvalue(1.0);
                 ScrollPaneChat.setVvalue(1.0);
         }
 
         public  void addRemoteMessage(String msg) {
-                //System.out.println("Chat Controller addRemoteMessage Instance: " + Integer.toHexString(hashCode()));
-
-                //Client client = LoginController.getMyClient();
-                //System.out.println("Message to GUI: " + msg);
-                //Message message = new Message("Partner", msg);
-                //String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
-                //Text text = new Text(addMessage);
-                //textFlow.getChildren().add(text);
                 String Message = "Message from Partner: " + msg;
                 Text text = new Text(Message);
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
                 ScrollPaneChat.setVvalue(1.0);
-
         }
 
         @FXML
@@ -116,7 +103,6 @@ public class ChatController  implements Initializable{
                 client.setUsername(logindata.getUsername());
                 ChatController meins = ChatController.getChatcontroller();
                 meins.ScrollPaneChat.setVvalue(1.0);
-                //ScrollPaneChat.setVvalue(1.0);
         }
 
         @FXML

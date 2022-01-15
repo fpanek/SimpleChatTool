@@ -113,6 +113,7 @@ public class Client extends Application{
 
             new Thread(clientThread).start();
             System.out.println("Connection successful to server " + server + " and port " + port + ".");
+            c.addOfflineMessage("Successfully connected to " + server + " port: " + port + " Have fun ;)");
         } catch (IOException e) {
             System.err.println("ERROR: Connection error");
             e.printStackTrace();
@@ -126,8 +127,6 @@ public class Client extends Application{
             outData = new DataOutputStream(outputStream);
             outData.writeUTF(msg);
             outData.flush();
-            //ChatController c = ChatController.getChatcontroller();
-            //c.addRemoteMessage("Message from Button: haloasdf");
         } catch (IOException e) {
             System.err.println("ERROR: Error sending data");
         }
@@ -171,7 +170,6 @@ public class Client extends Application{
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
         stg = primaryStage;
-
     }
 
 

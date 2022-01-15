@@ -80,7 +80,6 @@ public class LoginController  {
             logindata.setUsername(input_nickname.getText());
             logindata.setServerIP(input_server.getText());
             logindata.setServerPort(Integer.parseInt(input_port.getText()));
-
             System.out.println(server + " " + port);
             changeScene("basic-chat.fxml");
         }

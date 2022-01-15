@@ -17,7 +17,26 @@ public class Message {
         calendar.setTime(date);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
+        int seconds = calendar.get(Calendar.SECOND);
+        time = Integer.toString(hour) + ":" + Integer.toString(min) + ":" + Integer.toString(seconds);
+    }
+
+
+
+
+    public Message (){
+        Date date = new Date();
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
         time = Integer.toString(hour) + ":" + Integer.toString(min);
+    }
+
+    //String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
+
+    public String getMessage(){
+        return "[ " + getTime() + " " + getUsername() + " ] --> " + getText();
     }
 
     public void setUsername(String username) {

@@ -19,7 +19,7 @@
                <font>
                   <Font name="System Italic" size="14.0" />
                </font></TextField>
-            <Button fx:id="btn_login" alignment="CENTER" layoutX="177.0" layoutY="337.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;" text="LOGIN" textFill="WHITE">
+            <Button fx:id="btn_login" alignment="CENTER" layoutX="177.0" layoutY="337.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;" text="Enter Chat Tool" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
