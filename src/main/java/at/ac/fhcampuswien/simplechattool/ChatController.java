@@ -91,8 +91,7 @@ public class ChatController {
                 myClient = client;
                 client.setConnection(logindata.getServerIP(), logindata.getServerPort());
                 client.setUsername(logindata.getUsername());
-                ChatController meins = ChatController.getChatcontroller();
-                meins.ScrollPaneChat.setVvalue(1.0);
+                ScrollPaneChat.setVvalue(1.0);
         }
 
         @FXML
@@ -106,10 +105,15 @@ public class ChatController {
                         warning.setFill(Color.RED);
                         textFlow.getChildren().add(warning);
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
+                        ScrollPaneChat.setVvalue(1.0);
                 } else {
                         //Message message = new Message()
                         String msg = field_text.getText();
-                        client.sendMessage(msg);
+                        try{
+                                client.sendMessage(msg);
+                        }catch (NullPointerException e){
+                                e.printStackTrace();
+                        }
                         addClientMessage(msg);
                 }
                 field_text.clear();
