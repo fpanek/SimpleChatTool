@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 
 public class ClientHandler extends Thread{
     DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd");
@@ -34,6 +35,9 @@ public class ClientHandler extends Thread{
 
     }
 
+
+
+
     @Override
     public  String toString(){
         return "Socket: " + s.getPort() + s.getRemoteSocketAddress();
@@ -45,6 +49,21 @@ public class ClientHandler extends Thread{
 
     public static ArrayList<ClientHandler> getActiveClientHandlers(){
         return ActiveClientHandlers;
+    }
+
+    public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket){
+        if(clientHandler.getClientHandlerPort(clientHandler) == socket.getPort()){
+            //System.out.println("Ports are equal");
+            return true;
+        }else{
+            //System.out.println("Port not qual...");
+            return false;
+        }
+
+    }
+
+    public int getClientHandlerPort(ClientHandler clientHandler){
+        return clientHandler.s.getPort();
     }
 
     @Override
@@ -64,13 +83,16 @@ public class ClientHandler extends Thread{
 
 
                 //Send received Message to All Clients
-                for(ClientHandler handler: ActiveClientHandlers){
-                    //System.out.println(handler);
-                    if(handler.s.getPort()!=s.getPort()){
-                        handler.dos.writeUTF(received);
-                        handler.dos.flush();
+                if(!received.equals("CloseSocket")){
+                    for(ClientHandler handler: ActiveClientHandlers){
+                        //System.out.println(handler);
+                        if(handler.s.getPort()!=s.getPort()){
+                            handler.dos.writeUTF(received);
+                            handler.dos.flush();
+                        }
                     }
                 }
+
 
                 System.out.println("Port: " + s.getPort() + " received Message: " + received);
                 if(received.equals("CloseSocket"))
@@ -79,6 +101,13 @@ public class ClientHandler extends Thread{
                     System.out.println("Closing this connection.");
                     this.s.close();
                     System.out.println("Connection closed");
+                    for(ClientHandler handler: ActiveClientHandlers){
+                        if(socketEqualWithClientHandler(handler, s)){
+                            System.out.println("Removing Client: " + handler.s.getPort());
+                            ActiveClientHandlers.remove(handler);
+                            break;
+                        }
+                    }
                     break;
                 }
 
@@ -107,6 +136,16 @@ public class ClientHandler extends Thread{
 
             } catch (IOException e) {
                 System.err.println("Client disconnectd");
+                for(ClientHandler handler: ActiveClientHandlers){
+                    if(socketEqualWithClientHandler(handler, s)){
+                       //ActiveClientHandlers.remove(handler);
+                        // ClientHandler ClientHandlertoRemove = handler;
+                        System.out.println("Removing Client: " + handler.s.getPort());
+                        ActiveClientHandlers.remove(handler);
+                        break;
+                    }
+                }
+
                 try{
                     this.s.close();
                 } catch (Exception ex){
