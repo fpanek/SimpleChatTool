@@ -84,10 +84,4 @@ public class LoginController  {
             changeScene("basic-chat.fxml");
         }
     }
-
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
-
-
 }

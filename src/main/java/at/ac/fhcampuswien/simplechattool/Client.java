@@ -99,7 +99,6 @@ public class Client extends Application{
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }
-            System.out.println("Adding to gui..");
             //c.addRemoteMessage("Connection established - Ready to chat:");
             Task clientThread = new Task() {
                 @Override
@@ -140,8 +139,8 @@ public class Client extends Application{
             String Message =  inData.readUTF();
             //System.out.println("Message as Tring: " + Message);
             Platform.runLater(()->{
-                    ChatController chatcontroller = ChatController.getChatcontroller();
-                    chatcontroller.addRemoteMessage(Message);
+                ChatController chatcontroller = ChatController.getChatcontroller();
+                chatcontroller.addRemoteMessage(Message);
             });
         } catch(IOException e) {
             try{
@@ -151,7 +150,6 @@ public class Client extends Application{
             }catch (Exception ex){
                 ex.printStackTrace();
             }
-
             System.err.println("ERROR: Error listening to data");
             validData = false;
         }

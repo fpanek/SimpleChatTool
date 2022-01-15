@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class ClientHandler extends Thread{
@@ -15,7 +17,11 @@ public class ClientHandler extends Thread{
     final DataInputStream dis;
     final DataOutputStream dos;
     final Socket s;
+    ArrayList<Socket> connectedClients = new ArrayList<Socket>();
+    private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<ClientHandler>();
 
+    //ToDO
+    // remove socket from Array List if Socket gets Disconnected
 
     // Constructor
     public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)
@@ -23,6 +29,22 @@ public class ClientHandler extends Thread{
         this.s = s;
         this.dis = dis;
         this.dos = dos;
+        connectedClients.add(s);
+        ActiveClientHandlers.add(this);
+
+    }
+
+    @Override
+    public  String toString(){
+        return "Socket: " + s.getPort() + s.getRemoteSocketAddress();
+    }
+
+    public ArrayList<Socket> getConnectedClients(){
+        return connectedClients;
+    }
+
+    public static ArrayList<ClientHandler> getActiveClientHandlers(){
+        return ActiveClientHandlers;
     }
 
     @Override
@@ -39,6 +61,16 @@ public class ClientHandler extends Thread{
                 //dos.flush();
                 // receive the answer from client
                 received = dis.readUTF();
+
+
+                //Send received Message to All Clients
+                for(ClientHandler handler: ActiveClientHandlers){
+                    //System.out.println(handler);
+                    if(handler.s.getPort()!=s.getPort()){
+                        handler.dos.writeUTF(received);
+                        handler.dos.flush();
+                    }
+                }
 
                 System.out.println("Port: " + s.getPort() + " received Message: " + received);
                 if(received.equals("CloseSocket"))
