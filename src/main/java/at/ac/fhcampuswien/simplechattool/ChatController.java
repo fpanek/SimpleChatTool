@@ -122,6 +122,5 @@ public class ChatController {
                 client.closeConnection();
                 LoginController login = new LoginController();
                 login.changeScene("loginwindow.fxml");
-
         }
 }

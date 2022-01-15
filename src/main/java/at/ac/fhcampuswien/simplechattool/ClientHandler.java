@@ -2,15 +2,12 @@ package at.ac.fhcampuswien.simplechattool;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Iterator;
 
 public class ClientHandler extends Thread{
     DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd");
@@ -21,9 +18,6 @@ public class ClientHandler extends Thread{
     ArrayList<Socket> connectedClients = new ArrayList<Socket>();
     private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<ClientHandler>();
 
-    //ToDO
-    // remove socket from Array List if Socket gets Disconnected
-
     // Constructor
     public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)
     {
@@ -32,10 +26,7 @@ public class ClientHandler extends Thread{
         this.dos = dos;
         connectedClients.add(s);
         ActiveClientHandlers.add(this);
-
     }
-
-
 
 
     @Override
@@ -138,14 +129,11 @@ public class ClientHandler extends Thread{
                 System.err.println("Client disconnectd");
                 for(ClientHandler handler: ActiveClientHandlers){
                     if(socketEqualWithClientHandler(handler, s)){
-                       //ActiveClientHandlers.remove(handler);
-                        // ClientHandler ClientHandlertoRemove = handler;
                         System.out.println("Removing Client: " + handler.s.getPort());
                         ActiveClientHandlers.remove(handler);
                         break;
                     }
                 }
-
                 try{
                     this.s.close();
                 } catch (Exception ex){
