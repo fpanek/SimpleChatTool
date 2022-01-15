@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -176,8 +177,10 @@ public class Client extends Application{
         Parent root = loader.load();
         primaryStage.setTitle("Simple Chat Tool");
         primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setResizable(false);
         primaryStage.show();
         stg = primaryStage;
+        stg.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("logo2.png"))));
     }
 
 
