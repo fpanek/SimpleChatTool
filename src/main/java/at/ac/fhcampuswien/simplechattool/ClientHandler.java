@@ -1,5 +1,4 @@
 package at.ac.fhcampuswien.simplechattool;
-import at.ac.fhcampuswien.simplechattool.Server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

@@ -18,11 +18,8 @@ public class Message {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
         int seconds = calendar.get(Calendar.SECOND);
-        time = Integer.toString(hour) + ":" + Integer.toString(min) + ":" + Integer.toString(seconds);
+        time = hour + ":" + min + ":" + seconds;
     }
-
-
-
 
     public Message (){
         Date date = new Date();
@@ -30,10 +27,10 @@ public class Message {
         calendar.setTime(date);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
-        time = Integer.toString(hour) + ":" + Integer.toString(min);
-    }
+        int seconds = calendar.get(Calendar.SECOND);
 
-    //String addMessage = "[" + message.getTime() + " " + message.getUsername() + "]->\t" + message.getText();
+        time = hour + ":" + min + ":" + seconds;
+    }
 
     public String getMessage(){
         return "[ " + getTime() + " " + getUsername() + " ] --> " + getText();

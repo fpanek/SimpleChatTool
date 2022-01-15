@@ -13,7 +13,6 @@ import javafx.scene.text.TextFlow;
 import java.net.URL;
 import at.ac.fhcampuswien.simplechattool.Client;
 import at.ac.fhcampuswien.simplechattool.Message;
-import at.ac.fhcampuswien.simplechattool.Server;
 
 import java.util.ResourceBundle;
 
@@ -36,7 +35,6 @@ public class ChatController  implements Initializable{
 
 
         private Client client;
-        private Server server;
         private int mode;
 
         private static ChatController chatcontroller;

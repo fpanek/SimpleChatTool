@@ -74,7 +74,7 @@ public class Client extends Application{
 
 
     public void setConnection(String server, int port) {
-        ChatController c = ChatController.getChatcontroller();
+        ChatController chatcontroller = ChatController.getChatcontroller();
         boolean success = false;
         while(!success) {
             try {
@@ -113,7 +113,7 @@ public class Client extends Application{
 
             new Thread(clientThread).start();
             System.out.println("Connection successful to server " + server + " and port " + port + ".");
-            c.addOfflineMessage("Successfully connected to " + server + " port: " + port + " Have fun ;)");
+            chatcontroller.addOfflineMessage("Successfully connected to " + server + " port: " + port + " Have fun ;)");
         } catch (IOException e) {
             System.err.println("ERROR: Connection error");
             e.printStackTrace();
