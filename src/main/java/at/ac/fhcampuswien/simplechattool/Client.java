@@ -50,7 +50,7 @@ public class Client extends Application{
     private static String msg;
     public ChatController controller;
     public  TextFlow textFlow;
-
+    boolean validData = true;
 
     public Client() {
     }
@@ -104,10 +104,11 @@ public class Client extends Application{
             Task clientThread = new Task() {
                 @Override
                 protected Object call() throws Exception {
-                    while (true) {
+                    while (validData) {
                         listenData(clientSocket);
                         //System.out.println("Executing Threaaad  - still alive");
                     }
+                    return null;
                 }
             };
 
@@ -143,7 +144,16 @@ public class Client extends Application{
                     chatcontroller.addRemoteMessage(Message);
             });
         } catch(IOException e) {
+            try{
+                inData.close();
+                outData.close();
+                clientSocket.close();
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+
             System.err.println("ERROR: Error listening to data");
+            validData = false;
         }
     }
 
