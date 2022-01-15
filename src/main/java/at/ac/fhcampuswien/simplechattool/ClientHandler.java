@@ -36,8 +36,8 @@ public class ClientHandler extends Thread{
                 System.out.println("Bist du da?..");
 
                 // Ask user what he wants
-                dos.writeUTF("What do you want");
-                dos.flush();
+                //dos.writeUTF("What do you want");
+                //dos.flush();
                 // receive the answer from client
                 received = dis.readUTF();
                 System.out.println("received: " + received + "Port: " + s.getPort());

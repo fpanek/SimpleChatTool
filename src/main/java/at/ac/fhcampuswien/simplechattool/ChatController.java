@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -29,6 +30,10 @@ public class ChatController  implements Initializable{
         private TextField field_text;
         @FXML
         public  TextFlow textFlow;
+        @FXML private ScrollPane ScrollPaneChat;
+
+
+
 
         private Client client;
         private Server server;
@@ -50,6 +55,7 @@ public class ChatController  implements Initializable{
                 //System.out.println("Chat Controller created: " + Integer.toHexString(hashCode()));
                 myClient = client;
                 chatcontroller = this;
+                //ScrollPaneChat.setVvalue(1.0);
         }
 
         public static Client getClientFromChatController(){
@@ -70,11 +76,21 @@ public class ChatController  implements Initializable{
                 Text text = new Text(addMessage);
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
-                System.out.println("Chat Controller addClientMessage Instance: " + Integer.toHexString(hashCode()));
+                //System.out.println("Chat Controller addClientMessage Instance: " + Integer.toHexString(hashCode()));
+                ScrollPaneChat.setVvalue(1.0);
+        }
+
+        public void addOfflineMessage(String msg){
+                Text text = new Text(msg);
+                textFlow.getChildren().add(text);
+                textFlow.getChildren().add(new Text(System.lineSeparator()));
+                //ChatController meins = ChatController.getChatcontroller();
+                //meins.ScrollPaneChat.setVvalue(1.0);
+                ScrollPaneChat.setVvalue(1.0);
         }
 
         public  void addRemoteMessage(String msg) {
-                System.out.println("Chat Controller addRemoteMessage Instance: " + Integer.toHexString(hashCode()));
+                //System.out.println("Chat Controller addRemoteMessage Instance: " + Integer.toHexString(hashCode()));
 
                 //Client client = LoginController.getMyClient();
                 //System.out.println("Message to GUI: " + msg);
@@ -86,6 +102,8 @@ public class ChatController  implements Initializable{
                 Text text = new Text(Message);
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
+                ScrollPaneChat.setVvalue(1.0);
+
         }
 
         @FXML
@@ -96,20 +114,26 @@ public class ChatController  implements Initializable{
                 myClient = client;
                 client.setConnection(logindata.getServerIP(), logindata.getServerPort());
                 client.setUsername(logindata.getUsername());
+                ChatController meins = ChatController.getChatcontroller();
+                meins.ScrollPaneChat.setVvalue(1.0);
+                //ScrollPaneChat.setVvalue(1.0);
         }
 
         @FXML
         public void sendMessage() {
                 Client client = ChatController.getClientFromChatController();
+                if (client == null){
+                        addOfflineMessage("Server not yet started...");
+                }
                 if (field_text.getText().isEmpty()) {
                         Text warning = new Text("Please enter a non-empty message!");
                         warning.setFill(Color.RED);
                         textFlow.getChildren().add(warning);
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
                 } else {
-                        System.out.println("Button for Message send pressed");
+                        //System.out.println("Button for Message send pressed");
                         String msg = field_text.getText();
-                        System.out.println("Message read from input: " + msg);
+                        //System.out.println("Message read from input: " + msg);
                         //client.sendMessage("Automated Message after pressing Button:");
                         //client.sendMessage(msg);
                         client.sendMessage(msg);

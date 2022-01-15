@@ -49,14 +49,11 @@ public class Client extends Application{
     private static Stage stg;
     private static String msg;
     public ChatController controller;
-    //private static String Message;
-    String Message;
     public  TextFlow textFlow;
 
+
     public Client() {
-
     }
-
 
     public static String getMsg(){
         return msg;
@@ -78,7 +75,6 @@ public class Client extends Application{
 
     public void setConnection(String server, int port) {
         ChatController c = ChatController.getChatcontroller();
-        //c.addClientMessage("ooooooo");
         boolean success = false;
         while(!success) {
             try {
@@ -104,7 +100,7 @@ public class Client extends Application{
                 Thread.currentThread().interrupt();
             }
             System.out.println("Adding to gui..");
-            c.addRemoteMessage("Connection established - Ready to chat:");
+            //c.addRemoteMessage("Connection established - Ready to chat:");
             Task clientThread = new Task() {
                 @Override
                 protected Object call() throws Exception {
@@ -137,19 +133,11 @@ public class Client extends Application{
         }
     }
 
-    public void setMesage(String Message){
-        this.Message = Message;
-    }
-
-    public String getMessage(){
-        return Message;
-    }
-
     public void listenData(Socket clientSocket) {
         try {
             inputStream = clientSocket.getInputStream();
             inData = new DataInputStream(inputStream);
-            String Message = (String) inData.readUTF();
+            String Message =  inData.readUTF();
             //System.out.println("Message as Tring: " + Message);
             Platform.runLater(()->{
                     ChatController x = ChatController.getChatcontroller();

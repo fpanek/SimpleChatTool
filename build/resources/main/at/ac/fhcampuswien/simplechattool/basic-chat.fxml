@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -29,25 +30,29 @@
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #ebe9f5;" VBox.vgrow="ALWAYS">
             <children>
                 <TextField id="field_text" fx:id="field_text" alignment="TOP_LEFT" layoutX="12.0" layoutY="289.0" prefHeight="68.0" prefWidth="466.0" promptText="Enter your message">
-               <font>
-                  <Font name="System Italic" size="14.0" />
-               </font></TextField>
-                <Button id="btn_sendMessage" fx:id="btn_SendMessage" layoutX="288.0" layoutY="289.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Send" textFill="WHITE">
-                   <font>
-                      <Font size="15.0" />
-                   </font>
-                </Button>
-                <Button id="btn_startServer" fx:id="btn_StartServer" layoutX="488.0" layoutY="289.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="starts" textFill="WHITE">
+                    <font>
+                        <Font name="System Italic" size="14.0" />
+                    </font></TextField>
+                <Button id="btn_sendMessage" fx:id="btn_SendMessage" layoutX="488.0" layoutY="289.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Send" textFill="WHITE">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
-            <TextFlow id="textflow" fx:id="textFlow" layoutX="12.0" layoutY="14.0" prefHeight="262.0" prefWidth="466.0" style="-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;" AnchorPane.leftAnchor="12.0" />
-            <Button id="btn_send" fx:id="btn_disconnect" layoutX="488.0" layoutY="325.0" mnemonicParsing="false" onAction="#disconnectChat" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Disconnect" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
+                <Button id="btn_startServer" fx:id="btn_StartServer" layoutX="488.0" layoutY="253.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Connect" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+                <ScrollPane fx:id="ScrollPaneChat" layoutX="12.0" layoutY="14.0" AnchorPane.leftAnchor="12.0">
+                    <content>
+                        <TextFlow id="textflow" fx:id="textFlow" prefHeight="262.0" prefWidth="466.0" style="-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;" />
+                    </content>
+                </ScrollPane>
+                <Button id="btn_send" fx:id="btn_disconnect" layoutX="488.0" layoutY="217.0" mnemonicParsing="false" onAction="#disconnectChat" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Disconnect" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
             </children>
         </AnchorPane>
     </children>
