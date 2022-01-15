@@ -35,15 +35,6 @@ public class LoginController  {
     private static Client myClient;
     private static LoginData logindata;
 
-/*
-    public void start(Stage primaryStage) throws Exception {
-        stg = primaryStage;
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginwindow.fxml")));
-        primaryStage.setTitle("Simple Chat Tool");
-        primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.show();
-    }
-*/
     public LoginData getLogindataObject(){
         return logindata;
     }
@@ -89,20 +80,9 @@ public class LoginController  {
             logindata.setUsername(input_nickname.getText());
             logindata.setServerIP(input_server.getText());
             logindata.setServerPort(Integer.parseInt(input_port.getText()));
-            //Client client = new Client();
-            //client.setConnection(server, port);
-            //client.setUsername(input_nickname.getText());
-            System.out.println(server + " " + port);
 
-            //client.setUsername(input_nickname.getText());
-            //try {
-            //    TimeUnit.SECONDS.sleep(1);
-            //} catch (InterruptedException ie) {
-            //    Thread.currentThread().interrupt();
-            //}
-            //client.sendMessage("Automated Test Message");
+            System.out.println(server + " " + port);
             changeScene("basic-chat.fxml");
-            //myClient = client;
         }
     }
 

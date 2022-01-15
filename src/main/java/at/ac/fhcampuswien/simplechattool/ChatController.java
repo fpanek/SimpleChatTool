@@ -33,7 +33,6 @@ public class ChatController  implements Initializable{
         private Client client;
         private Server server;
         private int mode;
-        //private static ChatController myChatController;
 
         private static ChatController chatcontroller;
 
@@ -48,19 +47,11 @@ public class ChatController  implements Initializable{
         }
 
         public ChatController() {
-                //Client client = LoginController.getMyClient();
-                //client.setConnection("localhost", 5056);
+
                 System.out.println("");
                 System.out.println("Chat Controller created: " + Integer.toHexString(hashCode()));
-
-                //LoginData logindata = LoginData.getLogindata();
-                //Client client = new Client();
-                //client.setConnection(logindata.getServerIP(), logindata.getServerPort());
-                //client.setUsername(logindata.getUsername());
                 myClient = client;
-                //addRemoteMessage("sdfsdfewre");
                 chatcontroller = this;
-
         }
 
         public static Client getClientFromChatController(){
@@ -82,8 +73,6 @@ public class ChatController  implements Initializable{
                 textFlow.getChildren().add(text);
                 textFlow.getChildren().add(new Text(System.lineSeparator()));
                 System.out.println("Chat Controller addClientMessage Instance: " + Integer.toHexString(hashCode()));
-
-
         }
 
         public  void addRemoteMessage(String msg) {
@@ -108,17 +97,11 @@ public class ChatController  implements Initializable{
                 myClient = client;
                 client.setConnection(logindata.getServerIP(), logindata.getServerPort());
                 client.setUsername(logindata.getUsername());
-                //WorkerClass myThread = new WorkerClass();
-                //myThread.start();
-                //new Thread(myThread).start();
-
         }
 
         @FXML
         public void sendMessage() {
-                //Client client = LoginController.getMyClient();
                 Client client = ChatController.getClientFromChatController();
-                //System.out.0.println("Button for Message send pressed before any if...");
                 if (field_text.getText().isEmpty()) {
                         Text warning = new Text("Please enter a non-empty message!");
                         warning.setFill(Color.RED);
@@ -132,10 +115,7 @@ public class ChatController  implements Initializable{
                         //client.sendMessage(msg);
                         client.sendMessage(msg);
                         addClientMessage(msg);
-
                 }
-
-
                 //addClientMessage(msg);
                 field_text.clear();
         }
