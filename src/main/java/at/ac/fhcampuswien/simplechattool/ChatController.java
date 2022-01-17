@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import at.ac.fhcampuswien.simplechattool.Client;
 import at.ac.fhcampuswien.simplechattool.Message;
@@ -107,7 +109,6 @@ public class ChatController {
                         textFlow.getChildren().add(new Text(System.lineSeparator()));
                         ScrollPaneChat.setVvalue(1.0);
                 } else {
-                        //Message message = new Message()
                         String msg = field_text.getText();
                         try{
                                 client.sendMessage(msg);

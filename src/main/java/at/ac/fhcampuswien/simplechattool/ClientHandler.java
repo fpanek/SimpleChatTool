@@ -1,8 +1,6 @@
 package at.ac.fhcampuswien.simplechattool;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,18 +10,20 @@ import java.util.Date;
 public class ClientHandler extends Thread{
     DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd");
     DateFormat fortime = new SimpleDateFormat("hh:mm:ss");
-    final DataInputStream dis;
-    final DataOutputStream dos;
+    //final DataInputStream dis;
+    //final DataOutputStream dos;
+    final ObjectInputStream ois;
+    final ObjectOutputStream oos;
     final Socket s;
     ArrayList<Socket> connectedClients = new ArrayList<Socket>();
     private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<ClientHandler>();
 
     // Constructor
-    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)
+    public ClientHandler(Socket s, ObjectInputStream ois, ObjectOutputStream oos)
     {
         this.s = s;
-        this.dis = dis;
-        this.dos = dos;
+        this.ois = ois;
+        this.oos = oos;
         connectedClients.add(s);
         ActiveClientHandlers.add(this);
     }
@@ -44,10 +44,10 @@ public class ClientHandler extends Thread{
 
     public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket){
         if(clientHandler.getClientHandlerPort(clientHandler) == socket.getPort()){
-            //System.out.println("Ports are equal");
+            System.out.println("Ports are equal");
             return true;
         }else{
-            //System.out.println("Port not qual...");
+            System.out.println("Port not qual...");
             return false;
         }
 
@@ -62,31 +62,43 @@ public class ClientHandler extends Thread{
     {
         String received;
         String toreturn;
+        Message receivedMessage;
+        Message toReturnMessage;
         while (true)
         {
             try {
 
+                receivedMessage = (Message) ois.readObject();
+                System.out.println("Received Object Text: " + receivedMessage.getText());
+                //received = receivedMessage.getText();
                 // Ask user what he wants
                 //dos.writeUTF("What do you want");
                 //dos.flush();
                 // receive the answer from client
-                received = dis.readUTF();
+                //received = dis.readUTF();
 
-
+                //sendObject.writeObject(myMessage);
+                //sendObject.flush();
+                Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "iwas");
                 //Send received Message to All Clients
-                if(!received.equals("CloseSocket")){
+                if(!(receivedMessage.getText().equals("CloseSocket"))){
+                    System.out.println("Message not equal CloseSocket..");
                     for(ClientHandler handler: ActiveClientHandlers){
-                        //System.out.println(handler);
+                        //handler.oos.writeObject(myMessage);
+                        System.out.println(handler);
                         if(handler.s.getPort()!=s.getPort()){
-                            handler.dos.writeUTF(received);
-                            handler.dos.flush();
+                            //handler.dos.writeUTF(received);
+                            //handler.dos.flush();
+                            System.out.println("Forwarding Message: " + receivedMessage.getText());
+                            handler.oos.writeObject(receivedMessage.getText());
+                            handler.oos.flush();
                         }
                     }
                 }
 
 
-                System.out.println("Port: " + s.getPort() + " received Message: " + received);
-                if(received.equals("CloseSocket"))
+                System.out.println("Port: " + s.getPort() + " received Message: " + receivedMessage.getText());
+                if(receivedMessage.getText().equals("CloseSocket"))
                 {
                     System.out.println("Client " + this.s + " sends exit...");
                     System.out.println("Closing this connection.");
@@ -107,16 +119,17 @@ public class ClientHandler extends Thread{
 
                 // write on output stream based on the
                 // answer from the client
-                switch (received) {
+                switch (receivedMessage.getText()) {
 
                     case "Date" :
                         toreturn = fordate.format(date);
-                        dos.writeUTF(toreturn);
+                        //dos.writeUTF(toreturn);
+                        //oos.writeObject();
                         break;
 
                     case "Time" :
                         toreturn = fortime.format(date);
-                        dos.writeUTF(toreturn);
+                        //dos.writeUTF(toreturn);
                         break;
 
                     default:
@@ -125,8 +138,9 @@ public class ClientHandler extends Thread{
                 }
 
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.err.println("Client disconnectd");
+                e.printStackTrace();
                 for(ClientHandler handler: ActiveClientHandlers){
                     if(socketEqualWithClientHandler(handler, s)){
                         System.out.println("Removing Client: " + handler.s.getPort());
@@ -143,15 +157,17 @@ public class ClientHandler extends Thread{
             }
         }
 
+        /*
         try
         {
             // closing resources
-            this.dis.close();
-            this.dos.close();
+            this.ois.close();
+            this.oos.close();
 
         }catch(IOException e){
             e.printStackTrace();
         }
+         */
 
     }
 }

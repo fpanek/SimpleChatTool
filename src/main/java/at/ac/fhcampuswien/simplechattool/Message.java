@@ -1,17 +1,25 @@
 package at.ac.fhcampuswien.simplechattool;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Message {
+/*
+Message currently (16.01.2022) consists of 3 parts:
+    Username, Message, AdditionalInformation( -> Prepared for future usage)
+ */
+
+public class Message implements Serializable {
     private String username;
-    private String text;
+    private String Message;
     private String time;
+    private String AdditionalInformation;
+
 
     public Message(String username, String text) {
         this.username = username;
-        this.text = text;
+        this.Message = text;
         Date date = new Date();
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(date);
@@ -21,6 +29,12 @@ public class Message {
         time = hour + ":" + min + ":" + seconds;
     }
 
+    public Message(String username, String Message, String AdditionalInformation){
+        this.username = username;
+        this.Message = Message;
+        this.AdditionalInformation = AdditionalInformation;
+    }
+
     public Message (){
         Date date = new Date();
         Calendar calendar = GregorianCalendar.getInstance();
@@ -28,8 +42,17 @@ public class Message {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
         int seconds = calendar.get(Calendar.SECOND);
-
         time = hour + ":" + min + ":" + seconds;
+    }
+
+    public String getMessageAsString(){
+        return username + ":" + Message + ":" + AdditionalInformation;
+    }
+
+    public Message createMessageFromString(String MessageAsString){
+        //MessageAsString.split(":");
+        Message test = new Message("asdf","asf","asdf");
+        return test;
     }
 
     public String getMessage(){
@@ -41,7 +64,7 @@ public class Message {
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.Message = text;
     }
 
     public String getUsername() {
@@ -49,10 +72,22 @@ public class Message {
     }
 
     public String getText() {
-        return text;
+        return Message;
     }
 
     public String getTime() {
         return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getAdditionalInformation() {
+        return AdditionalInformation;
+    }
+
+    public void setAdditionalInformation(String additionalInformation) {
+        AdditionalInformation = additionalInformation;
     }
 }
