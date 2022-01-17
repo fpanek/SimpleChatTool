@@ -5,31 +5,19 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
-import at.ac.fhcampuswien.simplechattool.ChatController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-import at.ac.fhcampuswien.simplechattool.LoginController;
-import at.ac.fhcampuswien.simplechattool.ChatController;
+import javafx.stage.WindowEvent;
 
 /*
 Sources:
@@ -43,8 +31,8 @@ public class Client extends Application{
     private Socket clientSocket;
     private InputStream inputStream;
     private OutputStream outputStream;
-    private DataInputStream inData;
-    private DataOutputStream outData;
+    private ObjectInputStream objectInStream;
+    private ObjectOutputStream objectOutStream;
     private boolean option = true;
     private ChatController chatView;
     private static Stage stg;
@@ -52,6 +40,11 @@ public class Client extends Application{
     public ChatController controller;
     public  TextFlow textFlow;
     boolean validData = true;
+    private ObjectOutputStream sendObject;
+    private ObjectInputStream receiveObject;
+    private static ObjectOutputStream myObjectOutputStream;
+    private static ObjectInputStream myObjectInputStream;
+    private static Socket myClientSocket;
 
     public Client() {
     }
@@ -93,29 +86,43 @@ public class Client extends Application{
             System.out.print("Enter the right port number ..! " );
             System.exit(0);
         }
-        try {
+
+        try{
             clientSocket = new Socket(server, port);
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt();
+            myClientSocket = clientSocket;
+
+            try{
+                OutputStream outputStream = myClientSocket.getOutputStream();
+                InputStream inputStream = myClientSocket.getInputStream();
+                ObjectOutputStream sendObject = new ObjectOutputStream(outputStream);
+                ObjectInputStream receiveObject = new ObjectInputStream(inputStream);
+                myObjectOutputStream = sendObject;
+                myObjectInputStream = receiveObject;
+            } catch (Exception e){
+                e.printStackTrace();
             }
-            //c.addRemoteMessage("Connection established - Ready to chat:");
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+
+        try {
             Task clientThread = new Task() {
                 @Override
                 protected Object call() throws Exception {
                     while (validData) {
                         listenData(clientSocket);
+                        //Thread.sleep(10000);
                         //System.out.println("Executing Threaaad  - still alive");
                     }
                     return null;
                 }
             };
-
             new Thread(clientThread).start();
+
             System.out.println("Connection successful to server " + server + " and port " + port + ".");
             chatcontroller.addOfflineMessage("Successfully connected to " + server + " port: " + port + " Have fun ;)");
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("ERROR: Connection error");
             e.printStackTrace();
             //System.exit(0);
@@ -124,29 +131,27 @@ public class Client extends Application{
 
     public void sendMessage(String msg) {
         try {
-            outputStream = clientSocket.getOutputStream();
-            outData = new DataOutputStream(outputStream);
-            outData.writeUTF(msg);
-            outData.flush();
-        } catch (IOException e) {
+            Message myMessage = new Message(getUsername(), msg, "nothing");
+            System.out.println("Sending Object to Server..." + myMessage.getText());
+            myObjectOutputStream.writeObject(myMessage);
+            myObjectOutputStream.flush();
+
+        } catch (Exception e) {
             System.err.println("ERROR: Error sending data");
+            e.printStackTrace();
         }
     }
 
     public void listenData(Socket clientSocket) {
         try {
-            inputStream = clientSocket.getInputStream();
-            inData = new DataInputStream(inputStream);
-            String Message =  inData.readUTF();
-            //System.out.println("Message as Tring: " + Message);
+            Message myMessage = (Message) myObjectInputStream.readObject();
             Platform.runLater(()->{
                 ChatController chatcontroller = ChatController.getChatcontroller();
-                chatcontroller.addRemoteMessage(Message);
+                chatcontroller.addRemoteMessage(myMessage.getText());
             });
-        } catch(IOException e) {
+        } catch(Exception e) {
             try{
-                inData.close();
-                outData.close();
+                e.printStackTrace();
                 clientSocket.close();
             }catch (Exception ex){
                 ex.printStackTrace();
@@ -158,8 +163,8 @@ public class Client extends Application{
 
     public void closeConnection() {
         try {
-            outData.close();
-            inData.close();
+            objectOutStream.close();
+            objectInStream.close();
             clientSocket.close();
         } catch (IOException ex) {
             System.err.println("ERROR: Error closing connection");
@@ -181,6 +186,13 @@ public class Client extends Application{
         primaryStage.show();
         stg = primaryStage;
         stg.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("logo2.png"))));
+        stg.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                System.out.println("Stage is closing");
+                stg.close();
+                System.exit(0);
+            }
+        });
     }
 
 

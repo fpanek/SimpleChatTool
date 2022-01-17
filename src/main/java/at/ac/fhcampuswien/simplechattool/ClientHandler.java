@@ -70,15 +70,8 @@ public class ClientHandler extends Thread{
 
                 receivedMessage = (Message) ois.readObject();
                 System.out.println("Received Object Text: " + receivedMessage.getText());
-                //received = receivedMessage.getText();
-                // Ask user what he wants
-                //dos.writeUTF("What do you want");
-                //dos.flush();
-                // receive the answer from client
-                //received = dis.readUTF();
 
-                //sendObject.writeObject(myMessage);
-                //sendObject.flush();
+
                 Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "iwas");
                 //Send received Message to All Clients
                 if(!(receivedMessage.getText().equals("CloseSocket"))){
@@ -90,7 +83,7 @@ public class ClientHandler extends Thread{
                             //handler.dos.writeUTF(received);
                             //handler.dos.flush();
                             System.out.println("Forwarding Message: " + receivedMessage.getText());
-                            handler.oos.writeObject(receivedMessage.getText());
+                            handler.oos.writeObject(receivedMessage);
                             handler.oos.flush();
                         }
                     }
@@ -123,18 +116,30 @@ public class ClientHandler extends Thread{
 
                     case "Date" :
                         toreturn = fordate.format(date);
+                        Message returnMessageDate = new Message("Automatic Message", toreturn, "Automated Message");
+                        oos.writeObject(returnMessageDate);
+                        oos.flush();
                         //dos.writeUTF(toreturn);
                         //oos.writeObject();
                         break;
 
                     case "Time" :
                         toreturn = fortime.format(date);
+                        Message returnMessageTime = new Message("Automatic Message", toreturn, "Automated Message");
+                        oos.writeObject(returnMessageTime);
+                        oos.flush();
                         //dos.writeUTF(toreturn);
                         break;
-
+/*
                     default:
                         //dos.writeUTF("Invalid input");
+                        toreturn = "Invalid input";
+                        Message returnMessageDefault = new Message("Automatic Message", toreturn, "Automated Message");
+                        oos.writeObject(returnMessageDefault);
+                        oos.flush();
                         break;
+
+ */
                 }
 
 
