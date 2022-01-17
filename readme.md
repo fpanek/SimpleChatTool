@@ -14,11 +14,14 @@ This is a simple console based application created in Java that enables communic
 
 ## How to use
 
-Currently, please only use the Branch Client without GUI for the Branch:
-https://github.com/fpanek/SimpleChatTool/tree/ClientWithoutGUI
+Please note that there are two versions of this application:
+- Version without GUI (the "ClientWithoutGui" branch: https://github.com/fpanek/SimpleChatTool/tree/ClientWithoutGUI)
+- Version with GUI that has been updated on 16th January (the Master branch)
+
+If you are reviewing our application after 16th, please use the version with GUI from Master branch!
 
 1. Start Server.java
 2. Start Client.java
 3. Enter server and port
-4. Chat!
-5. To disconnect as a Client, you can enter "Exit" in the chat
+4. In the chat view, click on "Connect" to connect to the server
+5. Chat
