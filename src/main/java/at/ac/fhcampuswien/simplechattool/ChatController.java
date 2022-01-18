@@ -133,9 +133,9 @@ public class ChatController {
                 //ScrollPaneChat.setVvalue(1.0);
         }
 
-        public void addRemoteMessage(String msg) {
-                String Message = "Message from Partner: " + msg;
-                Text text = new Text(Message);
+        public void addRemoteMessage(Message message) {
+                Message message1 = new Message(message.getUsername(), message.getText());
+                Text text = new Text(message1.getMessage());
 
                 HBox hBox = new HBox();
                 hBox.setAlignment(Pos.TOP_LEFT);

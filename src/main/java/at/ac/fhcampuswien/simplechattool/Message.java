@@ -27,8 +27,8 @@ public class Message implements Serializable {
         calendar.setTime(date);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
-        //int seconds = calendar.get(Calendar.SECOND);
-        time = hour + ":" + min;
+        int seconds = calendar.get(Calendar.SECOND);
+        time = hour + ":" + min + ":" +seconds;
     }
 
     public Message(String username, String Message, String AdditionalInformation){

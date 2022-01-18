@@ -144,7 +144,7 @@ public class Client extends Application {
             Message myMessage = (Message) myObjectInputStream.readObject();
             Platform.runLater(()->{
                 ChatController chatcontroller = ChatController.getChatcontroller();
-                chatcontroller.addRemoteMessage(myMessage.getText());
+                chatcontroller.addRemoteMessage(myMessage);
             });
         } catch(Exception e) {
             try {
