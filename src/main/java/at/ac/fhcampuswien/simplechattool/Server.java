@@ -1,14 +1,13 @@
 package at.ac.fhcampuswien.simplechattool;
 
-
 import java.io.*;
 import java.text.*;
 import java.util.*;
 import java.net.*;
 
 public class Server {
-    public static void main(String[] args) throws IOException
-    {
+
+    public static void main(String[] args) throws IOException {
         // server is listening on port 5056
         ServerSocket ss = new ServerSocket(5056);
 

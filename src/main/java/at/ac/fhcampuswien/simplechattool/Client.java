@@ -26,7 +26,7 @@ https://github.com/ashmeet4293/Chat-Application-in-java-using-javafx
 https://luisgcenci.medium.com/building-a-group-chat-app-with-javafx-multithread-socket-programming-in-java-c8c11fd8c927
 */
 
-public class Client extends Application{
+public class Client extends Application {
     private String username;
     private Socket clientSocket;
     private InputStream inputStream;
@@ -61,11 +61,9 @@ public class Client extends Application{
         username = name;
     }
 
-
-    public static Stage getStage(){
+    public static Stage getStage() {
         return stg;
     }
-
 
     public void setConnection(String server, int port) {
         ChatController chatcontroller = ChatController.getChatcontroller();
@@ -81,17 +79,16 @@ public class Client extends Application{
                 System.exit(0);
             }
         }
-        if( port < 0 || port > 65535)
-        {
+        if (port < 0 || port > 65535) {
             System.out.print("Enter the right port number ..! " );
             System.exit(0);
         }
 
-        try{
+        try {
             clientSocket = new Socket(server, port);
             myClientSocket = clientSocket;
 
-            try{
+            try {
                 OutputStream outputStream = myClientSocket.getOutputStream();
                 InputStream inputStream = myClientSocket.getInputStream();
                 ObjectOutputStream sendObject = new ObjectOutputStream(outputStream);
@@ -101,7 +98,7 @@ public class Client extends Application{
             } catch (Exception e){
                 e.printStackTrace();
             }
-        }catch (Exception ex){
+        } catch (Exception ex){
             ex.printStackTrace();
         }
 
@@ -121,7 +118,7 @@ public class Client extends Application{
             new Thread(clientThread).start();
 
             System.out.println("Connection successful to server " + server + " and port " + port + ".");
-            chatcontroller.addOfflineMessage("Successfully connected to " + server + " port: " + port + " Have fun ;)");
+            chatcontroller.addOfflineMessage("Successfully connected to " + server + " port: " + port + ". Have fun ;)");
         } catch (Exception e) {
             System.err.println("ERROR: Connection error");
             e.printStackTrace();
@@ -150,10 +147,10 @@ public class Client extends Application{
                 chatcontroller.addRemoteMessage(myMessage.getText());
             });
         } catch(Exception e) {
-            try{
+            try {
                 e.printStackTrace();
                 clientSocket.close();
-            }catch (Exception ex){
+            } catch (Exception ex){
                 ex.printStackTrace();
             }
             System.err.println("ERROR: Error listening to data");
@@ -163,15 +160,15 @@ public class Client extends Application{
 
     public void closeConnection() {
         try {
-            objectOutStream.close();
-            objectInStream.close();
-            clientSocket.close();
+            myObjectOutputStream.close();
+            myObjectInputStream.close();
+            myClientSocket.close();
         } catch (IOException ex) {
             System.err.println("ERROR: Error closing connection");
         }
     }
 
-    public  static void main(String [] args) throws Exception {
+    public static void main(String [] args) throws Exception {
         launch(args);
     }
 
@@ -181,11 +178,12 @@ public class Client extends Application{
         loader.setLocation(Client.class.getResource("loginwindow.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Simple Chat Tool");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 670, 450));
         primaryStage.setResizable(false);
         primaryStage.show();
         stg = primaryStage;
         stg.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("logo2.png"))));
+
         stg.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
                 System.out.println("Stage is closing");

@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.simplechattool;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -15,6 +16,7 @@ public class Message implements Serializable {
     private String Message;
     private String time;
     private String AdditionalInformation;
+    public ArrayList<String> user_list = new ArrayList<String>();
 
 
     public Message(String username, String text) {
@@ -25,8 +27,8 @@ public class Message implements Serializable {
         calendar.setTime(date);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
-        int seconds = calendar.get(Calendar.SECOND);
-        time = hour + ":" + min + ":" + seconds;
+        //int seconds = calendar.get(Calendar.SECOND);
+        time = hour + ":" + min;
     }
 
     public Message(String username, String Message, String AdditionalInformation){
@@ -41,8 +43,8 @@ public class Message implements Serializable {
         calendar.setTime(date);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
-        int seconds = calendar.get(Calendar.SECOND);
-        time = hour + ":" + min + ":" + seconds;
+        //int seconds = calendar.get(Calendar.SECOND);
+        time = hour + ":" + min;
     }
 
     public String getMessageAsString(){
@@ -57,6 +59,14 @@ public class Message implements Serializable {
 
     public String getMessage(){
         return "[" + getTime() + " " + getUsername() + "] " + getText();
+    }
+
+    public void setUsers(ArrayList<String> users){
+        user_list.addAll(users);
+    }
+
+    public ArrayList<String> getUsers(){
+        return user_list;
     }
 
     public void setUsername(String username) {

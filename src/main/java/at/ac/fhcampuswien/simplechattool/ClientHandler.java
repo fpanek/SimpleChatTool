@@ -16,11 +16,11 @@ public class ClientHandler extends Thread{
     final ObjectOutputStream oos;
     final Socket s;
     ArrayList<Socket> connectedClients = new ArrayList<Socket>();
+    private static ArrayList<String> users = new ArrayList<String>();
     private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<ClientHandler>();
 
     // Constructor
-    public ClientHandler(Socket s, ObjectInputStream ois, ObjectOutputStream oos)
-    {
+    public ClientHandler(Socket s, ObjectInputStream ois, ObjectOutputStream oos) {
         this.s = s;
         this.ois = ois;
         this.oos = oos;
@@ -28,9 +28,8 @@ public class ClientHandler extends Thread{
         ActiveClientHandlers.add(this);
     }
 
-
     @Override
-    public  String toString(){
+    public String toString(){
         return "Socket: " + s.getPort() + s.getRemoteSocketAddress();
     }
 
@@ -42,15 +41,14 @@ public class ClientHandler extends Thread{
         return ActiveClientHandlers;
     }
 
-    public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket){
-        if(clientHandler.getClientHandlerPort(clientHandler) == socket.getPort()){
+    public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket) {
+        if (clientHandler.getClientHandlerPort(clientHandler) == socket.getPort()) {
             System.out.println("Ports are equal");
             return true;
-        }else{
-            System.out.println("Port not qual...");
+        } else {
+            System.out.println("Port not equal...");
             return false;
         }
-
     }
 
     public int getClientHandlerPort(ClientHandler clientHandler){
@@ -58,48 +56,49 @@ public class ClientHandler extends Thread{
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         String received;
         String toreturn;
         Message receivedMessage;
         Message toReturnMessage;
-        while (true)
-        {
+        while (true) {
             try {
-
                 receivedMessage = (Message) ois.readObject();
                 System.out.println("Received Object Text: " + receivedMessage.getText());
-
+                String username = receivedMessage.getUsername();
 
                 Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "iwas");
+
                 //Send received Message to All Clients
-                if(!(receivedMessage.getText().equals("CloseSocket"))){
+                if (!(receivedMessage.getText().equals("CloseSocket"))) {
                     System.out.println("Message not equal CloseSocket..");
-                    for(ClientHandler handler: ActiveClientHandlers){
+
+                    for (ClientHandler handler: ActiveClientHandlers) {
+
                         //handler.oos.writeObject(myMessage);
                         System.out.println(handler);
-                        if(handler.s.getPort()!=s.getPort()){
+                        if (handler.s.getPort() != s.getPort()) {
                             //handler.dos.writeUTF(received);
                             //handler.dos.flush();
                             System.out.println("Forwarding Message: " + receivedMessage.getText());
                             handler.oos.writeObject(receivedMessage);
+                            users.add(username);
                             handler.oos.flush();
                         }
                     }
                 }
 
-
                 System.out.println("Port: " + s.getPort() + " received Message: " + receivedMessage.getText());
-                if(receivedMessage.getText().equals("CloseSocket"))
-                {
+
+                if (receivedMessage.getText().equals("CloseSocket")) {
                     System.out.println("Client " + this.s + " sends exit...");
                     System.out.println("Closing this connection.");
                     this.s.close();
                     System.out.println("Connection closed");
-                    for(ClientHandler handler: ActiveClientHandlers){
-                        if(socketEqualWithClientHandler(handler, s)){
+                    for (ClientHandler handler: ActiveClientHandlers){
+                        if (socketEqualWithClientHandler(handler, s)) {
                             System.out.println("Removing Client: " + handler.s.getPort());
+                            users.remove(username);
                             ActiveClientHandlers.remove(handler);
                             break;
                         }
@@ -113,7 +112,6 @@ public class ClientHandler extends Thread{
                 // write on output stream based on the
                 // answer from the client
                 switch (receivedMessage.getText()) {
-
                     case "Date" :
                         toreturn = fordate.format(date);
                         Message returnMessageDate = new Message("Automatic Message", toreturn, "Automated Message");

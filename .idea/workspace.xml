@@ -4,22 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c703b09-d2b4-438e-98b4-1ad533bcc356" name="Changes" comment="*) removed GUI&#10;*) changed to console-based version&#10;*) implemented changes to Client class from Hugo&#10;*) adapted Server class to Client&#10;*) made general improvements">
+    <list default="true" id="5c703b09-d2b4-438e-98b4-1ad533bcc356" name="Changes" comment="*) added new logo to GUI&#10;*) added icon to the program">
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ChatController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/lock.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/noun-chat-137086.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/noun-lock-1009749.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/logo.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +89,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.31675392" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
@@ -296,16 +303,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java</url>
-          <line>103</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="17" />
