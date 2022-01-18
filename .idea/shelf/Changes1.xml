@@ -1,0 +1,59 @@
+<changelist name="Changes1" date="1642463304842" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/shelved.patch" />
+  <option name="DESCRIPTION" value="Changes" />
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="AFTER_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/buildOutputCleanup.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/ChatController.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/ChatController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/ChatController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/Client.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/Client.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/Client.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/ClientHandler.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/ClientHandler.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/ClientHandler.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.bin" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/executionHistory.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.lock" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/executionHistory.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.bin" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/fileHashes.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.lock" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/fileHashes.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/main/resources/at/ac/fhcampuswien/simplechattool/logo.png" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/Message.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/Message.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/Message.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes1/SimpleChatTool-1.0-SNAPSHOT.jar" />
+  </binary>
+</changelist>

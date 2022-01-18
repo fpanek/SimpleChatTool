@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Update_at_13_01_2022_20_30_[Changes]" date="1642102224806" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_01_2022_20_30_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 13.01.2022 20:30 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_01_2022_20_30_[Changes]/SimpleChatTool-1.0-SNAPSHOT.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/checksums/md5-checksums.bin" />
+    <option name="AFTER_PATH" value=".gradle/checksums/md5-checksums.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_01_2022_20_30_[Changes]/md5-checksums.bin" />
+  </binary>
+</changelist>

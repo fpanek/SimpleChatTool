@@ -1,0 +1,580 @@
+Index: build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Menu?>\r\n<?import javafx.scene.control.MenuBar?>\r\n<?import javafx.scene.control.MenuItem?>\r\n<?import javafx.scene.control.ScrollPane?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.VBox?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.TextFlow?>\r\n\r\n<VBox prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/17\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"at.ac.fhcampuswien.simplechattool.ChatController\">\r\n    <children>\r\n        <MenuBar VBox.vgrow=\"NEVER\">\r\n            <menus>\r\n                <Menu mnemonicParsing=\"false\" text=\"File\">\r\n                    <items>\r\n                        <MenuItem mnemonicParsing=\"false\" text=\"Quit\" />\r\n                    </items>\r\n                </Menu>\r\n                <Menu mnemonicParsing=\"false\" text=\"Help\">\r\n                    <items>\r\n                        <MenuItem mnemonicParsing=\"false\" text=\"About SimpleChatTool\" />\r\n                    </items>\r\n                </Menu>\r\n            </menus>\r\n        </MenuBar>\r\n        <AnchorPane maxHeight=\"-1.0\" maxWidth=\"-1.0\" prefHeight=\"-1.0\" prefWidth=\"-1.0\" style=\"-fx-background-color: #ebe9f5;\" VBox.vgrow=\"ALWAYS\">\r\n            <children>\r\n                <TextField id=\"field_text\" fx:id=\"field_text\" alignment=\"TOP_LEFT\" layoutX=\"10.0\" layoutY=\"310.0\" prefHeight=\"31.0\" prefWidth=\"462.0\" promptText=\"Type a message\">\r\n                    <font>\r\n                        <Font name=\"System Italic\" size=\"14.0\" />\r\n                    </font></TextField>\r\n                <Button id=\"btn_sendMessage\" fx:id=\"btn_SendMessage\" layoutX=\"486.0\" layoutY=\"310.0\" mnemonicParsing=\"false\" onAction=\"#sendMessage\" prefHeight=\"13.0\" prefWidth=\"100.0\" style=\"-fx-background-color: #7d43e2;\" text=\"Send\" textFill=\"WHITE\">\r\n                    <font>\r\n                        <Font size=\"15.0\" />\r\n                    </font>\r\n                </Button>\r\n                <Button id=\"btn_startServer\" fx:id=\"btn_StartServer\" layoutX=\"486.0\" layoutY=\"14.0\" mnemonicParsing=\"false\" onAction=\"#startServer\" prefHeight=\"31.0\" prefWidth=\"100.0\" style=\"-fx-background-color: #d4d1e2;\" text=\"Connect\" textFill=\"#79718e\">\r\n                    <font>\r\n                        <Font size=\"14.0\" />\r\n                    </font>\r\n                </Button>\r\n                <ScrollPane fx:id=\"ScrollPaneChat\" layoutX=\"12.0\" layoutY=\"14.0\" AnchorPane.leftAnchor=\"12.0\">\r\n                    <content>\r\n                        <TextFlow id=\"textflow\" fx:id=\"textFlow\" prefHeight=\"283.0\" prefWidth=\"460.0\" style=\"-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;\" />\r\n                    </content>\r\n                </ScrollPane>\r\n                <Button id=\"btn_send\" fx:id=\"btn_disconnect\" layoutX=\"486.0\" layoutY=\"52.0\" mnemonicParsing=\"false\" onAction=\"#disconnectChat\" prefHeight=\"31.0\" prefWidth=\"100.0\" style=\"-fx-background-color: #d4d1e2;\" text=\"Disconnect\" textFill=\"#79718e\">\r\n                    <font>\r\n                        <Font size=\"14.0\" />\r\n                    </font>\r\n                </Button>\r\n            </children>\r\n        </AnchorPane>\r\n    </children>\r\n</VBox>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml b/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml
+--- a/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml	(revision 94decb7798e88ae78f94599f617526d7eb1d1443)
++++ b/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml	(date 1642425917621)
+@@ -6,6 +6,8 @@
+ <?import javafx.scene.control.MenuItem?>
+ <?import javafx.scene.control.ScrollPane?>
+ <?import javafx.scene.control.TextField?>
++<?import javafx.scene.image.Image?>
++<?import javafx.scene.image.ImageView?>
+ <?import javafx.scene.layout.AnchorPane?>
+ <?import javafx.scene.layout.VBox?>
+ <?import javafx.scene.text.Font?>
+@@ -29,30 +31,37 @@
+         </MenuBar>
+         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #ebe9f5;" VBox.vgrow="ALWAYS">
+             <children>
+-                <TextField id="field_text" fx:id="field_text" alignment="TOP_LEFT" layoutX="10.0" layoutY="310.0" prefHeight="31.0" prefWidth="462.0" promptText="Type a message">
++                <TextField id="field_text" fx:id="field_text" layoutX="152.0" layoutY="310.0" prefHeight="40.0" prefWidth="395.0" promptText="Type a message" style="-fx-background-radius: 5;" AnchorPane.topAnchor="310.0">
+                     <font>
+-                        <Font name="System Italic" size="14.0" />
++                        <Font size="14.0" />
+                     </font></TextField>
+-                <Button id="btn_sendMessage" fx:id="btn_SendMessage" layoutX="486.0" layoutY="310.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="13.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Send" textFill="WHITE">
+-                    <font>
+-                        <Font size="15.0" />
+-                    </font>
+-                </Button>
+-                <Button id="btn_startServer" fx:id="btn_StartServer" layoutX="486.0" layoutY="14.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d4d1e2;" text="Connect" textFill="#79718e">
++                <fx:define>
++                    <Image fx:id="btnImage" url="@sendIcon4_small.png" />
++                </fx:define>
++                <Button id="btn_sendMessage" fx:id="btn_SendMessage" layoutX="549.0" layoutY="310.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="40.0" prefWidth="27.0" style="-fx-background-radius: 10; -fx-background-color: transparent;">
++               <graphic>
++                        <ImageView fitHeight="30.0" fitWidth="31.0">
++                     <image>
++                            <Image url="@sendIcon4_small.png" />
++                        </image>
++                  </ImageView>
++               </graphic></Button>
++                <Button id="btn_startServer" fx:id="btn_StartServer" layoutX="26.0" layoutY="229.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d4d1e2;" text="Connect" textFill="#79718e">
+                     <font>
+                         <Font size="14.0" />
+                     </font>
+                 </Button>
+-                <ScrollPane fx:id="ScrollPaneChat" layoutX="12.0" layoutY="14.0" AnchorPane.leftAnchor="12.0">
++                <ScrollPane fx:id="ScrollPaneChat" layoutX="152.0" layoutY="14.0" prefHeight="285.0" prefWidth="434.0" style="-fx-background-radius: 20;" AnchorPane.leftAnchor="152.0">
+                     <content>
+-                        <TextFlow id="textflow" fx:id="textFlow" prefHeight="283.0" prefWidth="460.0" style="-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;" />
++                        <TextFlow id="textflow" fx:id="textFlow" lineSpacing="1.0" prefHeight="283.0" prefWidth="432.0" style="-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;" />
+                     </content>
+                 </ScrollPane>
+-                <Button id="btn_send" fx:id="btn_disconnect" layoutX="486.0" layoutY="52.0" mnemonicParsing="false" onAction="#disconnectChat" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d4d1e2;" text="Disconnect" textFill="#79718e">
++                <Button id="btn_send" fx:id="btn_disconnect" layoutX="26.0" layoutY="268.0" mnemonicParsing="false" onAction="#disconnectChat" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d4d1e2;" text="Disconnect" textFill="#79718e">
+                     <font>
+                         <Font size="14.0" />
+                     </font>
+                 </Button>
++            <TextFlow layoutX="11.0" layoutY="15.0" prefHeight="203.0" prefWidth="130.0" style="-fx-background-color: #ffffff; -fx-border-color: #7d43e2; -fx-border-radius: 5;" />
+             </children>
+         </AnchorPane>
+     </children>
+Index: src/main/java/at/ac/fhcampuswien/simplechattool/Client.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package at.ac.fhcampuswien.simplechattool;\r\n\r\nimport java.io.*;\r\nimport java.net.InetAddress;\r\nimport java.net.Socket;\r\nimport java.net.UnknownHostException;\r\nimport java.util.Objects;\r\nimport java.util.concurrent.TimeUnit;\r\n\r\nimport at.ac.fhcampuswien.simplechattool.ChatController;\r\nimport javafx.application.Application;\r\nimport javafx.application.Platform;\r\nimport javafx.concurrent.Task;\r\nimport javafx.event.EventHandler;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport javafx.scene.layout.FlowPane;\r\nimport javafx.scene.layout.GridPane;\r\nimport javafx.scene.text.Text;\r\nimport javafx.scene.text.TextFlow;\r\nimport javafx.stage.Stage;\r\n\r\nimport at.ac.fhcampuswien.simplechattool.LoginController;\r\nimport at.ac.fhcampuswien.simplechattool.ChatController;\r\n\r\n/*\r\nSources:\r\nhttps://github.com/dvcarrillo/sockets-chat\r\nhttps://github.com/ashmeet4293/Chat-Application-in-java-using-javafx\r\nhttps://luisgcenci.medium.com/building-a-group-chat-app-with-javafx-multithread-socket-programming-in-java-c8c11fd8c927\r\n*/\r\n\r\npublic class Client extends Application{\r\n    private String username;\r\n    private Socket clientSocket;\r\n    private InputStream inputStream;\r\n    private OutputStream outputStream;\r\n    private DataInputStream inData;\r\n    private DataOutputStream outData;\r\n    private boolean option = true;\r\n    private ChatController chatView;\r\n    private static Stage stg;\r\n    private static String msg;\r\n    public ChatController controller;\r\n    public  TextFlow textFlow;\r\n    boolean validData = true;\r\n\r\n    public Client() {\r\n    }\r\n\r\n    public static String getMsg(){\r\n        return msg;\r\n    }\r\n\r\n    public String getUsername() {\r\n        return username;\r\n    }\r\n\r\n    public void setUsername(String name) {\r\n        username = name;\r\n    }\r\n\r\n\r\n    public static Stage getStage(){\r\n        return stg;\r\n    }\r\n\r\n\r\n    public void setConnection(String server, int port) {\r\n        ChatController chatcontroller = ChatController.getChatcontroller();\r\n        boolean success = false;\r\n        while(!success) {\r\n            try {\r\n                InetAddress host = InetAddress.getByName(server);\r\n                System.out.println(\"Server \" + server + \" is Online\");\r\n                success = true;\r\n\r\n            } catch (UnknownHostException e) {\r\n                System.out.println(\"Server is offline, please provide a correct server\");\r\n                System.exit(0);\r\n            }\r\n        }\r\n        if( port < 0 || port > 65535)\r\n        {\r\n            System.out.print(\"Enter the right port number ..! \" );\r\n            System.exit(0);\r\n        }\r\n        try {\r\n            clientSocket = new Socket(server, port);\r\n            try {\r\n                TimeUnit.SECONDS.sleep(1);\r\n            } catch (InterruptedException ie) {\r\n                Thread.currentThread().interrupt();\r\n            }\r\n            //c.addRemoteMessage(\"Connection established - Ready to chat:\");\r\n            Task clientThread = new Task() {\r\n                @Override\r\n                protected Object call() throws Exception {\r\n                    while (validData) {\r\n                        listenData(clientSocket);\r\n                        //System.out.println(\"Executing Threaaad  - still alive\");\r\n                    }\r\n                    return null;\r\n                }\r\n            };\r\n\r\n            new Thread(clientThread).start();\r\n            System.out.println(\"Connection successful to server \" + server + \" and port \" + port + \".\");\r\n            chatcontroller.addOfflineMessage(\"Successfully connected to \" + server + \" port: \" + port + \" Have fun ;)\");\r\n        } catch (IOException e) {\r\n            System.err.println(\"ERROR: Connection error\");\r\n            e.printStackTrace();\r\n            //System.exit(0);\r\n        }\r\n    }\r\n\r\n    public void sendMessage(String msg) {\r\n        try {\r\n            outputStream = clientSocket.getOutputStream();\r\n            outData = new DataOutputStream(outputStream);\r\n            outData.writeUTF(msg);\r\n            outData.flush();\r\n        } catch (IOException e) {\r\n            System.err.println(\"ERROR: Error sending data\");\r\n        }\r\n    }\r\n\r\n    public void listenData(Socket clientSocket) {\r\n        try {\r\n            inputStream = clientSocket.getInputStream();\r\n            inData = new DataInputStream(inputStream);\r\n            String Message =  inData.readUTF();\r\n            //System.out.println(\"Message as Tring: \" + Message);\r\n            Platform.runLater(()->{\r\n                ChatController chatcontroller = ChatController.getChatcontroller();\r\n                chatcontroller.addRemoteMessage(Message);\r\n            });\r\n        } catch(IOException e) {\r\n            try{\r\n                inData.close();\r\n                outData.close();\r\n                clientSocket.close();\r\n            }catch (Exception ex){\r\n                ex.printStackTrace();\r\n            }\r\n            System.err.println(\"ERROR: Error listening to data\");\r\n            validData = false;\r\n        }\r\n    }\r\n\r\n    public void closeConnection() {\r\n        try {\r\n            outData.close();\r\n            inData.close();\r\n            clientSocket.close();\r\n        } catch (IOException ex) {\r\n            System.err.println(\"ERROR: Error closing connection\");\r\n        }\r\n    }\r\n\r\n    public  static void main(String [] args) throws Exception {\r\n        launch(args);\r\n    }\r\n\r\n    @Override\r\n    public void start (Stage primaryStage) throws Exception{\r\n        FXMLLoader loader = new FXMLLoader();\r\n        loader.setLocation(Client.class.getResource(\"loginwindow.fxml\"));\r\n        Parent root = loader.load();\r\n        primaryStage.setTitle(\"Simple Chat Tool\");\r\n        primaryStage.setScene(new Scene(root, 600, 400));\r\n        primaryStage.setResizable(false);\r\n        primaryStage.show();\r\n        stg = primaryStage;\r\n        stg.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(\"logo2.png\"))));\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java b/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java
+--- a/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java	(revision 94decb7798e88ae78f94599f617526d7eb1d1443)
++++ b/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java	(date 1642381329435)
+@@ -6,7 +6,6 @@
+ import java.net.UnknownHostException;
+ import java.util.Objects;
+ import java.util.concurrent.TimeUnit;
+-
+ import at.ac.fhcampuswien.simplechattool.ChatController;
+ import javafx.application.Application;
+ import javafx.application.Platform;
+@@ -176,7 +175,7 @@
+         loader.setLocation(Client.class.getResource("loginwindow.fxml"));
+         Parent root = loader.load();
+         primaryStage.setTitle("Simple Chat Tool");
+-        primaryStage.setScene(new Scene(root, 600, 400));
++        primaryStage.setScene(new Scene(root, 670, 450));
+         primaryStage.setResizable(false);
+         primaryStage.show();
+         stg = primaryStage;
+Index: src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Menu?>\r\n<?import javafx.scene.control.MenuBar?>\r\n<?import javafx.scene.control.MenuItem?>\r\n<?import javafx.scene.control.ScrollPane?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.VBox?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.TextFlow?>\r\n\r\n<VBox prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/17\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"at.ac.fhcampuswien.simplechattool.ChatController\">\r\n    <children>\r\n        <MenuBar VBox.vgrow=\"NEVER\">\r\n            <menus>\r\n                <Menu mnemonicParsing=\"false\" text=\"File\">\r\n                    <items>\r\n                        <MenuItem mnemonicParsing=\"false\" text=\"Quit\" />\r\n                    </items>\r\n                </Menu>\r\n                <Menu mnemonicParsing=\"false\" text=\"Help\">\r\n                    <items>\r\n                        <MenuItem mnemonicParsing=\"false\" text=\"About SimpleChatTool\" />\r\n                    </items>\r\n                </Menu>\r\n            </menus>\r\n        </MenuBar>\r\n        <AnchorPane maxHeight=\"-1.0\" maxWidth=\"-1.0\" prefHeight=\"-1.0\" prefWidth=\"-1.0\" style=\"-fx-background-color: #ebe9f5;\" VBox.vgrow=\"ALWAYS\">\r\n            <children>\r\n                <TextField id=\"field_text\" fx:id=\"field_text\" alignment=\"TOP_LEFT\" layoutX=\"10.0\" layoutY=\"310.0\" prefHeight=\"31.0\" prefWidth=\"462.0\" promptText=\"Type a message\">\r\n                    <font>\r\n                        <Font name=\"System Italic\" size=\"14.0\" />\r\n                    </font></TextField>\r\n                <Button id=\"btn_sendMessage\" fx:id=\"btn_SendMessage\" layoutX=\"486.0\" layoutY=\"310.0\" mnemonicParsing=\"false\" onAction=\"#sendMessage\" prefHeight=\"13.0\" prefWidth=\"100.0\" style=\"-fx-background-color: #7d43e2;\" text=\"Send\" textFill=\"WHITE\">\r\n                    <font>\r\n                        <Font size=\"15.0\" />\r\n                    </font>\r\n                </Button>\r\n                <Button id=\"btn_startServer\" fx:id=\"btn_StartServer\" layoutX=\"486.0\" layoutY=\"14.0\" mnemonicParsing=\"false\" onAction=\"#startServer\" prefHeight=\"31.0\" prefWidth=\"100.0\" style=\"-fx-background-color: #d4d1e2;\" text=\"Connect\" textFill=\"#79718e\">\r\n                    <font>\r\n                        <Font size=\"14.0\" />\r\n                    </font>\r\n                </Button>\r\n                <ScrollPane fx:id=\"ScrollPaneChat\" layoutX=\"12.0\" layoutY=\"14.0\" AnchorPane.leftAnchor=\"12.0\">\r\n                    <content>\r\n                        <TextFlow id=\"textflow\" fx:id=\"textFlow\" prefHeight=\"283.0\" prefWidth=\"460.0\" style=\"-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;\" />\r\n                    </content>\r\n                </ScrollPane>\r\n                <Button id=\"btn_send\" fx:id=\"btn_disconnect\" layoutX=\"486.0\" layoutY=\"52.0\" mnemonicParsing=\"false\" onAction=\"#disconnectChat\" prefHeight=\"31.0\" prefWidth=\"100.0\" style=\"-fx-background-color: #d4d1e2;\" text=\"Disconnect\" textFill=\"#79718e\">\r\n                    <font>\r\n                        <Font size=\"14.0\" />\r\n                    </font>\r\n                </Button>\r\n            </children>\r\n        </AnchorPane>\r\n    </children>\r\n</VBox>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml b/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml
+--- a/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml	(revision 94decb7798e88ae78f94599f617526d7eb1d1443)
++++ b/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml	(date 1642379709001)
+@@ -6,6 +6,8 @@
+ <?import javafx.scene.control.MenuItem?>
+ <?import javafx.scene.control.ScrollPane?>
+ <?import javafx.scene.control.TextField?>
++<?import javafx.scene.image.Image?>
++<?import javafx.scene.image.ImageView?>
+ <?import javafx.scene.layout.AnchorPane?>
+ <?import javafx.scene.layout.VBox?>
+ <?import javafx.scene.text.Font?>
+@@ -29,30 +31,37 @@
+         </MenuBar>
+         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #ebe9f5;" VBox.vgrow="ALWAYS">
+             <children>
+-                <TextField id="field_text" fx:id="field_text" alignment="TOP_LEFT" layoutX="10.0" layoutY="310.0" prefHeight="31.0" prefWidth="462.0" promptText="Type a message">
++                <TextField id="field_text" fx:id="field_text" layoutX="152.0" layoutY="310.0" prefHeight="40.0" prefWidth="395.0" promptText="Type a message" style="-fx-background-radius: 5;" AnchorPane.topAnchor="310.0">
+                     <font>
+-                        <Font name="System Italic" size="14.0" />
++                        <Font size="14.0" />
+                     </font></TextField>
+-                <Button id="btn_sendMessage" fx:id="btn_SendMessage" layoutX="486.0" layoutY="310.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="13.0" prefWidth="100.0" style="-fx-background-color: #7d43e2;" text="Send" textFill="WHITE">
+-                    <font>
+-                        <Font size="15.0" />
+-                    </font>
+-                </Button>
+-                <Button id="btn_startServer" fx:id="btn_StartServer" layoutX="486.0" layoutY="14.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d4d1e2;" text="Connect" textFill="#79718e">
++                <fx:define>
++                    <Image fx:id="btnImage" url="@sendIcon4_small.png" />
++                </fx:define>
++                <Button id="btn_sendMessage" fx:id="btn_SendMessage" layoutX="549.0" layoutY="310.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="40.0" prefWidth="27.0" style="-fx-background-radius: 10; -fx-background-color: transparent;">
++               <graphic>
++                        <ImageView fitHeight="30.0" fitWidth="31.0">
++                     <image>
++                            <Image url="@sendIcon4_small.png" />
++                        </image>
++                  </ImageView>
++               </graphic></Button>
++                <Button id="btn_startServer" fx:id="btn_StartServer" layoutX="26.0" layoutY="229.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d4d1e2;" text="Connect" textFill="#79718e">
+                     <font>
+                         <Font size="14.0" />
+                     </font>
+                 </Button>
+-                <ScrollPane fx:id="ScrollPaneChat" layoutX="12.0" layoutY="14.0" AnchorPane.leftAnchor="12.0">
++                <ScrollPane fx:id="ScrollPaneChat" layoutX="152.0" layoutY="14.0" prefHeight="285.0" prefWidth="434.0" style="-fx-background-radius: 20;" AnchorPane.leftAnchor="152.0">
+                     <content>
+-                        <TextFlow id="textflow" fx:id="textFlow" prefHeight="283.0" prefWidth="460.0" style="-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;" />
++                        <TextFlow id="textflow" fx:id="textFlow" lineSpacing="1.0" prefHeight="283.0" prefWidth="432.0" style="-fx-background-color: #ffffff; -fx-border-width: 1; -fx-border-color: #7d43e2; -fx-border-radius: 5;" />
+                     </content>
+                 </ScrollPane>
+-                <Button id="btn_send" fx:id="btn_disconnect" layoutX="486.0" layoutY="52.0" mnemonicParsing="false" onAction="#disconnectChat" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d4d1e2;" text="Disconnect" textFill="#79718e">
++                <Button id="btn_send" fx:id="btn_disconnect" layoutX="26.0" layoutY="268.0" mnemonicParsing="false" onAction="#disconnectChat" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #d4d1e2;" text="Disconnect" textFill="#79718e">
+                     <font>
+                         <Font size="14.0" />
+                     </font>
+                 </Button>
++            <TextFlow layoutX="11.0" layoutY="15.0" prefHeight="203.0" prefWidth="130.0" style="-fx-background-color: #ffffff; -fx-border-color: #7d43e2; -fx-border-radius: 5;" />
+             </children>
+         </AnchorPane>
+     </children>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5c703b09-d2b4-438e-98b4-1ad533bcc356\" name=\"Changes\" comment=\"*) removed GUI&#10;*) changed to console-based version&#10;*) implemented changes to Client class from Hugo&#10;*) adapted Server class to Client&#10;*) made general improvements\">\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/build/libs/SimpleChatTool-1.0-SNAPSHOT.jar\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/build/libs/SimpleChatTool-1.0-SNAPSHOT.jar\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/img/lock.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/img/noun-chat-137086.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/img/noun-lock-1009749.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Message.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Message.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"SimpleChatTool\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"22slmIyR2Kdmokwb0TN1LkGvLXG\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Modules\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.17\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.31675392\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"configurable.group.build\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"at.ac.fhcampuswien.simplechattool\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Application.Client\">\r\n    <configuration name=\"Client\" type=\"Application\" factoryName=\"Application\" singleton=\"false\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"at.ac.fhcampuswien.simplechattool.Client\" />\r\n      <module name=\"SimpleChatTool.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"at.ac.fhcampuswien.simplechattool.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ClientHandler\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"at.ac.fhcampuswien.simplechattool.ClientHandler\" />\r\n      <module name=\"SimpleChatTool.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"at.ac.fhcampuswien.simplechattool.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ClientTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"at.ac.fhcampuswien.simplechattool.ClientTest\" />\r\n      <module name=\"SimpleChatTool.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"at.ac.fhcampuswien.simplechattool.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"at.ac.fhcampuswien.simplechattool.Server\" />\r\n      <module name=\"SimpleChatTool.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"at.ac.fhcampuswien.simplechattool.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Server2\" type=\"Application\" factoryName=\"Application\" singleton=\"false\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"at.ac.fhcampuswien.simplechattool.Server2\" />\r\n      <module name=\"SimpleChatTool.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"at.ac.fhcampuswien.simplechattool.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"SimpleChatTool [:Server2.main()]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" value=\":Server2.main()\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list />\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.ClientHandler\" />\r\n      <item itemvalue=\"Application.Server2\" />\r\n      <item itemvalue=\"Application.ClientTest\" />\r\n      <item itemvalue=\"Application.Client\" />\r\n      <item itemvalue=\"Application.Server\" />\r\n      <item itemvalue=\"Gradle.SimpleChatTool [:Server2.main()]\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Server\" />\r\n        <item itemvalue=\"Application.Client\" />\r\n        <item itemvalue=\"Application.ClientTest\" />\r\n        <item itemvalue=\"Application.Server2\" />\r\n        <item itemvalue=\"Application.ClientHandler\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5c703b09-d2b4-438e-98b4-1ad533bcc356\" name=\"Changes\" comment=\"\" />\r\n      <created>1640634333531</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1640634333531</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test\">\r\n      <created>1640887655600</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640887655600</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"tes\">\r\n      <created>1640887806135</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640887806135</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"*)Client/Server startable/running&#10;*)message received by Server and displayed on cmd&#10;*)messages are sent successfully via GUI to Server\">\r\n      <created>1642098848958</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1642098848958</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"*)update\">\r\n      <created>1642107477125</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1642107477125</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"*)update after rework\">\r\n      <created>1642179341775</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1642179341775</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"*)update after rework 2020\">\r\n      <created>1642188034699</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1642188034699</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.History.Properties\">\r\n    <option name=\"COLUMN_ID_ORDER\">\r\n      <list>\r\n        <option value=\"Default.Root\" />\r\n        <option value=\"Default.Author\" />\r\n        <option value=\"Default.Date\" />\r\n        <option value=\"Default.Subject\" />\r\n        <option value=\"Space.CommitStatus\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"origin/master\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test\" />\r\n    <MESSAGE value=\"tes\" />\r\n    <MESSAGE value=\"*)Client/Server startable/running&#10;*)message received by Server and displayed on cmd&#10;*)messages are sent successfully via GUI to Server\" />\r\n    <MESSAGE value=\"*)update\" />\r\n    <MESSAGE value=\"*)update after rework\" />\r\n    <MESSAGE value=\"*)update after rework 2020\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"*)update after rework 2020\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java</url>\r\n          <line>83</line>\r\n          <option name=\"timeStamp\" value=\"15\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java</url>\r\n          <line>103</line>\r\n          <option name=\"timeStamp\" value=\"16\" />\r\n        </line-breakpoint>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"java.lang.NullPointerException\" package=\"java.lang\" />\r\n          <option name=\"timeStamp\" value=\"17\" />\r\n        </breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n    <watches-manager>\r\n      <configuration name=\"GradleRunConfiguration\">\r\n        <watch expression=\"textFlow.getChildren()\" language=\"JAVA\" />\r\n      </configuration>\r\n    </watches-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 94decb7798e88ae78f94599f617526d7eb1d1443)
++++ b/.idea/workspace.xml	(date 1642449840149)
+@@ -4,22 +4,25 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="5c703b09-d2b4-438e-98b4-1ad533bcc356" name="Changes" comment="*) removed GUI&#10;*) changed to console-based version&#10;*) implemented changes to Client class from Hugo&#10;*) adapted Server class to Client&#10;*) made general improvements">
++    <list default="true" id="5c703b09-d2b4-438e-98b4-1ad533bcc356" name="Changes" comment="*) added new logo to GUI&#10;*) added icon to the program">
+       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ChatController.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Client.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/ClientHandler.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/at/ac/fhcampuswien/simplechattool/Message.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/img/lock.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/img/noun-chat-137086.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/img/noun-lock-1009749.png" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Message.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/basic-chat.fxml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/at/ac/fhcampuswien/simplechattool/logo.png" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -296,16 +299,6 @@
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+       <breakpoints>
+-        <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java</url>
+-          <line>83</line>
+-          <option name="timeStamp" value="15" />
+-        </line-breakpoint>
+-        <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/src/main/java/at/ac/fhcampuswien/simplechattool/Client.java</url>
+-          <line>103</line>
+-          <option name="timeStamp" value="16" />
+-        </line-breakpoint>
+         <breakpoint enabled="true" type="java-exception">
+           <properties class="java.lang.NullPointerException" package="java.lang" />
+           <option name="timeStamp" value="17" />
+Index: src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.geometry.Insets?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.image.Image?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.BorderPane?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n<BorderPane maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/17\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"at.ac.fhcampuswien.simplechattool.LoginController\">\r\n   <center>\r\n      <AnchorPane prefHeight=\"200.0\" prefWidth=\"200.0\" style=\"-fx-background-color: #ebe9f5;\" BorderPane.alignment=\"CENTER\">\r\n         <children>\r\n            <TextField fx:id=\"input_server\" layoutX=\"177.0\" layoutY=\"134.0\" prefHeight=\"31.0\" prefWidth=\"211.0\" promptText=\"Enter hostname or IP\" style=\"-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;\">\r\n               <font>\r\n                  <Font name=\"System Italic\" size=\"14.0\" />\r\n               </font></TextField>\r\n            <Button fx:id=\"btn_login\" alignment=\"CENTER\" layoutX=\"177.0\" layoutY=\"337.0\" mnemonicParsing=\"false\" onAction=\"#userLogin\" prefHeight=\"32.0\" prefWidth=\"188.0\" style=\"-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;\" text=\"Enter Chat Tool\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font size=\"15.0\" />\r\n               </font>\r\n               <opaqueInsets>\r\n                  <Insets />\r\n               </opaqueInsets>\r\n            </Button>\r\n            <Label fx:id=\"warning_msg\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutX=\"212.0\" layoutY=\"306.0\" textAlignment=\"CENTER\" textFill=\"#bc0a0a\">\r\n               <font>\r\n                  <Font name=\"System Italic\" size=\"14.0\" />\r\n               </font>\r\n            </Label>\r\n            <Text fill=\"#0e0030\" fontSmoothingType=\"LCD\" layoutX=\"182.0\" layoutY=\"195.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Port\">\r\n               <font>\r\n                  <Font size=\"14.0\" />\r\n               </font>\r\n            </Text>\r\n            <Text fill=\"#0e0030\" fontSmoothingType=\"LCD\" layoutX=\"182.0\" layoutY=\"130.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Server\">\r\n               <font>\r\n                  <Font size=\"14.0\" />\r\n               </font>\r\n            </Text>\r\n            <TextField fx:id=\"input_port\" layoutX=\"177.0\" layoutY=\"200.0\" prefHeight=\"31.0\" prefWidth=\"211.0\" promptText=\"Enter port number\" style=\"-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;\">\r\n               <font>\r\n                  <Font name=\"System Italic\" size=\"14.0\" />\r\n               </font>\r\n            </TextField>\r\n            <Text fill=\"#0e0030\" fontSmoothingType=\"LCD\" layoutX=\"182.0\" layoutY=\"261.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Nickname\">\r\n               <font>\r\n                  <Font size=\"14.0\" />\r\n               </font>\r\n            </Text>\r\n            <TextField fx:id=\"input_nickname\" layoutX=\"177.0\" layoutY=\"266.0\" prefHeight=\"31.0\" prefWidth=\"211.0\" promptText=\"Enter your nickname\" style=\"-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;\">\r\n               <font>\r\n                  <Font name=\"System Italic\" size=\"14.0\" />\r\n               </font>\r\n            </TextField>\r\n            <ImageView fitHeight=\"83.0\" fitWidth=\"208.0\" layoutX=\"198.0\" layoutY=\"7.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n               <image>\r\n                  <Image url=\"@logo.png\" />\r\n               </image>\r\n            </ImageView>\r\n         </children>\r\n      </AnchorPane>\r\n   </center>\r\n</BorderPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml b/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml
+--- a/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml	(revision 94decb7798e88ae78f94599f617526d7eb1d1443)
++++ b/src/main/resources/at/ac/fhcampuswien/simplechattool/loginwindow.fxml	(date 1642431317762)
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+ <?import javafx.geometry.Insets?>
++<?import javafx.scene.Cursor?>
+ <?import javafx.scene.control.Button?>
+ <?import javafx.scene.control.Label?>
+ <?import javafx.scene.control.TextField?>
+@@ -11,55 +12,67 @@
+ <?import javafx.scene.text.Font?>
+ <?import javafx.scene.text.Text?>
+ 
+-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.simplechattool.LoginController">
++<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.simplechattool.LoginController">
+    <center>
+       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ebe9f5;" BorderPane.alignment="CENTER">
+          <children>
+-            <TextField fx:id="input_server" layoutX="177.0" layoutY="134.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter hostname or IP" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
++            <TextField fx:id="input_server" layoutX="205.0" layoutY="172.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter hostname or IP" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+                <font>
+                   <Font name="System Italic" size="14.0" />
+-               </font></TextField>
+-            <Button fx:id="btn_login" alignment="CENTER" layoutX="177.0" layoutY="337.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;" text="Enter Chat Tool" textFill="WHITE">
++               </font>
++               <cursor>
++                  <Cursor fx:constant="TEXT" />
++               </cursor></TextField>
++            <Button fx:id="btn_login" alignment="CENTER" layoutX="205.0" layoutY="382.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;" text="Enter Chat Tool" textFill="WHITE">
+                <font>
+                   <Font size="15.0" />
+                </font>
+                <opaqueInsets>
+                   <Insets />
+                </opaqueInsets>
++               <cursor>
++                  <Cursor fx:constant="HAND" />
++               </cursor>
+             </Button>
+             <Label fx:id="warning_msg" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="306.0" textAlignment="CENTER" textFill="#bc0a0a">
+                <font>
+                   <Font name="System Italic" size="14.0" />
+                </font>
+             </Label>
+-            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port">
++            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="205.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port">
+                <font>
+                   <Font size="14.0" />
+                </font>
+             </Text>
+-            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server">
++            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="205.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server">
+                <font>
+                   <Font size="14.0" />
+                </font>
+             </Text>
+-            <TextField fx:id="input_port" layoutX="177.0" layoutY="200.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter port number" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
++            <TextField fx:id="input_port" layoutX="205.0" layoutY="236.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter port number" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+                <font>
+                   <Font name="System Italic" size="14.0" />
+                </font>
++               <cursor>
++                  <Cursor fx:constant="TEXT" />
++               </cursor>
+             </TextField>
+-            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname">
++            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="205.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname">
+                <font>
+                   <Font size="14.0" />
+                </font>
+             </Text>
+-            <TextField fx:id="input_nickname" layoutX="177.0" layoutY="266.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter your nickname" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
++            <TextField fx:id="input_nickname" layoutX="205.0" layoutY="301.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter your nickname" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+                <font>
+                   <Font name="System Italic" size="14.0" />
+                </font>
++               <cursor>
++                  <Cursor fx:constant="TEXT" />
++               </cursor>
+             </TextField>
+-            <ImageView fitHeight="83.0" fitWidth="208.0" layoutX="198.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
++            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="255.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+-                  <Image url="@logo.png" />
++                  <Image url="@chatLogo.png" />
+                </image>
+             </ImageView>
+          </children>
+Index: build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.geometry.Insets?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.image.Image?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.BorderPane?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n<BorderPane maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/17\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"at.ac.fhcampuswien.simplechattool.LoginController\">\r\n   <center>\r\n      <AnchorPane prefHeight=\"200.0\" prefWidth=\"200.0\" style=\"-fx-background-color: #ebe9f5;\" BorderPane.alignment=\"CENTER\">\r\n         <children>\r\n            <TextField fx:id=\"input_server\" layoutX=\"177.0\" layoutY=\"134.0\" prefHeight=\"31.0\" prefWidth=\"211.0\" promptText=\"Enter hostname or IP\" style=\"-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;\">\r\n               <font>\r\n                  <Font name=\"System Italic\" size=\"14.0\" />\r\n               </font></TextField>\r\n            <Button fx:id=\"btn_login\" alignment=\"CENTER\" layoutX=\"177.0\" layoutY=\"337.0\" mnemonicParsing=\"false\" onAction=\"#userLogin\" prefHeight=\"32.0\" prefWidth=\"188.0\" style=\"-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;\" text=\"Enter Chat Tool\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font size=\"15.0\" />\r\n               </font>\r\n               <opaqueInsets>\r\n                  <Insets />\r\n               </opaqueInsets>\r\n            </Button>\r\n            <Label fx:id=\"warning_msg\" alignment=\"CENTER\" contentDisplay=\"CENTER\" layoutX=\"212.0\" layoutY=\"306.0\" textAlignment=\"CENTER\" textFill=\"#bc0a0a\">\r\n               <font>\r\n                  <Font name=\"System Italic\" size=\"14.0\" />\r\n               </font>\r\n            </Label>\r\n            <Label alignment=\"CENTER\" layoutX=\"206.0\" layoutY=\"61.0\" text=\"Simple Chat Tool\" textAlignment=\"CENTER\" textFill=\"#0e0030\">\r\n               <font>\r\n                  <Font name=\"System Bold Italic\" size=\"24.0\" />\r\n               </font>\r\n            </Label>\r\n            <Text fill=\"#0e0030\" fontSmoothingType=\"LCD\" layoutX=\"182.0\" layoutY=\"195.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Port\">\r\n               <font>\r\n                  <Font size=\"14.0\" />\r\n               </font>\r\n            </Text>\r\n            <Text fill=\"#0e0030\" fontSmoothingType=\"LCD\" layoutX=\"182.0\" layoutY=\"130.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Server\">\r\n               <font>\r\n                  <Font size=\"14.0\" />\r\n               </font>\r\n            </Text>\r\n            <TextField fx:id=\"input_port\" layoutX=\"177.0\" layoutY=\"200.0\" prefHeight=\"31.0\" prefWidth=\"211.0\" promptText=\"Enter port number\" style=\"-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;\">\r\n               <font>\r\n                  <Font name=\"System Italic\" size=\"14.0\" />\r\n               </font>\r\n            </TextField>\r\n            <Text fill=\"#0e0030\" fontSmoothingType=\"LCD\" layoutX=\"182.0\" layoutY=\"261.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Nickname\">\r\n               <font>\r\n                  <Font size=\"14.0\" />\r\n               </font>\r\n            </Text>\r\n            <TextField fx:id=\"input_nickname\" layoutX=\"177.0\" layoutY=\"266.0\" prefHeight=\"31.0\" prefWidth=\"211.0\" promptText=\"Enter your nickname\" style=\"-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;\">\r\n               <font>\r\n                  <Font name=\"System Italic\" size=\"14.0\" />\r\n               </font>\r\n            </TextField>\r\n            <ImageView fitHeight=\"51.0\" fitWidth=\"52.0\" layoutX=\"277.0\" layoutY=\"14.0\" pickOnBounds=\"true\" preserveRatio=\"true\">\r\n               <image>\r\n                  <Image url=\"@../../../../../../../../../OneDrive/Pictures/noun-chat-137086.png\" />\r\n               </image>\r\n            </ImageView>\r\n         </children>\r\n      </AnchorPane>\r\n   </center>\r\n</BorderPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml b/build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml
+--- a/build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml	(revision 94decb7798e88ae78f94599f617526d7eb1d1443)
++++ b/build/resources/main/at/ac/fhcampuswien/simplechattool/loginwindow.fxml	(date 1642425917639)
+@@ -1,6 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+ <?import javafx.geometry.Insets?>
++<?import javafx.scene.Cursor?>
+ <?import javafx.scene.control.Button?>
+ <?import javafx.scene.control.Label?>
+ <?import javafx.scene.control.TextField?>
+@@ -11,60 +12,67 @@
+ <?import javafx.scene.text.Font?>
+ <?import javafx.scene.text.Text?>
+ 
+-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.simplechattool.LoginController">
++<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.simplechattool.LoginController">
+    <center>
+       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ebe9f5;" BorderPane.alignment="CENTER">
+          <children>
+-            <TextField fx:id="input_server" layoutX="177.0" layoutY="134.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter hostname or IP" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
++            <TextField fx:id="input_server" layoutX="205.0" layoutY="144.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter hostname or IP" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+                <font>
+                   <Font name="System Italic" size="14.0" />
+-               </font></TextField>
+-            <Button fx:id="btn_login" alignment="CENTER" layoutX="177.0" layoutY="337.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;" text="Enter Chat Tool" textFill="WHITE">
++               </font>
++               <cursor>
++                  <Cursor fx:constant="TEXT" />
++               </cursor></TextField>
++            <Button fx:id="btn_login" alignment="CENTER" layoutX="205.0" layoutY="351.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="32.0" prefWidth="188.0" style="-fx-background-color: #7d43e2; -fx-pref-height: 40; -fx-pref-width: 250;" text="Enter Chat Tool" textFill="WHITE">
+                <font>
+                   <Font size="15.0" />
+                </font>
+                <opaqueInsets>
+                   <Insets />
+                </opaqueInsets>
++               <cursor>
++                  <Cursor fx:constant="HAND" />
++               </cursor>
+             </Button>
+             <Label fx:id="warning_msg" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="306.0" textAlignment="CENTER" textFill="#bc0a0a">
+                <font>
+                   <Font name="System Italic" size="14.0" />
+                </font>
+             </Label>
+-            <Label alignment="CENTER" layoutX="206.0" layoutY="61.0" text="Simple Chat Tool" textAlignment="CENTER" textFill="#0e0030">
+-               <font>
+-                  <Font name="System Bold Italic" size="24.0" />
+-               </font>
+-            </Label>
+-            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port">
++            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="205.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port">
+                <font>
+                   <Font size="14.0" />
+                </font>
+             </Text>
+-            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server">
++            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="205.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server">
+                <font>
+                   <Font size="14.0" />
+                </font>
+             </Text>
+-            <TextField fx:id="input_port" layoutX="177.0" layoutY="200.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter port number" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
++            <TextField fx:id="input_port" layoutX="205.0" layoutY="210.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter port number" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+                <font>
+                   <Font name="System Italic" size="14.0" />
+                </font>
++               <cursor>
++                  <Cursor fx:constant="TEXT" />
++               </cursor>
+             </TextField>
+-            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="182.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname">
++            <Text fill="#0e0030" fontSmoothingType="LCD" layoutX="205.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname">
+                <font>
+                   <Font size="14.0" />
+                </font>
+             </Text>
+-            <TextField fx:id="input_nickname" layoutX="177.0" layoutY="266.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter your nickname" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
++            <TextField fx:id="input_nickname" layoutX="205.0" layoutY="275.0" prefHeight="31.0" prefWidth="211.0" promptText="Enter your nickname" style="-fx-background-color: #ffffff; -fx-pref-height: 30; -fx-pref-width: 250;">
+                <font>
+                   <Font name="System Italic" size="14.0" />
+                </font>
++               <cursor>
++                  <Cursor fx:constant="TEXT" />
++               </cursor>
+             </TextField>
+-            <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="277.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
++            <ImageView fitHeight="83.0" fitWidth="199.0" layoutX="231.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+-                  <Image url="@../../../../../../../../../OneDrive/Pictures/noun-chat-137086.png" />
++                  <Image url="@logo.png" />
+                </image>
+             </ImageView>
+          </children>
+Index: src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package at.ac.fhcampuswien.simplechattool;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.ScrollPane;\r\nimport javafx.scene.control.TextField;\r\nimport javafx.scene.paint.Color;\r\nimport javafx.scene.text.Text;\r\nimport javafx.scene.text.TextFlow;\r\nimport java.net.URL;\r\nimport at.ac.fhcampuswien.simplechattool.Client;\r\nimport at.ac.fhcampuswien.simplechattool.Message;\r\n\r\nimport java.util.ResourceBundle;\r\n\r\npublic class ChatController {\r\n        @FXML\r\n        private Button btn_disconnect;\r\n        @FXML\r\n        private Button btn_send;\r\n        @FXML\r\n        private Button btn_SendMessage;\r\n        @FXML\r\n        private Button btn_StartServer;\r\n        @FXML\r\n        private TextField field_text;\r\n        @FXML\r\n        public  TextFlow textFlow;\r\n        @FXML private ScrollPane ScrollPaneChat;\r\n\r\n\r\n\r\n\r\n        private Client client;\r\n        private int mode;\r\n\r\n        private static ChatController chatcontroller;\r\n\r\n\r\n        private static Client myClient;\r\n\r\n\r\n\r\n        public ChatController() {\r\n                myClient = client;\r\n                chatcontroller = this;\r\n                System.out.println(\"initialize wihtou mehtod Calleasdfasdf\");\r\n        }\r\n\r\n        public static Client getClientFromChatController(){\r\n                return myClient;\r\n        }\r\n\r\n        public  static ChatController getChatcontroller(){\r\n                return chatcontroller;\r\n        }\r\n\r\n\r\n        public void addClientMessage(String msg) {\r\n                Client client = ChatController.getClientFromChatController();\r\n                Message message = new Message(client.getUsername(), msg);\r\n                Text text = new Text(message.getMessage());\r\n                textFlow.getChildren().add(text);\r\n                textFlow.getChildren().add(new Text(System.lineSeparator()));\r\n                ScrollPaneChat.setVvalue(1.0);\r\n        }\r\n\r\n        public void addOfflineMessage(String msg){\r\n                Text text = new Text(msg);\r\n                textFlow.getChildren().add(text);\r\n                textFlow.getChildren().add(new Text(System.lineSeparator()));\r\n                ScrollPaneChat.setVvalue(1.0);\r\n        }\r\n\r\n        public  void addRemoteMessage(String msg) {\r\n                String Message = \"Message from Partner: \" + msg;\r\n                Text text = new Text(Message);\r\n                textFlow.getChildren().add(text);\r\n                textFlow.getChildren().add(new Text(System.lineSeparator()));\r\n                ScrollPaneChat.setVvalue(1.0);\r\n        }\r\n\r\n        @FXML\r\n        public void startServer(){\r\n                System.out.println(\"Using Chat Controller: \" + Integer.toHexString(hashCode()));\r\n                LoginData logindata = LoginData.getLogindata();\r\n                Client client = new Client();\r\n                myClient = client;\r\n                client.setConnection(logindata.getServerIP(), logindata.getServerPort());\r\n                client.setUsername(logindata.getUsername());\r\n                ChatController meins = ChatController.getChatcontroller();\r\n                meins.ScrollPaneChat.setVvalue(1.0);\r\n        }\r\n\r\n        @FXML\r\n        public void sendMessage() {\r\n                Client client = ChatController.getClientFromChatController();\r\n                if (client == null){\r\n                        addOfflineMessage(\"Server not yet started...\");\r\n                }\r\n                if (field_text.getText().isEmpty()) {\r\n                        Text warning = new Text(\"Please enter a non-empty message!\");\r\n                        warning.setFill(Color.RED);\r\n                        textFlow.getChildren().add(warning);\r\n                        textFlow.getChildren().add(new Text(System.lineSeparator()));\r\n                } else {\r\n                        //Message message = new Message()\r\n                        String msg = field_text.getText();\r\n                        client.sendMessage(msg);\r\n                        addClientMessage(msg);\r\n                }\r\n                field_text.clear();\r\n        }\r\n\r\n        @FXML\r\n        public void disconnectChat() throws Exception {\r\n                Client client = ChatController.getClientFromChatController();\r\n                client.sendMessage(\"CloseSocket\");\r\n                client.closeConnection();\r\n                LoginController login = new LoginController();\r\n                login.changeScene(\"loginwindow.fxml\");\r\n        }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java b/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java
+--- a/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java	(revision 94decb7798e88ae78f94599f617526d7eb1d1443)
++++ b/src/main/java/at/ac/fhcampuswien/simplechattool/ChatController.java	(date 1642426075375)
+@@ -1,12 +1,19 @@
+ package at.ac.fhcampuswien.simplechattool;
+ 
+ import javafx.application.Application;
++import javafx.application.Platform;
+ import javafx.event.ActionEvent;
++import javafx.event.EventHandler;
+ import javafx.fxml.FXML;
+ import javafx.fxml.Initializable;
+ import javafx.scene.control.Button;
+ import javafx.scene.control.ScrollPane;
+ import javafx.scene.control.TextField;
++import javafx.scene.control.Tooltip;
++import javafx.scene.image.Image;
++import javafx.scene.image.ImageView;
++import javafx.scene.input.KeyCode;
++import javafx.scene.input.KeyEvent;
+ import javafx.scene.paint.Color;
+ import javafx.scene.text.Text;
+ import javafx.scene.text.TextFlow;
+@@ -18,51 +25,50 @@
+ 
+ public class ChatController {
+         @FXML
+-        private Button btn_disconnect;
++        private Button btn_StartServer;
+         @FXML
+-        private Button btn_send;
++        private Button btn_disconnect;
+         @FXML
+         private Button btn_SendMessage;
+         @FXML
+-        private Button btn_StartServer;
+-        @FXML
+         private TextField field_text;
+         @FXML
+         public  TextFlow textFlow;
+         @FXML private ScrollPane ScrollPaneChat;
+-
+-
+-
+-
+         private Client client;
+         private int mode;
+-
+         private static ChatController chatcontroller;
+-
+-
+         private static Client myClient;
+ 
+-
+-
+         public ChatController() {
+                 myClient = client;
+                 chatcontroller = this;
+                 System.out.println("initialize wihtou mehtod Calleasdfasdf");
++
++                Platform.runLater(()->{
++                        ChatController chatcontroller = ChatController.getChatcontroller();
++                        Client client = ChatController.getClientFromChatController();
++                        if (client == null) {
++                                chatcontroller.btn_SendMessage.setDisable(true);
++                                chatcontroller.btn_disconnect.setDisable(true);
++                                chatcontroller.btn_StartServer.setTooltip(new Tooltip("Connect"));
++                        }
++                });
+         }
+ 
+         public static Client getClientFromChatController(){
+                 return myClient;
+         }
+ 
+-        public  static ChatController getChatcontroller(){
++        public static ChatController getChatcontroller(){
+                 return chatcontroller;
+         }
+ 
+-
+         public void addClientMessage(String msg) {
+                 Client client = ChatController.getClientFromChatController();
+                 Message message = new Message(client.getUsername(), msg);
+                 Text text = new Text(message.getMessage());
++                text.setStyle("-fx-font: 16 Calibri;");
+                 textFlow.getChildren().add(text);
+                 textFlow.getChildren().add(new Text(System.lineSeparator()));
+                 ScrollPaneChat.setVvalue(1.0);
+@@ -70,14 +76,16 @@
+ 
+         public void addOfflineMessage(String msg){
+                 Text text = new Text(msg);
++                text.setStyle("-fx-font: 16 Calibri;");
+                 textFlow.getChildren().add(text);
+                 textFlow.getChildren().add(new Text(System.lineSeparator()));
+                 ScrollPaneChat.setVvalue(1.0);
+         }
+ 
+-        public  void addRemoteMessage(String msg) {
++        public void addRemoteMessage(String msg) {
+                 String Message = "Message from Partner: " + msg;
+                 Text text = new Text(Message);
++                text.setStyle("-fx-font: 16 Calibri;");
+                 textFlow.getChildren().add(text);
+                 textFlow.getChildren().add(new Text(System.lineSeparator()));
+                 ScrollPaneChat.setVvalue(1.0);
+@@ -93,6 +101,28 @@
+                 client.setUsername(logindata.getUsername());
+                 ChatController meins = ChatController.getChatcontroller();
+                 meins.ScrollPaneChat.setVvalue(1.0);
++
++                meins.btn_SendMessage.setDisable(false);
++                meins.btn_SendMessage.setTooltip(new Tooltip("Send"));
++                meins.btn_disconnect.setDisable(false);
++                meins.btn_disconnect.setTooltip(new Tooltip("Disconnect"));
++                meins.btn_StartServer.setDisable(true);
++
++                btn_SendMessage.setOnAction(new EventHandler<ActionEvent>() {
++                        @Override
++                        public void handle(ActionEvent actionEvent) {
++                                sendMessage();
++                        }
++                });
++
++                field_text.setOnKeyPressed(new EventHandler<KeyEvent>() {
++                        @Override
++                        public void handle(KeyEvent keyEvent) {
++                                if (keyEvent.getCode() == KeyCode.ENTER)  {
++                                        sendMessage();
++                                }
++                        }
++                });
+         }
+ 
+         @FXML
+@@ -103,6 +133,7 @@
+                 }
+                 if (field_text.getText().isEmpty()) {
+                         Text warning = new Text("Please enter a non-empty message!");
++                        warning.setStyle("-fx-font: 16 Calibri;");
+                         warning.setFill(Color.RED);
+                         textFlow.getChildren().add(warning);
+                         textFlow.getChildren().add(new Text(System.lineSeparator()));
+@@ -123,4 +154,8 @@
+                 LoginController login = new LoginController();
+                 login.changeScene("loginwindow.fxml");
+         }
++
++
++
++
+ }

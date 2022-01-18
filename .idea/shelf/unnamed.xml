@@ -1,0 +1,9 @@
+<changelist name="unnamed" date="1642331794402" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/unnamed/shelved.patch" />
+  <option name="DESCRIPTION" value="" />
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/Message.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/Message.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/unnamed/Message.class" />
+  </binary>
+</changelist>

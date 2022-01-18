@@ -1,0 +1,39 @@
+<changelist name="Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]" date="1641943137985" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 12.01.2022 00:18 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]/SimpleChatTool-1.0-SNAPSHOT.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.bin" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]/executionHistory.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.bin" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]/fileHashes.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="AFTER_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]/buildOutputCleanup.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.lock" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]/executionHistory.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="AFTER_PATH" value="build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]/previous-compilation-data.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.lock" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_01_2022_00_18_[Changes]/fileHashes.lock" />
+  </binary>
+</changelist>

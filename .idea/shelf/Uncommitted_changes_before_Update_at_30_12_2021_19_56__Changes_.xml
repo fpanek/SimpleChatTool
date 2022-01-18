@@ -1,0 +1,69 @@
+<changelist name="Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]" date="1640890573548" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 30.12.2021 19:56 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/module-info.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/module-info.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/module-info.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" />
+    <option name="AFTER_PATH" value="build/libs/SimpleChatTool-1.0-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/SimpleChatTool-1.0-SNAPSHOT.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/checksums/sha1-checksums.bin" />
+    <option name="AFTER_PATH" value=".gradle/checksums/sha1-checksums.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/sha1-checksums.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/buildOutputCleanup/outputFiles.bin" />
+    <option name="AFTER_PATH" value=".gradle/buildOutputCleanup/outputFiles.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/outputFiles.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/SimpleChatToolApplication.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/SimpleChatToolApplication.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/SimpleChatToolApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.bin" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/executionHistory.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.bin" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/fileHashes.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="AFTER_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/buildOutputCleanup.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.lock" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/executionHistory/executionHistory.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/executionHistory.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/checksums/checksums.lock" />
+    <option name="AFTER_PATH" value=".gradle/checksums/checksums.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/checksums.lock" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/at/ac/fhcampuswien/simplechattool/copyPasteChatApp/test.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="AFTER_PATH" value="build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/previous-compilation-data.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.lock" />
+    <option name="AFTER_PATH" value=".gradle/7.1.1/fileHashes/fileHashes.lock" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_12_2021_19_56_[Changes]/fileHashes.lock" />
+  </binary>
+</changelist>
