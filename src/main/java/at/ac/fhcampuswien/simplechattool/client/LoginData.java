@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.simplechattool;
+package at.ac.fhcampuswien.simplechattool.client;
 
 public class LoginData {
     private String ServerIP;

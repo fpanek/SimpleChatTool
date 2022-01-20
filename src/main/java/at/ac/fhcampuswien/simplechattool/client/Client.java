@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.simplechattool;
+package at.ac.fhcampuswien.simplechattool.client;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Objects;
 
+import at.ac.fhcampuswien.simplechattool.Message;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -116,9 +117,9 @@ public class Client extends Application {
                 }
             };
             new Thread(clientThread).start();
-
             System.out.println("Connection successful to server " + server + " and port " + port + ".");
             chatcontroller.addOfflineMessage("Successfully connected to " + server + " port: " + port + ". Have fun ;)");
+
         } catch (Exception e) {
             System.err.println("ERROR: Connection error");
             e.printStackTrace();

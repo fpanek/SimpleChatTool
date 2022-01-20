@@ -1,8 +1,6 @@
-package at.ac.fhcampuswien.simplechattool;
+package at.ac.fhcampuswien.simplechattool.server;
 
 import java.io.*;
-import java.text.*;
-import java.util.*;
 import java.net.*;
 
 public class Server {
