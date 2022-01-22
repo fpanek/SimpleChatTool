@@ -20,6 +20,8 @@ public class Message implements Serializable {
     private String AdditionalInformation;
     public ArrayList<String> user_list = new ArrayList<String>();
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("HH:mm");
+    // Internal Message  -> not displayed on GUI
+    boolean InternalInformation;    //message received by client if new connection is established - String Message = "myUsername"
 
 
     public Message(String username, String text) {
@@ -38,6 +40,13 @@ public class Message implements Serializable {
         this.AdditionalInformation = AdditionalInformation;
     }
 
+    public boolean isInternalInformation() {
+        return InternalInformation;
+    }
+
+    public void setInternalInformation(boolean internalInformation) {
+        InternalInformation = internalInformation;
+    }
 
     public String getMessageAsString() {
         return time + ":" + username + ":" + Message + ":" + AdditionalInformation;

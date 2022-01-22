@@ -16,6 +16,7 @@ public class ClientHandler extends Thread{
     ArrayList<Socket> connectedClients = new ArrayList<Socket>();
     public ArrayList<String> users = new ArrayList<String>();
     private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<ClientHandler>();
+    String username;
 
     // Constructor
     public ClientHandler(Socket s, ObjectInputStream ois, ObjectOutputStream oos) {
@@ -24,6 +25,16 @@ public class ClientHandler extends Thread{
         this.oos = oos;
         connectedClients.add(s);
         ActiveClientHandlers.add(this);
+        this.username="";
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -63,8 +74,24 @@ public class ClientHandler extends Thread{
             try {
                 receivedMessage = (Message) ois.readObject();
                 System.out.println("Received Object Text: " + receivedMessage.getText());
-                String username = receivedMessage.getUsername();
-                users.add(username);
+
+                if(receivedMessage.getAdditionalInformation()==true){
+                    if (receivedMessage.getUsername().equals("myUsername"));
+                        this.username = receivedMessage.getUsername();
+                }
+                //String username = receivedMessage.getUsername();
+                //users.add(username);
+
+                //TODO:
+                //Send all connected Clients to User if new message is retrieved  - in both cases = internalMessage=true/false
+
+                //TODO:
+                //if internalMessage = true -->  myUsername
+                //new Message
+                //private String username;  --> Server
+                //private String Message; --> Message = "allConnectedUsers"
+                //send arraylist of connected users
+
 
                 Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "iwas");
 
@@ -97,7 +124,7 @@ public class ClientHandler extends Thread{
                     for (ClientHandler handler: ActiveClientHandlers){
                         if (socketEqualWithClientHandler(handler, s)) {
                             System.out.println("Removing Client: " + handler.s.getPort());
-                            users.remove(username);
+                            //users.remove(username);
                             ActiveClientHandlers.remove(handler);
                             break;
                         }
