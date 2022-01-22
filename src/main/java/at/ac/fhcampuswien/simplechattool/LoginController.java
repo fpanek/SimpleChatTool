@@ -31,23 +31,23 @@ public class LoginController {
 
     public LoginController() {
         Platform.runLater(()->{
-        btn_login.setOnAction(actionEvent -> {
-            try {
-                userLogin();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+            input_nickname.setOnKeyPressed(keyEvent -> {
+                if (keyEvent.getCode() == KeyCode.ENTER)  {
+                    try {
+                        userLogin();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
-        input_nickname.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.ENTER)  {
+            btn_login.setOnAction(actionEvent -> {
                 try {
                     userLogin();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-        });
+            });
         });
     }
 
@@ -82,13 +82,6 @@ public class LoginController {
         String port;
         if (input_port.getText().isEmpty()) {
             port = "5056";
-        } else if (Integer.parseInt(input_port.getText()) < 0 || Integer.parseInt(input_port.getText()) > 65535) {
-            warning_msg.getChildren().clear();
-            Text message = new Text("Error: Port number must be between 0 and 65535.");
-            message.setFill(Color.RED);
-            message.setStyle("-fx-font: 14 System;");
-            warning_msg.getChildren().addAll(message);
-            return;
         } else {
             port = input_port.getText();
             boolean flag = true;
@@ -105,12 +98,21 @@ public class LoginController {
                 message.setStyle("-fx-font: 14 System;");
                 warning_msg.getChildren().addAll(message);
                 return;
+            } else if (Integer.parseInt(input_port.getText()) < 0 || Integer.parseInt(input_port.getText()) > 65535) {
+                warning_msg.getChildren().clear();
+                Text message = new Text("Error: Port number must be between 0 and 65535.");
+                message.setFill(Color.RED);
+                message.setStyle("-fx-font: 14 System;");
+                warning_msg.getChildren().addAll(message);
+                return;
+            } else {
+                port = input_port.getText();
             }
         }
 
         if (!input_server.getText().isEmpty()) {
             InetAddress host = InetAddress.getByName(input_server.getText());
-            if (host.isReachable(0)) {
+            if (host.isReachable(1000)) {
                 String ip = input_server.getText();
             } else {
                 warning_msg.getChildren().clear();
