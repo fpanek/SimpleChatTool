@@ -43,7 +43,6 @@ public class Message implements Serializable {
         return time + ":" + username + ":" + Message + ":" + AdditionalInformation;
     }
 
-
     public String getMessage(){
         return "[" + getTime() + " " + getUsername() + "] " + getText();
     }

@@ -39,8 +39,6 @@ public class ClientHandler extends Thread{
         return ActiveClientHandlers;
     }
 
-
-
     public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket) {
         if (clientHandler.getClientHandlerPort(clientHandler) == socket.getPort()) {
             System.out.println("Ports are equal");

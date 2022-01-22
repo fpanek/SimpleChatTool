@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Objects;
 
 public class LoginController {
     @FXML
@@ -65,7 +64,7 @@ public class LoginController {
 
     @FXML
     public void userLogin() throws IOException {
-        System.out.println("Button login pressed");
+        System.out.println("Login Button pressed");
         checkLogin();
     }
 
@@ -83,7 +82,7 @@ public class LoginController {
         String port;
         if (input_port.getText().isEmpty()) {
             port = "5056";
-        } else if (Integer.parseInt(input_port.getText()) < 0 || Integer.parseInt(input_port.getText()) > 65535){
+        } else if (Integer.parseInt(input_port.getText()) < 0 || Integer.parseInt(input_port.getText()) > 65535) {
             warning_msg.getChildren().clear();
             Text message = new Text("Error: Port number must be between 0 and 65535.");
             message.setFill(Color.RED);
@@ -92,6 +91,21 @@ public class LoginController {
             return;
         } else {
             port = input_port.getText();
+            boolean flag = true;
+            for (int i = 0; i < port.length(); i++) {
+                if (i==0 && port.charAt(i) == '-')
+                    continue;
+                if (!Character.isDigit(port.charAt(i)))
+                    flag = false;
+            }
+            if (!flag) {
+                warning_msg.getChildren().clear();
+                Text message = new Text("Error: Port number must be a number.");
+                message.setFill(Color.RED);
+                message.setStyle("-fx-font: 14 System;");
+                warning_msg.getChildren().addAll(message);
+                return;
+            }
         }
 
         if (!input_server.getText().isEmpty()) {
