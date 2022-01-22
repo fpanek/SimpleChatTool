@@ -1,8 +1,6 @@
 package at.ac.fhcampuswien.simplechattool;
 
-import java.sql.Timestamp;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +17,6 @@ public class Message implements Serializable {
     private String time;
     private String AdditionalInformation;
     public ArrayList<String> user_list = new ArrayList<String>();
-    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
 
     public Message(String username, String text) {
@@ -28,12 +25,10 @@ public class Message implements Serializable {
         Date date = new Date();
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(date);
-        //int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        //int min = calendar.get(Calendar.MINUTE);
-        //int seconds = calendar.get(Calendar.SECOND);
-        //time = hour + ":" + min + ":" +seconds;
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        time = SIMPLE_DATE_FORMAT.format(timestamp);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
+        int seconds = calendar.get(Calendar.SECOND);
+        time = hour + ":" + min + ":" +seconds;
     }
 
     public Message(String username, String Message, String AdditionalInformation){
@@ -42,11 +37,25 @@ public class Message implements Serializable {
         this.AdditionalInformation = AdditionalInformation;
     }
 
+    public Message (){
+        Date date = new Date();
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
+        //int seconds = calendar.get(Calendar.SECOND);
+        time = hour + ":" + min;
+    }
 
     public String getMessageAsString(){
         return username + ":" + Message + ":" + AdditionalInformation;
     }
 
+    public Message createMessageFromString(String MessageAsString){
+        //MessageAsString.split(":");
+        Message test = new Message("asdf","asf","asdf");
+        return test;
+    }
 
     public String getMessage(){
         return "[" + getTime() + " " + getUsername() + "] " + getText();
