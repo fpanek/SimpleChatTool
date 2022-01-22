@@ -1,23 +1,17 @@
 package at.ac.fhcampuswien.simplechattool;
 
-import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Objects;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-import javafx.stage.WindowEvent;
+import java.io.*;
+import java.net.Socket;
+import java.util.Objects;
 
 /*
 Sources:
@@ -28,29 +22,15 @@ https://luisgcenci.medium.com/building-a-group-chat-app-with-javafx-multithread-
 
 public class Client extends Application {
     private String username;
+    public String successMsg;
     private Socket clientSocket;
-    private InputStream inputStream;
-    private OutputStream outputStream;
-    private ObjectInputStream objectInStream;
-    private ObjectOutputStream objectOutStream;
-    private boolean option = true;
-    private ChatController chatView;
     private static Stage stg;
-    private static String msg;
-    public ChatController controller;
-    public  TextFlow textFlow;
     boolean validData = true;
-    private ObjectOutputStream sendObject;
-    private ObjectInputStream receiveObject;
     private static ObjectOutputStream myObjectOutputStream;
     private static ObjectInputStream myObjectInputStream;
     private static Socket myClientSocket;
 
     public Client() {
-    }
-
-    public static String getMsg(){
-        return msg;
     }
 
     public String getUsername() {
@@ -66,24 +46,6 @@ public class Client extends Application {
     }
 
     public void setConnection(String server, int port) {
-        ChatController chatcontroller = ChatController.getChatcontroller();
-        boolean success = false;
-        while(!success) {
-            try {
-                InetAddress host = InetAddress.getByName(server);
-                System.out.println("Server " + server + " is Online");
-                success = true;
-
-            } catch (UnknownHostException e) {
-                System.out.println("Server is offline, please provide a correct server");
-                System.exit(0);
-            }
-        }
-        if (port < 0 || port > 65535) {
-            System.out.print("Enter the right port number ..! " );
-            System.exit(0);
-        }
-
         try {
             clientSocket = new Socket(server, port);
             myClientSocket = clientSocket;
@@ -102,23 +64,20 @@ public class Client extends Application {
             ex.printStackTrace();
         }
 
-
         try {
             Task clientThread = new Task() {
                 @Override
                 protected Object call() throws Exception {
                     while (validData) {
                         listenData(clientSocket);
-                        //Thread.sleep(10000);
-                        //System.out.println("Executing Threaaad  - still alive");
                     }
                     return null;
                 }
             };
             new Thread(clientThread).start();
-
             System.out.println("Connection successful to server " + server + " and port " + port + ".");
-            chatcontroller.addOfflineMessage("Successfully connected to " + server + " port: " + port + ". Have fun ;)");
+            successMsg = "You are connected via " + server + " and port " + port + ". Have fun ;)";
+
         } catch (Exception e) {
             System.err.println("ERROR: Connection error");
             e.printStackTrace();
@@ -143,7 +102,7 @@ public class Client extends Application {
         try {
             Message myMessage = (Message) myObjectInputStream.readObject();
             Platform.runLater(()->{
-                ChatController chatcontroller = ChatController.getChatcontroller();
+                ChatController chatcontroller = ChatController.getChatController();
                 chatcontroller.addRemoteMessage(myMessage);
             });
         } catch(Exception e) {
@@ -168,12 +127,12 @@ public class Client extends Application {
         }
     }
 
-    public static void main(String [] args) throws Exception {
+    public static void main(String [] args) {
         launch(args);
     }
 
     @Override
-    public void start (Stage primaryStage) throws Exception{
+    public void start (Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Client.class.getResource("loginwindow.fxml"));
         Parent root = loader.load();
@@ -184,14 +143,10 @@ public class Client extends Application {
         stg = primaryStage;
         stg.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("logo2.png"))));
 
-        stg.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent we) {
-                System.out.println("Stage is closing");
-                stg.close();
-                System.exit(0);
-            }
+        stg.setOnCloseRequest(we -> {
+            System.out.println("Stage is closing");
+            stg.close();
+            System.exit(0);
         });
     }
-
-
 }

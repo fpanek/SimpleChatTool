@@ -1,25 +1,22 @@
 package at.ac.fhcampuswien.simplechattool;
 
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
-public class LoginController  {
+public class LoginController {
     @FXML
     private Button btn_login;
     @FXML
@@ -29,22 +26,22 @@ public class LoginController  {
     @FXML
     private TextField input_server;
     @FXML
-    private Label warning_msg;
-
-    private String server;
-    private int port;
-    private String nickname;
-    private static Stage stg;
-
+    private TextFlow warning_msg;
     private static Client myClient;
-    private static LoginData logindata;
 
-    /*
+
     public LoginController() {
         Platform.runLater(()->{
-        btn_login.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
+        btn_login.setOnAction(actionEvent -> {
+            try {
+                userLogin();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        input_nickname.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER)  {
                 try {
                     userLogin();
                 } catch (IOException e) {
@@ -52,47 +49,18 @@ public class LoginController  {
                 }
             }
         });
-
-        input_nickname.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER)  {
-                    try {
-                        userLogin();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
         });
     }
-    */
 
-    public LoginData getLogindataObject(){
-        return logindata;
-    }
-
-    public String getIP() {
-        return server;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public String getUsername() {
-        return nickname;
+    public static Client getClientFromLoginController() {
+        return myClient;
     }
 
     public void changeScene(String fxml) throws IOException {
         Stage stg = Client.getStage();
-        Parent pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxml)));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        Parent pane = loader.load();
         stg.getScene().setRoot(pane);
-    }
-
-    public static Client getMyClient() {
-        return myClient;
     }
 
     @FXML
@@ -103,21 +71,56 @@ public class LoginController  {
 
     @FXML
     public void checkLogin() throws IOException {
-        if (input_server.getText().isEmpty() || input_port.getText().isEmpty() || input_nickname.getText().isEmpty()) {
-            warning_msg.setText("Error: Please enter your data!");
 
-        } else if (!input_nickname.getText().isEmpty()) {
+        if (input_server.getText().isEmpty() || input_nickname.getText().isEmpty()) {
+            warning_msg.getChildren().clear();
+            Text message = new Text("Error: Please enter your data!");
+            message.setFill(Color.RED);
+            message.setStyle("-fx-font: 14 System;");
+            warning_msg.getChildren().addAll(message);
+        }
 
-            server = input_server.getText();
-            port = Integer.parseInt(input_port.getText());
-            System.out.println("Username from input " + input_nickname.getText() + "method: " );
+        String port;
+        if (input_port.getText().isEmpty()) {
+            port = "5056";
+        } else if (Integer.parseInt(input_port.getText()) < 0 || Integer.parseInt(input_port.getText()) > 65535){
+            warning_msg.getChildren().clear();
+            Text message = new Text("Error: Port number must be between 0 and 65535.");
+            message.setFill(Color.RED);
+            message.setStyle("-fx-font: 14 System;");
+            warning_msg.getChildren().addAll(message);
+            return;
+        } else {
+            port = input_port.getText();
+        }
 
-            logindata = LoginData.getLogindata();
+        if (!input_server.getText().isEmpty()) {
+            InetAddress host = InetAddress.getByName(input_server.getText());
+            if (host.isReachable(0)) {
+                String ip = input_server.getText();
+            } else {
+                warning_msg.getChildren().clear();
+                Text message = new Text("Error: Entered server is offline. Please enter a reachable server.");
+                message.setFill(Color.RED);
+                message.setStyle("-fx-font: 14 System;");
+                warning_msg.getChildren().addAll(message);
+                return;
+            }
+        }
+
+        if (!input_nickname.getText().isEmpty() && !input_server.getText().isEmpty()) {
+            LoginData logindata = LoginData.getLogindata();
             logindata.setUsername(input_nickname.getText());
             logindata.setServerIP(input_server.getText());
-            logindata.setServerPort(Integer.parseInt(input_port.getText()));
+            logindata.setServerPort(Integer.parseInt(port));
 
-            System.out.println(server + " " + port);
+            System.out.println("Username from input: " + input_nickname.getText() + ", server: " + input_server.getText() + ", port: " + port);
+
+            Client client = new Client();
+            myClient = client;
+            client.setConnection(logindata.getServerIP(), logindata.getServerPort());
+            client.setUsername(logindata.getUsername());
+
             changeScene("basic_chat_v2.fxml");
         }
     }

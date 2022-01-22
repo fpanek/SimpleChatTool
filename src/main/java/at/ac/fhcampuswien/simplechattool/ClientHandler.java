@@ -10,13 +10,11 @@ import java.util.Date;
 public class ClientHandler extends Thread{
     DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd");
     DateFormat fortime = new SimpleDateFormat("hh:mm:ss");
-    //final DataInputStream dis;
-    //final DataOutputStream dos;
     final ObjectInputStream ois;
     final ObjectOutputStream oos;
     final Socket s;
     ArrayList<Socket> connectedClients = new ArrayList<Socket>();
-    private static ArrayList<String> users = new ArrayList<String>();
+    public ArrayList<String> users = new ArrayList<String>();
     private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<ClientHandler>();
 
     // Constructor
@@ -40,6 +38,8 @@ public class ClientHandler extends Thread{
     public static ArrayList<ClientHandler> getActiveClientHandlers(){
         return ActiveClientHandlers;
     }
+
+
 
     public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket) {
         if (clientHandler.getClientHandlerPort(clientHandler) == socket.getPort()) {
@@ -66,6 +66,7 @@ public class ClientHandler extends Thread{
                 receivedMessage = (Message) ois.readObject();
                 System.out.println("Received Object Text: " + receivedMessage.getText());
                 String username = receivedMessage.getUsername();
+                users.add(username);
 
                 Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "iwas");
 
@@ -82,7 +83,7 @@ public class ClientHandler extends Thread{
                             //handler.dos.flush();
                             System.out.println("Forwarding Message: " + receivedMessage.getText());
                             handler.oos.writeObject(receivedMessage);
-                            users.add(username);
+                            myMessage.user_list.addAll(users);
                             handler.oos.flush();
                         }
                     }
@@ -142,35 +143,22 @@ public class ClientHandler extends Thread{
 
 
             } catch (Exception e) {
-                System.err.println("Client disconnectd");
+                System.err.println("Client disconnected");
                 e.printStackTrace();
-                for(ClientHandler handler: ActiveClientHandlers){
-                    if(socketEqualWithClientHandler(handler, s)){
+                for (ClientHandler handler: ActiveClientHandlers) {
+                    if (socketEqualWithClientHandler(handler, s)) {
                         System.out.println("Removing Client: " + handler.s.getPort());
                         ActiveClientHandlers.remove(handler);
                         break;
                     }
                 }
-                try{
+                try {
                     this.s.close();
-                } catch (Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 break;
             }
         }
-
-        /*
-        try
-        {
-            // closing resources
-            this.ois.close();
-            this.oos.close();
-
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-         */
-
     }
 }

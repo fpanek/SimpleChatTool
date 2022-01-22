@@ -2,7 +2,7 @@ package at.ac.fhcampuswien.simplechattool;
 
 public class LoginData {
     private String ServerIP;
-    private int ServerPort;
+    private int ServerPort = 5056;
     private String Username;
     private static LoginData logindata = new LoginData();
 

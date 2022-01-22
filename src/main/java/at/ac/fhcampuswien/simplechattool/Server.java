@@ -1,11 +1,12 @@
 package at.ac.fhcampuswien.simplechattool;
 
 import java.io.*;
-import java.text.*;
-import java.util.*;
-import java.net.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server {
+    private static ArrayList<String> users = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // server is listening on port 5056
@@ -13,12 +14,9 @@ public class Server {
 
         // running infinite loop for getting
         // client request
-        while (true)
-        {
+        while (true) {
             Socket s = null;
-
-            try
-            {
+            try {
                 // socket object to receive incoming client requests
                 s = ss.accept();
 
@@ -48,10 +46,7 @@ public class Server {
                 //System.out.println(myMessage.getText());
                 //String test = dis.readUTF();
                 //System.out.println("Received message in Server ClassL: " + test);
-
-
                 //End Test
-
 
                 System.out.println("Assigning new thread for this client");
                 //create a new thread object
