@@ -101,6 +101,7 @@ public class Client extends Application {
     public void listenData(Socket clientSocket) {
         try {
             Message myMessage = (Message) myObjectInputStream.readObject();
+            System.out.println("Connected User: " + myMessage.getUsers());
             Platform.runLater(()->{
                 ChatController chatcontroller = ChatController.getChatController();
                 chatcontroller.addRemoteMessage(myMessage);

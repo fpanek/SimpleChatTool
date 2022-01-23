@@ -40,7 +40,7 @@ public class Message implements Serializable {
         this.AdditionalInformation = AdditionalInformation;
     }
 
-    public boolean isInternalInformation() {
+    public boolean getInternalInformation() {
         return InternalInformation;
     }
 

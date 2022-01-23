@@ -14,9 +14,9 @@ public class ClientHandler extends Thread{
     final ObjectOutputStream oos;
     final Socket s;
     ArrayList<Socket> connectedClients = new ArrayList<Socket>();
-    public ArrayList<String> users = new ArrayList<String>();
+    private static ArrayList<String> users = new ArrayList<String>();
     private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<ClientHandler>();
-    String username;
+    private String username;
 
     // Constructor
     public ClientHandler(Socket s, ObjectInputStream ois, ObjectOutputStream oos) {
@@ -26,6 +26,7 @@ public class ClientHandler extends Thread{
         connectedClients.add(s);
         ActiveClientHandlers.add(this);
         this.username="";
+        //users.add()
     }
 
 
@@ -35,6 +36,7 @@ public class ClientHandler extends Thread{
 
     public void setUsername(String username) {
         this.username = username;
+        users.add(username);
     }
 
     @Override
@@ -52,10 +54,10 @@ public class ClientHandler extends Thread{
 
     public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket) {
         if (clientHandler.getClientHandlerPort(clientHandler) == socket.getPort()) {
-            System.out.println("Ports are equal");
+            //System.out.println("Ports are equal");
             return true;
         } else {
-            System.out.println("Port not equal...");
+            //System.out.println("Port not equal...");
             return false;
         }
     }
@@ -75,37 +77,48 @@ public class ClientHandler extends Thread{
                 receivedMessage = (Message) ois.readObject();
                 System.out.println("Received Object Text: " + receivedMessage.getText());
 
-                if(receivedMessage.getAdditionalInformation()==true){
-                    if (receivedMessage.getUsername().equals("myUsername"));
-                        this.username = receivedMessage.getUsername();
-                }
-                //String username = receivedMessage.getUsername();
+
+                System.out.println("Port: " + s.getPort() + " AdditionalInformation: " + receivedMessage.getInternalInformation() + " received Message: " + receivedMessage.getText() + "Users: " + receivedMessage.getUsers());
+
+
+                String username = receivedMessage.getUsername();
+                Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "iwas");
                 //users.add(username);
 
                 //TODO:
-                //Send all connected Clients to User if new message is retrieved  - in both cases = internalMessage=true/false
+                //Send all connected Clients to User if new message is retrieved  - in both cases = internalMessage=true (additional message)/false (default behavior)
+                //forward it to all users
+                //TODO : !! testing purpose set if to false condition again - is only to not for testing purpose
+                if(receivedMessage.getInternalInformation()) {
+                    if ((receivedMessage.getText().equals("myUsername")) && !users.contains(receivedMessage.getUsername())) {
+                        System.out.println("New User:..." + receivedMessage.getText());
+                        users.add(receivedMessage.getUsername());
+                        this.username = receivedMessage.getUsername();
+                        for (ClientHandler handler : ActiveClientHandlers) {
+                            //handler.oos.writeObject(myMessage);
+                            receivedMessage.setUsers(users);
+                            receivedMessage.setText("allConnectedUsers");
+                            System.out.println(handler);
+                            handler.oos.writeObject(receivedMessage);
+                            //myMessage.user_list.addAll(users);
+                            handler.oos.flush();
+                        }
+                    }
+                }
 
-                //TODO:
-                //if internalMessage = true -->  myUsername
-                //new Message
-                //private String username;  --> Server
-                //private String Message; --> Message = "allConnectedUsers"
-                //send arraylist of connected users
 
 
-                Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "iwas");
 
-                //Send received Message to All Clients
+                //Send received Message to All Clients except to itself
                 if (!(receivedMessage.getText().equals("CloseSocket"))) {
                     System.out.println("Message not equal CloseSocket..");
-
                     for (ClientHandler handler: ActiveClientHandlers) {
-
                         //handler.oos.writeObject(myMessage);
                         System.out.println(handler);
                         if (handler.s.getPort() != s.getPort()) {
                             //handler.dos.writeUTF(received);
                             //handler.dos.flush();
+                            receivedMessage.setUsers(users);
                             System.out.println("Forwarding Message: " + receivedMessage.getText());
                             handler.oos.writeObject(receivedMessage);
                             myMessage.user_list.addAll(users);
@@ -114,8 +127,8 @@ public class ClientHandler extends Thread{
                     }
                 }
 
-                System.out.println("Port: " + s.getPort() + " received Message: " + receivedMessage.getText());
 
+                //Client disconnects and closes Socket
                 if (receivedMessage.getText().equals("CloseSocket")) {
                     System.out.println("Client " + this.s + " sends exit...");
                     System.out.println("Closing this connection.");
@@ -124,7 +137,7 @@ public class ClientHandler extends Thread{
                     for (ClientHandler handler: ActiveClientHandlers){
                         if (socketEqualWithClientHandler(handler, s)) {
                             System.out.println("Removing Client: " + handler.s.getPort());
-                            //users.remove(username);
+                            users.remove(username);
                             ActiveClientHandlers.remove(handler);
                             break;
                         }
@@ -137,6 +150,7 @@ public class ClientHandler extends Thread{
 
                 // write on output stream based on the
                 // answer from the client
+                //TODO: Add previous if/else statements to switch/case below:
                 switch (receivedMessage.getText()) {
                     case "Date" :
                         toreturn = fordate.format(date);
@@ -152,6 +166,17 @@ public class ClientHandler extends Thread{
                         Message returnMessageTime = new Message("Automatic Message", toreturn, "Automated Message");
                         oos.writeObject(returnMessageTime);
                         oos.flush();
+                        //dos.writeUTF(toreturn);
+                        break;
+
+                    case "Users" :
+                        toreturn = fortime.format(date);
+                        Message returnConnectedUsers = new Message("Automatic Message", toreturn, "Automated Message Print connected User on Server CMD");
+                        returnConnectedUsers.setUsers(users);
+                        oos.writeObject(returnConnectedUsers);
+                        oos.flush();
+                        System.out.println("Connected Users requested on Server Side: " + users);
+
                         //dos.writeUTF(toreturn);
                         break;
 /*
@@ -174,6 +199,7 @@ public class ClientHandler extends Thread{
                     if (socketEqualWithClientHandler(handler, s)) {
                         System.out.println("Removing Client: " + handler.s.getPort());
                         ActiveClientHandlers.remove(handler);
+                        users.remove(this.username);
                         break;
                     }
                 }
