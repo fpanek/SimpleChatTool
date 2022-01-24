@@ -85,13 +85,33 @@ public class Client extends Application {
         }
     }
 
+    public void sendObject(Message message) {
+        try {
+            System.out.println("Sending Object to Server..." + message.getText());
+            myObjectOutputStream.writeObject(message);
+            //ChatController chatcontroller = ChatController.getChatController();
+            //chatcontroller.displayUsers(message);
+            myObjectOutputStream.flush();
+        } catch (Exception e) {
+            System.err.println("ERROR: Error sending data");
+            e.printStackTrace();
+        }
+    }
+
+
     public void sendMessage(String msg) {
         try {
             Message myMessage = new Message(getUsername(), msg, "nothing");
-            System.out.println("Sending Object to Server..." + myMessage.getText());
-            myObjectOutputStream.writeObject(myMessage);
-            myObjectOutputStream.flush();
-
+            if (!myMessage.InternalInformation) {
+                System.out.println("Sending Object to Server..." + myMessage.getText());
+                myObjectOutputStream.writeObject(myMessage);
+                myObjectOutputStream.flush();
+            } else {
+                //myObjectOutputStream.writeObject(myMessage.getUsers());
+                //ChatController chatcontroller = ChatController.getChatController();
+                //chatcontroller.displayUsers(myMessage);
+                //myObjectOutputStream.flush();
+            }
         } catch (Exception e) {
             System.err.println("ERROR: Error sending data");
             e.printStackTrace();
@@ -101,11 +121,19 @@ public class Client extends Application {
     public void listenData(Socket clientSocket) {
         try {
             Message myMessage = (Message) myObjectInputStream.readObject();
-            System.out.println("Connected User: " + myMessage.getUsers());
-            Platform.runLater(()->{
-                ChatController chatcontroller = ChatController.getChatController();
-                chatcontroller.addRemoteMessage(myMessage);
-            });
+            ChatController chatcontroller = ChatController.getChatController();
+                if (myMessage.InternalInformation) {
+                    Platform.runLater(()->{;
+                        chatcontroller.displayUsers(myMessage);
+                    });
+                } else {
+                    System.out.println("Connected User: " + myMessage.getUsers());
+                    Platform.runLater(()->{;
+                        chatcontroller.addRemoteMessage(myMessage);
+                    });
+                }
+            System.out.println("received connected clients:");
+            System.out.println(myMessage.getUsers());
         } catch(Exception e) {
             try {
                 e.printStackTrace();

@@ -57,6 +57,7 @@ public class LoginController {
 
     public void changeScene(String fxml) throws IOException {
         Stage stg = Client.getStage();
+        stg.setTitle("Simple Chat Tool @ " + input_nickname.getText());
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         Parent pane = loader.load();
         stg.getScene().setRoot(pane);
@@ -93,7 +94,7 @@ public class LoginController {
             }
             if (!flag) {
                 warning_msg.getChildren().clear();
-                Text message = new Text("Error: Port number must be a number.");
+                Text message = new Text("Error: Port must be a number.");
                 message.setFill(Color.RED);
                 message.setStyle("-fx-font: 14 System;");
                 warning_msg.getChildren().addAll(message);
@@ -136,6 +137,7 @@ public class LoginController {
             myClient = client;
             client.setConnection(logindata.getServerIP(), logindata.getServerPort());
             client.setUsername(logindata.getUsername());
+
 
             changeScene("basic_chat_v2.fxml");
         }

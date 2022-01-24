@@ -34,9 +34,9 @@ public class Message implements Serializable {
         time = SIMPLE_DATE_FORMAT.format(timestamp);
     }
 
-    public Message(String username, String Message, String AdditionalInformation){
+    public Message(String username, String message, String AdditionalInformation){
         this.username = username;
-        this.Message = Message;
+        this.Message = message;
         this.AdditionalInformation = AdditionalInformation;
     }
 
@@ -45,11 +45,11 @@ public class Message implements Serializable {
     }
 
     public void setInternalInformation(boolean internalInformation) {
-        InternalInformation = internalInformation;
+        this.InternalInformation = internalInformation;
     }
 
     public String getMessageAsString() {
-        return time + ":" + username + ":" + Message + ":" + AdditionalInformation;
+        return getTime() + ":" + getUsername() + ":" + getText();
     }
 
     public String getMessage(){
@@ -57,7 +57,7 @@ public class Message implements Serializable {
     }
 
     public void setUsers(ArrayList<String> users){
-        user_list.addAll(users);
+        user_list = users;
     }
 
     public ArrayList<String> getUsers(){

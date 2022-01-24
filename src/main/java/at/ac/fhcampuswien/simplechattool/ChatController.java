@@ -15,6 +15,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class ChatController {
         @FXML
         private Button btn_disconnect;
@@ -45,13 +47,14 @@ public class ChatController {
                 System.out.println("ChatController initialized");
                 System.out.println("Using ChatController: " + Integer.toHexString(hashCode()));
                 welcomeMsg = "Welcome to Simple Chat, " + client.getUsername() + "!";
+                Message msgWithUsername = new Message(client.getUsername(), "myUsername");
+                msgWithUsername.InternalInformation = true;
+                client.sendObject(msgWithUsername);
 
                 Platform.runLater(()->{
                         chatcontroller.btn_SendMessage.setTooltip(new Tooltip("Send"));
-                        chatcontroller.btn_disconnect.setDisable(false);
                         chatcontroller.btn_disconnect.setTooltip(new Tooltip("Disconnect"));
                         chatcontroller.btn_Exit.setTooltip(new Tooltip("Exit"));
-                        chatcontroller.flow_onlineUsers.setItems(items);
 
                         btn_SendMessage.setOnAction(actionEvent -> sendMessage());
                         field_text.setOnKeyPressed(keyEvent -> {
@@ -67,9 +70,6 @@ public class ChatController {
                 Platform.runLater(()->{
                         msg = client.successMsg;
                         addOfflineMessage(msg);
-
-                        items = FXCollections.observableArrayList(client.getUsername());
-                        flow_onlineUsers.setItems(items);
                 });
                 addOfflineMessage(welcomeMsg);
         }
@@ -78,8 +78,17 @@ public class ChatController {
                 return chatcontroller;
         }
 
+        public void displayUsers(Message message) {
+                        items.clear();
+                        System.out.println("Method displayUsers called");
+                        System.out.println("Online users: " + message.getUsers());
+                        items = FXCollections.observableArrayList(message.getUsers());
+                        flow_onlineUsers.setItems(items);
+        }
+
         public void addClientMessage(String msg) {
                 Message message = new Message(client.getUsername(), msg);
+                message.setInternalInformation(false);
                 Text text = new Text(message.getMessage());
                 HBox hBox = new HBox();
                 hBox.setAlignment(Pos.TOP_RIGHT);
@@ -115,6 +124,7 @@ public class ChatController {
 
         public void addRemoteMessage(Message message) {
                 Message message1 = new Message(message.getUsername(), message.getText());
+                message1.setInternalInformation(false);
                 Text text = new Text(message1.getMessage());
 
                 HBox hBox = new HBox();

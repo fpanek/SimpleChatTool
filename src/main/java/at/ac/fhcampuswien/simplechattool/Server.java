@@ -6,7 +6,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server {
-    private static ArrayList<String> users = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // server is listening on port 5056

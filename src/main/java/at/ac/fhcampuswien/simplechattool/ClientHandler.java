@@ -7,15 +7,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ClientHandler extends Thread{
+public class ClientHandler extends Thread {
     DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd");
     DateFormat fortime = new SimpleDateFormat("hh:mm:ss");
     final ObjectInputStream ois;
     final ObjectOutputStream oos;
     final Socket s;
-    ArrayList<Socket> connectedClients = new ArrayList<Socket>();
-    private static ArrayList<String> users = new ArrayList<String>();
-    private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<ClientHandler>();
+    ArrayList<Socket> connectedClients = new ArrayList<>();
+    private static ArrayList<String> users = new ArrayList<>();
+    private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<>();
     private String username;
 
     // Constructor
@@ -26,7 +26,6 @@ public class ClientHandler extends Thread{
         connectedClients.add(s);
         ActiveClientHandlers.add(this);
         this.username="";
-        //users.add()
     }
 
 
@@ -53,21 +52,17 @@ public class ClientHandler extends Thread{
     }
 
     public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket) {
-        if (clientHandler.getClientHandlerPort(clientHandler) == socket.getPort()) {
-            //System.out.println("Ports are equal");
-            return true;
-        } else {
-            //System.out.println("Port not equal...");
-            return false;
-        }
+        return clientHandler.getClientHandlerPort(clientHandler) == socket.getPort();
     }
 
     public int getClientHandlerPort(ClientHandler clientHandler){
         return clientHandler.s.getPort();
     }
 
+
     @Override
     public void run() {
+
         String received;
         String toreturn;
         Message receivedMessage;
@@ -75,58 +70,60 @@ public class ClientHandler extends Thread{
         while (true) {
             try {
                 receivedMessage = (Message) ois.readObject();
+                username = receivedMessage.getUsername();
+
                 System.out.println("Received Object Text: " + receivedMessage.getText());
+                System.out.println("Port: " + s.getPort() + ", InternalInformation: " + receivedMessage.getInternalInformation() +
+                                    ", received message: " + receivedMessage.getText() + ", Users: " + receivedMessage.getUsername());
 
-
-                System.out.println("Port: " + s.getPort() + " AdditionalInformation: " + receivedMessage.getInternalInformation() + " received Message: " + receivedMessage.getText() + "Users: " + receivedMessage.getUsers());
-
-
-                String username = receivedMessage.getUsername();
-                Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "iwas");
+                //String username = receivedMessage.getUsername();
+                Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "nothing");
                 //users.add(username);
 
                 //TODO:
                 //Send all connected Clients to User if new message is retrieved  - in both cases = internalMessage=true (additional message)/false (default behavior)
                 //forward it to all users
                 //TODO : !! testing purpose set if to false condition again - is only to not for testing purpose
-                if(receivedMessage.getInternalInformation()) {
-                    if ((receivedMessage.getText().equals("myUsername")) && !users.contains(receivedMessage.getUsername())) {
-                        System.out.println("New User:..." + receivedMessage.getText());
+                if (receivedMessage.getInternalInformation() && !users.contains(receivedMessage.getUsername())) {
+                    if (receivedMessage.getText().equals("myUsername")) {
+                        System.out.println("New User: " + receivedMessage.getUsername());
                         users.add(receivedMessage.getUsername());
+                        System.out.println(users);
                         this.username = receivedMessage.getUsername();
+
+                        System.out.println(ActiveClientHandlers);
+
                         for (ClientHandler handler : ActiveClientHandlers) {
-                            //handler.oos.writeObject(myMessage);
                             receivedMessage.setUsers(users);
-                            receivedMessage.setText("allConnectedUsers");
+                            receivedMessage.setText("All connected users:");
+                            System.out.println("All connected users:");
+                            System.out.println(users);
                             System.out.println(handler);
                             handler.oos.writeObject(receivedMessage);
                             //myMessage.user_list.addAll(users);
                             handler.oos.flush();
+                            System.out.println("printing received users");
+                            System.out.println(receivedMessage.getUsers());
                         }
                     }
                 }
 
-
-
-
                 //Send received Message to All Clients except to itself
                 if (!(receivedMessage.getText().equals("CloseSocket"))) {
-                    System.out.println("Message not equal CloseSocket..");
+                    System.out.println("Message not equal CloseSocket");
+
                     for (ClientHandler handler: ActiveClientHandlers) {
-                        //handler.oos.writeObject(myMessage);
                         System.out.println(handler);
+
                         if (handler.s.getPort() != s.getPort()) {
-                            //handler.dos.writeUTF(received);
-                            //handler.dos.flush();
                             receivedMessage.setUsers(users);
                             System.out.println("Forwarding Message: " + receivedMessage.getText());
                             handler.oos.writeObject(receivedMessage);
-                            myMessage.user_list.addAll(users);
+                            //.user_list.addAll(users);
                             handler.oos.flush();
                         }
                     }
                 }
-
 
                 //Client disconnects and closes Socket
                 if (receivedMessage.getText().equals("CloseSocket")) {
@@ -134,7 +131,8 @@ public class ClientHandler extends Thread{
                     System.out.println("Closing this connection.");
                     this.s.close();
                     System.out.println("Connection closed");
-                    for (ClientHandler handler: ActiveClientHandlers){
+
+                    for (ClientHandler handler: ActiveClientHandlers) {
                         if (socketEqualWithClientHandler(handler, s)) {
                             System.out.println("Removing Client: " + handler.s.getPort());
                             users.remove(username);
@@ -169,28 +167,16 @@ public class ClientHandler extends Thread{
                         //dos.writeUTF(toreturn);
                         break;
 
-                    case "Users" :
+                    case "myUsername" :
                         toreturn = fortime.format(date);
                         Message returnConnectedUsers = new Message("Automatic Message", toreturn, "Automated Message Print connected User on Server CMD");
                         returnConnectedUsers.setUsers(users);
                         oos.writeObject(returnConnectedUsers);
                         oos.flush();
                         System.out.println("Connected Users requested on Server Side: " + users);
-
                         //dos.writeUTF(toreturn);
                         break;
-/*
-                    default:
-                        //dos.writeUTF("Invalid input");
-                        toreturn = "Invalid input";
-                        Message returnMessageDefault = new Message("Automatic Message", toreturn, "Automated Message");
-                        oos.writeObject(returnMessageDefault);
-                        oos.flush();
-                        break;
-
- */
                 }
-
 
             } catch (Exception e) {
                 System.err.println("Client disconnected");
