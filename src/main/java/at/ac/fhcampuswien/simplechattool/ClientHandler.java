@@ -79,7 +79,6 @@ public class ClientHandler extends Thread {
                 //String username = receivedMessage.getUsername();
                 Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "nothing");
                 //users.add(username);
-
                 //TODO:
                 //Send all connected Clients to User if new message is retrieved  - in both cases = internalMessage=true (additional message)/false (default behavior)
                 //forward it to all users
@@ -95,29 +94,32 @@ public class ClientHandler extends Thread {
 
                         for (ClientHandler handler : ActiveClientHandlers) {
                             receivedMessage.setUsers(users);
-                            receivedMessage.setText("All connected users:");
-                            System.out.println("All connected users:");
-                            System.out.println(users);
-                            System.out.println(handler);
+                            //unnedig... receivedMessage.setInternalInformation(true);
+                            //receivedMessage.setText("All connected users:");
+                            //System.out.println("All connected users:");
+                            //System.out.println(users);
+                            //System.out.println(handler);
+                            System.out.println("Sending Users to: " + handler.getUsername() + "Users: " + users);
                             handler.oos.writeObject(receivedMessage);
                             //myMessage.user_list.addAll(users);
                             handler.oos.flush();
-                            System.out.println("printing received users");
-                            System.out.println(receivedMessage.getUsers());
+                            //System.out.println("printing received users");
+                            //System.out.println(receivedMessage.getUsers());
                         }
                     }
                 }
 
                 //Send received Message to All Clients except to itself
                 if (!(receivedMessage.getText().equals("CloseSocket"))) {
-                    System.out.println("Message not equal CloseSocket");
+                    //System.out.println("Message not equal CloseSocket");
 
                     for (ClientHandler handler: ActiveClientHandlers) {
-                        System.out.println(handler);
+                        //System.out.println(handler);
 
                         if (handler.s.getPort() != s.getPort()) {
+                            //users.add("teest");
                             receivedMessage.setUsers(users);
-                            System.out.println("Forwarding Message: " + receivedMessage.getText());
+                            System.out.println("Forwarding Message to All Clients: " + receivedMessage.getText() + " Users: " + receivedMessage.getUsers());
                             handler.oos.writeObject(receivedMessage);
                             //.user_list.addAll(users);
                             handler.oos.flush();
@@ -137,6 +139,15 @@ public class ClientHandler extends Thread {
                             System.out.println("Removing Client: " + handler.s.getPort());
                             users.remove(username);
                             ActiveClientHandlers.remove(handler);
+                            try{
+                                Message updatingUser = new Message("Automatic Message", "updating Users", "Automated Message updateing Users");
+                                updatingUser.setInternalInformation(true);
+                                updatingUser.setUsers(users);
+                                oos.writeObject(updatingUser);
+                                oos.flush();
+                            } catch (Exception ex){
+                                ex.printStackTrace();
+                            }
                             break;
                         }
                     }
@@ -152,7 +163,11 @@ public class ClientHandler extends Thread {
                 switch (receivedMessage.getText()) {
                     case "Date" :
                         toreturn = fordate.format(date);
+                        //users.add(fordate.format(date));
+                        //System.out.println("returning Date with users: " + users);
                         Message returnMessageDate = new Message("Automatic Message", toreturn, "Automated Message");
+                        returnMessageDate.setUsers(users);
+                        System.out.println("Mesageobject users: " + returnMessageDate.getUsers());
                         oos.writeObject(returnMessageDate);
                         oos.flush();
                         //dos.writeUTF(toreturn);
@@ -170,6 +185,8 @@ public class ClientHandler extends Thread {
                     case "myUsername" :
                         toreturn = fortime.format(date);
                         Message returnConnectedUsers = new Message("Automatic Message", toreturn, "Automated Message Print connected User on Server CMD");
+                        //returnConnectedUsers.setUsers(users);
+                        returnConnectedUsers.setInternalInformation(true);
                         returnConnectedUsers.setUsers(users);
                         oos.writeObject(returnConnectedUsers);
                         oos.flush();
@@ -186,6 +203,16 @@ public class ClientHandler extends Thread {
                         System.out.println("Removing Client: " + handler.s.getPort());
                         ActiveClientHandlers.remove(handler);
                         users.remove(this.username);
+                        try{
+                            Message updatingUser = new Message("Automatic Message", "updating Users", "Automated Message updateing Users");
+                            updatingUser.setInternalInformation(true);
+                            updatingUser.setUsers(users);
+                            oos.writeObject(updatingUser);
+                            oos.flush();
+                        } catch (Exception ex){
+                            ex.printStackTrace();
+                        }
+
                         break;
                     }
                 }
@@ -195,6 +222,12 @@ public class ClientHandler extends Thread {
                     ex.printStackTrace();
                 }
                 break;
+            }
+            //reset ojbect -cause issues in transferring array list
+            try{
+                oos.reset();
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
     }

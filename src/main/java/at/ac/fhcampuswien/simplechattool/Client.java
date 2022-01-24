@@ -102,7 +102,7 @@ public class Client extends Application {
     public void sendMessage(String msg) {
         try {
             Message myMessage = new Message(getUsername(), msg, "nothing");
-            if (!myMessage.InternalInformation) {
+            if (!myMessage.getInternalInformation()) {
                 System.out.println("Sending Object to Server..." + myMessage.getText());
                 myObjectOutputStream.writeObject(myMessage);
                 myObjectOutputStream.flush();
@@ -121,8 +121,11 @@ public class Client extends Application {
     public void listenData(Socket clientSocket) {
         try {
             Message myMessage = (Message) myObjectInputStream.readObject();
+            System.out.println("received connected clients:");
+            System.out.println(myMessage.getUsers());
+            System.out.println("Message is internal?.. : " + myMessage.getInternalInformation());
             ChatController chatcontroller = ChatController.getChatController();
-                if (myMessage.InternalInformation) {
+                if (myMessage.getInternalInformation()) {
                     Platform.runLater(()->{;
                         chatcontroller.displayUsers(myMessage);
                     });
@@ -130,10 +133,11 @@ public class Client extends Application {
                     System.out.println("Connected User: " + myMessage.getUsers());
                     Platform.runLater(()->{;
                         chatcontroller.addRemoteMessage(myMessage);
+                        chatcontroller.displayUsers(myMessage);
                     });
                 }
-            System.out.println("received connected clients:");
-            System.out.println(myMessage.getUsers());
+                //myObjectInputStream.reset();
+
         } catch(Exception e) {
             try {
                 e.printStackTrace();

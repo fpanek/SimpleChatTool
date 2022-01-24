@@ -48,7 +48,8 @@ public class ChatController {
                 System.out.println("Using ChatController: " + Integer.toHexString(hashCode()));
                 welcomeMsg = "Welcome to Simple Chat, " + client.getUsername() + "!";
                 Message msgWithUsername = new Message(client.getUsername(), "myUsername");
-                msgWithUsername.InternalInformation = true;
+                //msgWithUsername.InternalInformation = true;
+                msgWithUsername.setInternalInformation(true);
                 client.sendObject(msgWithUsername);
 
                 Platform.runLater(()->{

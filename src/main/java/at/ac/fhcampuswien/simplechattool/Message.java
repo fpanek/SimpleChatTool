@@ -18,10 +18,10 @@ public class Message implements Serializable {
     private String Message;
     private String time;
     private String AdditionalInformation;
-    public ArrayList<String> user_list = new ArrayList<String>();
+    private ArrayList<String> user_list = new ArrayList<String>();
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("HH:mm");
     // Internal Message  -> not displayed on GUI
-    boolean InternalInformation;    //message received by client if new connection is established - String Message = "myUsername"
+    private boolean InternalInformation;    //message received by client if new connection is established - String Message = "myUsername"
 
 
     public Message(String username, String text) {
@@ -57,8 +57,11 @@ public class Message implements Serializable {
     }
 
     public void setUsers(ArrayList<String> users){
-        user_list = users;
+        this.user_list = users;
+        System.out.println("Usser list lof Message object: " + user_list);
     }
+
+
 
     public ArrayList<String> getUsers(){
         return user_list;
