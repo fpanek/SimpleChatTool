@@ -163,7 +163,7 @@ public class Client extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
         stg = primaryStage;
-        stg.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("logo2.png"))));
+        stg.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("chatIcon.png"))));
 
         stg.setOnCloseRequest(we -> {
             System.out.println("Stage is closing");

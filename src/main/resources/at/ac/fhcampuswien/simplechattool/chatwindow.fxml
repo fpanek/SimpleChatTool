@@ -21,60 +21,60 @@
     <MenuBar prefHeight="12.0" prefWidth="670.0" VBox.vgrow="NEVER" />
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="438.0" prefWidth="746.0" VBox.vgrow="ALWAYS">
          <children>
-            <SplitPane dividerPositions="0.2813995215311004" layoutX="-1.0" layoutY="-1.0" prefHeight="424.0" prefWidth="670.0">
+            <SplitPane dividerPositions="0.2795216741405082" layoutX="-1.0" layoutY="-1.0" prefHeight="424.0" prefWidth="670.0">
               <items>
-                <AnchorPane minHeight="160.0" minWidth="184.0" prefHeight="160.0" prefWidth="184.0" style="-fx-background-color: #ebe9f5;">
+                <AnchorPane minHeight="422.0" minWidth="159.0" prefHeight="422.0" prefWidth="159.0" style="-fx-background-color: #ebe9f5;">
                      <children>
-                        <ListView fx:id="flow_onlineUsers" layoutY="81.0" minWidth="186.0" prefHeight="285.0" prefWidth="186.0" />
-                        <ImageView fitHeight="83.0" fitWidth="154.0" layoutX="34.0" pickOnBounds="true" preserveRatio="true">
+                        <ListView fx:id="flow_onlineUsers" layoutY="81.0" minWidth="160.0" prefHeight="285.0" prefWidth="160.0" />
+                        <ImageView fitHeight="83.0" fitWidth="154.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@chatLogo1.png" />
+                              <Image url="@chatLogo.png" />
                            </image>
                         </ImageView>
                          <fx:define>
-                             <Image fx:id="btn_Connect_Image" url="@iconConnectColorSmall.png" />
+                             <Image fx:id="btn_Connect_Image" url="@iconConnect.png" />
                          </fx:define>
                          <fx:define>
-                             <Image fx:id="btn_Disconnect_Image" url="@iconDisconnectColorSmall.png" />
+                             <Image fx:id="btn_Disconnect_Image" url="@iconDisconnect.png" />
                          </fx:define>
-                        <Button fx:id="btn_disconnect" layoutX="34.0" layoutY="373.0" onAction="#disconnectChat" prefHeight="40.0" prefWidth="27.0" style="-fx-background-radius: 10; -fx-background-color: #ffffff;">
+                        <Button fx:id="btn_disconnect" layoutX="26.0" layoutY="373.0" onAction="#disconnectChat" prefHeight="40.0" prefWidth="27.0" style="-fx-background-radius: 10; -fx-background-color: #ffffff;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                             <graphic>
                                 <ImageView fitHeight="24.0" fitWidth="33.0" preserveRatio="true">
                                     <image>
-                                        <Image url="@iconDisconnectColorSmall.png" />
+                                        <Image url="@iconDisconnect.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </Button>
                          <fx:define>
-                             <Image fx:id="btn_Help_Image" url="@iconHelp2Small.png" />
+                             <Image fx:id="btn_Help_Image" url="@iconHelp.png" />
                          </fx:define>
                          <fx:define>
-                             <Image fx:id="btn_Exit_Image" url="@iconExit3Small.png" />
+                             <Image fx:id="btn_Exit_Image" url="@iconExit.png" />
                          </fx:define>
-                         <Button fx:id="btn_Exit" layoutX="103.0" layoutY="373.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="40.0" prefWidth="49.6" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
+                         <Button fx:id="btn_Exit" layoutX="88.0" layoutY="373.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="40.0" prefWidth="49.6" style="-fx-background-color: #ffffff; -fx-background-radius: 10;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                              <graphic>
                                  <ImageView fitHeight="25.0" fitWidth="22.0" preserveRatio="true">
                                      <image>
-                                         <Image url="@iconExit3Small.png" />
+                                         <Image url="@iconExit.png" />
                                      </image>
                                  </ImageView>
                              </graphic>
                          </Button>
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="160.0" minWidth="479.0" prefHeight="422.0" prefWidth="479.0">
+                <AnchorPane minHeight="160.0" minWidth="504.0" prefHeight="422.0" prefWidth="479.0">
                      <children>
-                        <Separator layoutY="366.0" prefHeight="0.0" prefWidth="478.0" />
-                        <ToolBar layoutY="367.0" prefHeight="55.0" prefWidth="478.0" style="-fx-background-color: #ebe9f5;">
+                        <Separator layoutY="366.0" maxHeight="1.0" minHeight="1.0" prefHeight="1.0" prefWidth="503.0" />
+                        <ToolBar layoutY="366.0" prefHeight="57.0" prefWidth="503.0" style="-fx-background-color: #ebe9f5;">
                            <items>
-                              <TextField fx:id="field_text" layoutY="380.0" prefHeight="38.0" prefWidth="406.0" promptText="Type a message" style="-fx-background-radius: 20; -fx-background-color: #ffffff;">
+                              <TextField fx:id="field_text" layoutY="380.0" prefHeight="38.0" prefWidth="430.0" promptText="Type a message" style="-fx-background-radius: 20; -fx-background-color: #ffffff;">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>
@@ -83,7 +83,7 @@
                                  </font>
                               </TextField>
                                <fx:define>
-                                   <Image fx:id="btn_Send_Image" url="@sendIcon4_small.png" />
+                                   <Image fx:id="btn_Send_Image" url="@iconSendSmall.png" />
                                </fx:define>
                               <Button fx:id="btn_SendMessage" mnemonicParsing="false" onAction="#sendMessage" prefHeight="42.0" prefWidth="42.0" style="-fx-background-radius: 100; -fx-background-color: transparent;">
                                  <cursor>
@@ -92,18 +92,18 @@
                                   <graphic>
                                       <ImageView fitHeight="32.0" fitWidth="32.0">
                                           <image>
-                                              <Image url="@sendIcon4_small.png" />
+                                              <Image url="@iconSendSmall.png" />
                                           </image>
                                       </ImageView>
                                   </graphic>
                               </Button>
                            </items>
                         </ToolBar>
-                        <ScrollPane fx:id="ScrollPaneChat" layoutX="-3.0" layoutY="-1.0" minWidth="470.0" prefHeight="366.0" prefWidth="483.0" style="-fx-background-color: #ffffff;">
+                        <ScrollPane fx:id="ScrollPaneChat" layoutX="-3.0" layoutY="-1.0" minWidth="503.0" prefHeight="365.0" prefWidth="508.0" style="-fx-background-color: #ffffff;">
                            <content>
-                              <TextFlow fx:id="textFlow" lineSpacing="1.0" minWidth="467.0" prefHeight="364.0" prefWidth="467.0" style="-fx-background-color: #ffffff;">
+                              <TextFlow fx:id="textFlow" lineSpacing="1.0" minWidth="467.0" prefHeight="363.0" prefWidth="490.0" style="-fx-background-color: #ffffff;">
                                  <children>
-                                    <VBox fx:id="vbox_message" prefHeight="0.0" prefWidth="467.0" />
+                                    <VBox fx:id="vbox_message" prefHeight="0.0" prefWidth="490.0" />
                                  </children>
                               </TextFlow>
                            </content>

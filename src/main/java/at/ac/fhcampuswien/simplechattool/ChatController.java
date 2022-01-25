@@ -84,6 +84,7 @@ public class ChatController {
                         items.clear();
                         System.out.println("Method displayUsers called");
                         System.out.println("Online users: " + message.getUsers());
+                        flow_onlineUsers.setCellFactory((ListView<String> l) -> new OnlineUsersPanel());
                         items = FXCollections.observableArrayList(message.getUsers());
                         flow_onlineUsers.setItems(items);
                 });

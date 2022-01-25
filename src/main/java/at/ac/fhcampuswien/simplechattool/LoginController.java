@@ -135,7 +135,7 @@ public class LoginController {
             client.setConnection(logindata.getServerIP(), logindata.getServerPort());
             client.setUsername(logindata.getUsername());
 
-            changeScene("basic_chat_v2.fxml");
+            changeScene("chatwindow.fxml");
         }
     }
 }
