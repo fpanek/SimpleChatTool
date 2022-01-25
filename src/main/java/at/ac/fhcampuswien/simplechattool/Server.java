@@ -4,6 +4,20 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/*
+Sources:
+
+https://luisgcenci.medium.com/building-a-group-chat-app-with-javafx-multithread-socket-programming-in-java-c8c11fd8c927
+https://riptutorial.com/javafx/example/8803/passing-data-to-fxml---accessing-existing-controller
+https://www.geeksforgeeks.org/introducing-threads-socket-programming-java/
+https://medium.com/nerd-for-tech/create-a-chat-app-with-java-sockets-8449fdaa933
+https://www.hubberspot.com/2012/08/creating-simple-chat-clientserver.html
+https://github.com/JosephRocha/RowdyTalk
+https://github.com/dvcarrillo/sockets-chat
+https://github.com/ashmeet4293/Chat-Application-in-java-using-javafx
+
+*/
+
 public class Server {
 
     public static void main(String[] args) throws IOException {

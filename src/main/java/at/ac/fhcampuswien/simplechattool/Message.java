@@ -57,10 +57,6 @@ public class Message implements Serializable {
         return user_list;
     }
 
-    public void setText(String text) {
-        this.Message = text;
-    }
-
     public String getUsername() {
         return username;
     }

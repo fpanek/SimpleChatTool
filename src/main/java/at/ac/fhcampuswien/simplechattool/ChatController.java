@@ -42,10 +42,9 @@ public class ChatController {
         public ChatController() {
                 client = LoginController.getClientFromLoginController();
                 chatcontroller = this;
-                Client.getStage().setTitle("Simple Chat Tool @ " + client.getUsername());
+                System.out.println("ChatController initialized" + Integer.toHexString(hashCode()));
 
-                System.out.println("ChatController initialized");
-                System.out.println("Using ChatController: " + Integer.toHexString(hashCode()));
+                Client.getStage().setTitle("Simple Chat Tool @ " + client.getUsername());
                 welcomeMsg = "Welcome to Simple Chat, " + client.getUsername() + "!";
 
                 Message msgWithUsername = new Message(client.getUsername(), "myUsername");
@@ -92,7 +91,6 @@ public class ChatController {
 
         public void addClientMessage(String msg) {
                 Message message = new Message(client.getUsername(), msg);
-              //  message.setInternalInformation(false);
                 Text text = new Text(message.getMessage());
                 chatBubble(text, "Client");
         }
@@ -104,7 +102,6 @@ public class ChatController {
 
         public void addRemoteMessage(Message message) {
                 Message message1 = new Message(message.getUsername(), message.getText());
-            //    message1.setInternalInformation(false);
                 Text text = new Text(message1.getMessage());
                 chatBubble(text, "Partner");
         }
@@ -114,11 +111,10 @@ public class ChatController {
                 if (client == null){
                         addOfflineMessage("Server not yet started...");
                 }
-                if (field_text.getText().isEmpty() || field_text.getText().isBlank()) {
+                if (field_text.getText().isEmpty()) {
                         addOfflineMessage("Please enter a non-empty message!");
                 }
-                else if (field_text.getText().equals("CloseSocket")){
-                        //addOfflineMessage("invalid input");
+                else if (field_text.getText().equals("CloseSocket") || field_text.getText().isBlank()){
                         field_text.clear();
                 }
                 else {
@@ -176,8 +172,6 @@ public class ChatController {
                 hBox.getChildren().add(textFlow);
                 vbox_message.getChildren().add(hBox);
                 vbox_message.heightProperty().addListener(observable -> ScrollPaneChat.setVvalue(1D));
-             //   System.out.println(message.user_list);
-              //  items = FXCollections.observableArrayList(message.user_list);
                 flow_onlineUsers.setItems(items);
         }
 }
