@@ -123,7 +123,7 @@ public class ChatController {
                 else {
                         String msg = field_text.getText();
                         try {
-                                client.sendMessage(msg, "");
+                                client.sendMessage(msg);
                         } catch (NullPointerException e){
                                 e.printStackTrace();
                         }
@@ -134,7 +134,7 @@ public class ChatController {
 
         @FXML
         public void disconnectChat() throws Exception {
-                client.sendMessage("", "CloseSocket");
+                client.sendMessage("CloseSocket");
                 client.closeConnection();
                 LoginController login = new LoginController();
                 login.changeScene("loginwindow.fxml");
