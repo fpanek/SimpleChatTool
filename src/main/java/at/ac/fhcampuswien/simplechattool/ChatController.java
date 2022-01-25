@@ -118,7 +118,8 @@ public class ChatController {
                         addOfflineMessage("Please enter a non-empty message!");
                 }
                 else if (field_text.getText().equals("CloseSocket")){
-                        addOfflineMessage("invalid input");
+                        //addOfflineMessage("invalid input");
+                        field_text.clear();
                 }
                 else {
                         String msg = field_text.getText();
