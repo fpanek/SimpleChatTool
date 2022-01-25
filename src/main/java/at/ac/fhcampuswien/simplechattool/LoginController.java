@@ -1,21 +1,27 @@
 package at.ac.fhcampuswien.simplechattool;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
     @FXML
     private Button btn_login;
     @FXML
@@ -26,6 +32,8 @@ public class LoginController {
     private TextField input_server;
     @FXML
     private TextFlow warning_msg;
+    @FXML
+    private ImageView simpleLogo;
     private static Client myClient;
 
 
@@ -139,5 +147,15 @@ public class LoginController {
 
             changeScene("chatwindow.fxml");
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setNode(simpleLogo);
+        fadeTransition.setDuration(Duration.millis(3000));
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
     }
 }
