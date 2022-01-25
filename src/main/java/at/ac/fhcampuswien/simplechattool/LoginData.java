@@ -4,12 +4,12 @@ public class LoginData {
     private String ServerIP;
     private int ServerPort = 5056;
     private String Username;
-    private static LoginData logindata = new LoginData();
+    private static final LoginData logindata = new LoginData();
 
     private LoginData(){
     }
 
-    public static LoginData getLogindata() {
+    public static LoginData getLoginData() {
         return logindata;
     }
 
@@ -23,10 +23,6 @@ public class LoginData {
 
     public void setUsername(String username) {
         Username = username;
-    }
-
-    public void setLogindata(LoginData logindata) {
-        this.logindata = logindata;
     }
 
     public String getServerIP() {

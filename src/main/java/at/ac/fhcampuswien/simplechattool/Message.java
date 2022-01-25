@@ -14,15 +14,12 @@ Message currently (16.01.2022) consists of 3 parts:
  */
 
 public class Message implements Serializable {
-    private String username;
+    private final String username;
     private String Message;
     private String time;
-    private String AdditionalInformation;
-    private ArrayList<String> user_list = new ArrayList<String>();
+    private ArrayList<String> user_list = new ArrayList<>();
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("HH:mm");
-    // Internal Message  -> not displayed on GUI
-    private boolean InternalInformation;    //message received by client if new connection is established - String Message = "myUsername"
-
+    private boolean InternalInformation;    // internal message received by client if new connection is established - String Message = "myUsername" (not displayed on GUI)
 
     public Message(String username, String text) {
         this.username = username;
@@ -37,7 +34,6 @@ public class Message implements Serializable {
     public Message(String username, String message, String AdditionalInformation){
         this.username = username;
         this.Message = message;
-        this.AdditionalInformation = AdditionalInformation;
     }
 
     public boolean getInternalInformation() {
@@ -48,27 +44,17 @@ public class Message implements Serializable {
         this.InternalInformation = internalInformation;
     }
 
-    public String getMessageAsString() {
-        return getTime() + ":" + getUsername() + ":" + getText();
-    }
-
     public String getMessage(){
         return "[" + getTime() + " " + getUsername() + "] " + getText();
     }
 
     public void setUsers(ArrayList<String> users){
         this.user_list = users;
-        System.out.println("Usser list lof Message object: " + user_list);
+        System.out.println("User list of Message objects: " + user_list);
     }
-
-
 
     public ArrayList<String> getUsers(){
         return user_list;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setText(String text) {
@@ -87,15 +73,4 @@ public class Message implements Serializable {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getAdditionalInformation() {
-        return AdditionalInformation;
-    }
-
-    public void setAdditionalInformation(String additionalInformation) {
-        AdditionalInformation = additionalInformation;
-    }
 }

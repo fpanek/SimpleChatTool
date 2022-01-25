@@ -13,13 +13,6 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Objects;
 
-/*
-Sources:
-https://github.com/dvcarrillo/sockets-chat
-https://github.com/ashmeet4293/Chat-Application-in-java-using-javafx
-https://luisgcenci.medium.com/building-a-group-chat-app-with-javafx-multithread-socket-programming-in-java-c8c11fd8c927
-*/
-
 public class Client extends Application {
     private String username;
     public String successMsg;
@@ -67,7 +60,7 @@ public class Client extends Application {
         try {
             Task clientThread = new Task() {
                 @Override
-                protected Object call() throws Exception {
+                protected Object call() {
                     while (validData) {
                         listenData(clientSocket);
                     }
@@ -81,7 +74,7 @@ public class Client extends Application {
         } catch (Exception e) {
             System.err.println("ERROR: Connection error");
             e.printStackTrace();
-            //System.exit(0);
+            System.exit(0);
         }
     }
 
@@ -89,8 +82,6 @@ public class Client extends Application {
         try {
             System.out.println("Sending Object to Server..." + message.getText());
             myObjectOutputStream.writeObject(message);
-            //ChatController chatcontroller = ChatController.getChatController();
-            //chatcontroller.displayUsers(message);
             myObjectOutputStream.flush();
         } catch (Exception e) {
             System.err.println("ERROR: Error sending data");
@@ -107,10 +98,10 @@ public class Client extends Application {
                 myObjectOutputStream.writeObject(myMessage);
                 myObjectOutputStream.flush();
             } else {
-                //myObjectOutputStream.writeObject(myMessage.getUsers());
-                //ChatController chatcontroller = ChatController.getChatController();
-                //chatcontroller.displayUsers(myMessage);
-                //myObjectOutputStream.flush();
+                myObjectOutputStream.writeObject(myMessage.getUsers());
+                ChatController chatcontroller = ChatController.getChatController();
+                chatcontroller.displayUsers(myMessage);
+                myObjectOutputStream.flush();
             }
         } catch (Exception e) {
             System.err.println("ERROR: Error sending data");
@@ -126,19 +117,15 @@ public class Client extends Application {
             System.out.println("Message is internal?.. : " + myMessage.getInternalInformation());
             ChatController chatcontroller = ChatController.getChatController();
                 if (myMessage.getInternalInformation()) {
-                    Platform.runLater(()->{;
-                        chatcontroller.displayUsers(myMessage);
-                    });
+                    Platform.runLater(()-> chatcontroller.displayUsers(myMessage));
                 } else {
                     System.out.println("Connected User: " + myMessage.getUsers());
-                    Platform.runLater(()->{;
+                    Platform.runLater(()->{
                         chatcontroller.addRemoteMessage(myMessage);
                         chatcontroller.displayUsers(myMessage);
                     });
                 }
-                //myObjectInputStream.reset();
-
-        } catch(Exception e) {
+        } catch(IOException e) {
             try {
                 e.printStackTrace();
                 clientSocket.close();
@@ -147,6 +134,8 @@ public class Client extends Application {
             }
             System.err.println("ERROR: Error listening to data");
             validData = false;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

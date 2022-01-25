@@ -15,8 +15,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
 public class ChatController {
         @FXML
         private Button btn_disconnect;
@@ -38,17 +36,19 @@ public class ChatController {
         private static Client client;
         private static ChatController chatcontroller;
         private String msg;
-        private String welcomeMsg;
+        private final String welcomeMsg;
 
 
         public ChatController() {
                 client = LoginController.getClientFromLoginController();
                 chatcontroller = this;
+                Client.getStage().setTitle("Simple Chat Tool @ " + client.getUsername());
+
                 System.out.println("ChatController initialized");
                 System.out.println("Using ChatController: " + Integer.toHexString(hashCode()));
                 welcomeMsg = "Welcome to Simple Chat, " + client.getUsername() + "!";
+
                 Message msgWithUsername = new Message(client.getUsername(), "myUsername");
-                //msgWithUsername.InternalInformation = true;
                 msgWithUsername.setInternalInformation(true);
                 client.sendObject(msgWithUsername);
 
@@ -80,67 +80,32 @@ public class ChatController {
         }
 
         public void displayUsers(Message message) {
+                Platform.runLater(()->{
                         items.clear();
                         System.out.println("Method displayUsers called");
                         System.out.println("Online users: " + message.getUsers());
                         items = FXCollections.observableArrayList(message.getUsers());
                         flow_onlineUsers.setItems(items);
+                });
         }
 
         public void addClientMessage(String msg) {
                 Message message = new Message(client.getUsername(), msg);
                 message.setInternalInformation(false);
                 Text text = new Text(message.getMessage());
-                HBox hBox = new HBox();
-                hBox.setAlignment(Pos.TOP_RIGHT);
-                hBox.setPadding(new Insets(5,5,5,5));
-                TextFlow textFlow = new TextFlow(text);
-                textFlow.setStyle("-fx-color: rgb(239,242,255); " +
-                        "-fx-background-color:  #7d43e2;" +
-                        "-fx-background-radius: 25px;");
-                textFlow.setPadding(new Insets(8,10,8,10));
-                text.setFill(Color.color(0.934, 0.945, 0.996));
-                text.setStyle("-fx-font: 16 Calibri;");
-                hBox.getChildren().add(textFlow);
-                vbox_message.getChildren().add(hBox);
-                vbox_message.heightProperty().addListener(observable -> ScrollPaneChat.setVvalue(1D));
+                chatBubble(text, "Client");
         }
 
         public void addOfflineMessage(String msg) {
                 Text text = new Text(msg);
-                HBox hBox = new HBox();
-                hBox.setAlignment(Pos.TOP_LEFT);
-                hBox.setPadding(new Insets(5,5,5,5));
-                TextFlow textFlow = new TextFlow(text);
-                textFlow.setStyle("-fx-color: rgb(239,242,255); " +
-                        "-fx-background-color:  #28282a;" +
-                        "-fx-background-radius: 25px;");
-                textFlow.setPadding(new Insets(8,10,8,10));
-                text.setFill(Color.color(0.934, 0.945, 0.996));
-                text.setStyle("-fx-font: 16 Calibri;");
-                hBox.getChildren().add(textFlow);
-                vbox_message.getChildren().add(hBox);
-                vbox_message.heightProperty().addListener(observable -> ScrollPaneChat.setVvalue(1D));
+                chatBubble(text, "Server");
         }
 
         public void addRemoteMessage(Message message) {
                 Message message1 = new Message(message.getUsername(), message.getText());
                 message1.setInternalInformation(false);
                 Text text = new Text(message1.getMessage());
-
-                HBox hBox = new HBox();
-                hBox.setAlignment(Pos.TOP_LEFT);
-                hBox.setPadding(new Insets(5,5,5,5));
-                TextFlow textFlow = new TextFlow(text);
-                textFlow.setStyle("-fx-color: rgb(239,242,255); " +
-                        "-fx-background-color:  #e4e6eb;" +
-                        "-fx-background-radius: 25px;");
-                textFlow.setPadding(new Insets(8,10,8,10));
-                text.setFill(Color.BLACK);
-                text.setStyle("-fx-font: 16 Calibri;");
-                hBox.getChildren().add(textFlow);
-                vbox_message.getChildren().add(hBox);
-                vbox_message.heightProperty().addListener(observable -> ScrollPaneChat.setVvalue(1D));
+                chatBubble(text, "Partner");
         }
 
         @FXML
@@ -148,7 +113,6 @@ public class ChatController {
                 if (client == null){
                         addOfflineMessage("Server not yet started...");
                 }
-
                 if (field_text.getText().isEmpty() || field_text.getText().isBlank()) {
                         addOfflineMessage("Please enter a non-empty message!");
                 } else {
@@ -177,5 +141,34 @@ public class ChatController {
                 System.out.println("Stage is closing");
                 stg.close();
                 System.exit(0);
+        }
+
+        public void chatBubble(Text text, String source) {
+                Color textColorClient = Color.color(0.934, 0.945, 0.996);
+                Color textColorServer = Color.color(0.934, 0.945, 0.996);
+                Color textColorPartner = Color.BLACK;
+                HBox hBox = new HBox();
+                TextFlow textFlow = new TextFlow(text);
+                hBox.setPadding(new Insets(5,5,5,5));
+                textFlow.setPadding(new Insets(8,10,8,10));
+                if (source.equals("Client")) {
+                        hBox.setAlignment(Pos.TOP_RIGHT);
+                        text.setFill(textColorClient);
+                        textFlow.setStyle("-fx-color: rgb(239,242,255); " + "-fx-background-color: #7d43e2;" + "-fx-background-radius: 25px;");
+                }
+                if (source.equals("Partner")) {
+                        hBox.setAlignment(Pos.TOP_LEFT);
+                        text.setFill(textColorPartner);
+                        textFlow.setStyle("-fx-color: rgb(239,242,255); " + "-fx-background-color: #e4e6eb;" + "-fx-background-radius: 25px;");
+                }
+                if (source.equals("Server")) {
+                        hBox.setAlignment(Pos.TOP_LEFT);
+                        text.setFill(textColorServer);
+                        textFlow.setStyle("-fx-color: rgb(239,242,255); " + "-fx-background-color: #28282a;" + "-fx-background-radius: 25px;");
+                }
+                text.setStyle("-fx-font: 16 Calibri;");
+                hBox.getChildren().add(textFlow);
+                vbox_message.getChildren().add(hBox);
+                vbox_message.heightProperty().addListener(observable -> ScrollPaneChat.setVvalue(1D));
         }
 }

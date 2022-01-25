@@ -36,7 +36,7 @@ public class LoginController {
                     try {
                         userLogin();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.out.println("Error checking login");
                     }
                 }
             });
@@ -57,7 +57,6 @@ public class LoginController {
 
     public void changeScene(String fxml) throws IOException {
         Stage stg = Client.getStage();
-        stg.setTitle("Simple Chat Tool @ " + input_nickname.getText());
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         Parent pane = loader.load();
         stg.getScene().setRoot(pane);
@@ -113,9 +112,7 @@ public class LoginController {
 
         if (!input_server.getText().isEmpty()) {
             InetAddress host = InetAddress.getByName(input_server.getText());
-            if (host.isReachable(1000)) {
-                String ip = input_server.getText();
-            } else {
+            if (!host.isReachable(1000)) {
                 warning_msg.getChildren().clear();
                 Text message = new Text("Error: Entered server is offline. Please enter a reachable server.");
                 message.setFill(Color.RED);
@@ -126,7 +123,7 @@ public class LoginController {
         }
 
         if (!input_nickname.getText().isEmpty() && !input_server.getText().isEmpty()) {
-            LoginData logindata = LoginData.getLogindata();
+            LoginData logindata = LoginData.getLoginData();
             logindata.setUsername(input_nickname.getText());
             logindata.setServerIP(input_server.getText());
             logindata.setServerPort(Integer.parseInt(port));
@@ -137,7 +134,6 @@ public class LoginController {
             myClient = client;
             client.setConnection(logindata.getServerIP(), logindata.getServerPort());
             client.setUsername(logindata.getUsername());
-
 
             changeScene("basic_chat_v2.fxml");
         }

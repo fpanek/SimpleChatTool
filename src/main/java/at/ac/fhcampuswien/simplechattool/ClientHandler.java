@@ -14,11 +14,10 @@ public class ClientHandler extends Thread {
     final ObjectOutputStream oos;
     final Socket s;
     ArrayList<Socket> connectedClients = new ArrayList<>();
-    private static ArrayList<String> users = new ArrayList<>();
-    private static ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<>();
+    private static final ArrayList<String> users = new ArrayList<>();
+    private static final ArrayList<ClientHandler> ActiveClientHandlers = new ArrayList<>();
     private String username;
 
-    // Constructor
     public ClientHandler(Socket s, ObjectInputStream ois, ObjectOutputStream oos) {
         this.s = s;
         this.ois = ois;
@@ -27,7 +26,6 @@ public class ClientHandler extends Thread {
         ActiveClientHandlers.add(this);
         this.username="";
     }
-
 
     public String getUsername() {
         return username;
@@ -43,14 +41,6 @@ public class ClientHandler extends Thread {
         return "Socket: " + s.getPort() + s.getRemoteSocketAddress();
     }
 
-    public ArrayList<Socket> getConnectedClients(){
-        return connectedClients;
-    }
-
-    public static ArrayList<ClientHandler> getActiveClientHandlers(){
-        return ActiveClientHandlers;
-    }
-
     public boolean socketEqualWithClientHandler(ClientHandler clientHandler, Socket socket) {
         return clientHandler.getClientHandlerPort(clientHandler) == socket.getPort();
     }
@@ -59,14 +49,10 @@ public class ClientHandler extends Thread {
         return clientHandler.s.getPort();
     }
 
-
     @Override
     public void run() {
-
-        String received;
         String toreturn;
         Message receivedMessage;
-        Message toReturnMessage;
         while (true) {
             try {
                 receivedMessage = (Message) ois.readObject();
@@ -79,6 +65,7 @@ public class ClientHandler extends Thread {
                 //String username = receivedMessage.getUsername();
                 Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "nothing");
                 //users.add(username);
+
                 //TODO:
                 //Send all connected Clients to User if new message is retrieved  - in both cases = internalMessage=true (additional message)/false (default behavior)
                 //forward it to all users
@@ -121,7 +108,7 @@ public class ClientHandler extends Thread {
                             receivedMessage.setUsers(users);
                             System.out.println("Forwarding Message to All Clients: " + receivedMessage.getText() + " Users: " + receivedMessage.getUsers());
                             handler.oos.writeObject(receivedMessage);
-                            //.user_list.addAll(users);
+                            //myMessage.user_list.addAll(users);
                             handler.oos.flush();
                         }
                     }
@@ -139,12 +126,16 @@ public class ClientHandler extends Thread {
                             System.out.println("Removing Client: " + handler.s.getPort());
                             users.remove(username);
                             ActiveClientHandlers.remove(handler);
-                            try{
-                                Message updatingUser = new Message("Automatic Message", "updating Users", "Automated Message updateing Users");
+                            try {
+                                Message updatingUser = new Message("Automatic Message", "updating users", "Automated Message updating users");
                                 updatingUser.setInternalInformation(true);
                                 updatingUser.setUsers(users);
-                                oos.writeObject(updatingUser);
-                                oos.flush();
+                                try {
+                                    oos.writeObject(updatingUser);
+                                    oos.flush();
+                                } catch (IOException e) {
+                                    System.out.println("Socket closed");
+                                }
                             } catch (Exception ex){
                                 ex.printStackTrace();
                             }
@@ -167,7 +158,7 @@ public class ClientHandler extends Thread {
                         //System.out.println("returning Date with users: " + users);
                         Message returnMessageDate = new Message("Automatic Message", toreturn, "Automated Message");
                         returnMessageDate.setUsers(users);
-                        System.out.println("Mesageobject users: " + returnMessageDate.getUsers());
+                        System.out.println("Message Object users: " + returnMessageDate.getUsers());
                         oos.writeObject(returnMessageDate);
                         oos.flush();
                         //dos.writeUTF(toreturn);
@@ -191,7 +182,6 @@ public class ClientHandler extends Thread {
                         oos.writeObject(returnConnectedUsers);
                         oos.flush();
                         System.out.println("Connected Users requested on Server Side: " + users);
-                        //dos.writeUTF(toreturn);
                         break;
                 }
 
@@ -204,7 +194,7 @@ public class ClientHandler extends Thread {
                         ActiveClientHandlers.remove(handler);
                         users.remove(this.username);
                         try{
-                            Message updatingUser = new Message("Automatic Message", "updating Users", "Automated Message updateing Users");
+                            Message updatingUser = new Message("Automatic Message", "Updating Users", "Automated Message updating users");
                             updatingUser.setInternalInformation(true);
                             updatingUser.setUsers(users);
                             oos.writeObject(updatingUser);
@@ -223,10 +213,11 @@ public class ClientHandler extends Thread {
                 }
                 break;
             }
-            //reset ojbect -cause issues in transferring array list
-            try{
+
+            // reset object - cause issues in transferring array list
+            try {
                 oos.reset();
-            }catch (Exception e){
+            } catch (Exception e){
                 e.printStackTrace();
             }
         }
