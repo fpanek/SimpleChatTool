@@ -62,14 +62,6 @@ public class ClientHandler extends Thread {
                 System.out.println("Port: " + s.getPort() + ", InternalInformation: " + receivedMessage.getInternalInformation() +
                                     ", received message: " + receivedMessage.getText() + ", Users: " + receivedMessage.getUsername());
 
-                //String username = receivedMessage.getUsername();
-                Message myMessage = new Message(receivedMessage.getUsername(), receivedMessage.getText(), "nothing");
-                //users.add(username);
-
-                //TODO:
-                //Send all connected Clients to User if new message is retrieved  - in both cases = internalMessage=true (additional message)/false (default behavior)
-                //forward it to all users
-                //TODO : !! testing purpose set if to false condition again - is only to not for testing purpose
                 if (receivedMessage.getInternalInformation() && !users.contains(receivedMessage.getUsername())) {
                     if (receivedMessage.getText().equals("myUsername")) {
                         System.out.println("New User: " + receivedMessage.getUsername());
@@ -81,34 +73,20 @@ public class ClientHandler extends Thread {
 
                         for (ClientHandler handler : ActiveClientHandlers) {
                             receivedMessage.setUsers(users);
-                            //unnedig... receivedMessage.setInternalInformation(true);
-                            //receivedMessage.setText("All connected users:");
-                            //System.out.println("All connected users:");
-                            //System.out.println(users);
-                            //System.out.println(handler);
                             System.out.println("Sending Users to: " + handler.getUsername() + "Users: " + users);
                             handler.oos.writeObject(receivedMessage);
-                            //myMessage.user_list.addAll(users);
                             handler.oos.flush();
-                            //System.out.println("printing received users");
-                            //System.out.println(receivedMessage.getUsers());
                         }
                     }
                 }
 
                 //Send received Message to All Clients except to itself
                 if (!(receivedMessage.getText().equals("CloseSocket"))) {
-                    //System.out.println("Message not equal CloseSocket");
-
                     for (ClientHandler handler: ActiveClientHandlers) {
-                        //System.out.println(handler);
-
                         if (handler.s.getPort() != s.getPort()) {
-                            //users.add("teest");
                             receivedMessage.setUsers(users);
                             System.out.println("Forwarding Message to All Clients: " + receivedMessage.getText() + " Users: " + receivedMessage.getUsers());
                             handler.oos.writeObject(receivedMessage);
-                            //myMessage.user_list.addAll(users);
                             handler.oos.flush();
                         }
                     }
@@ -148,21 +126,15 @@ public class ClientHandler extends Thread {
                 // creating Date object
                 Date date = new Date();
 
-                // write on output stream based on the
-                // answer from the client
-                //TODO: Add previous if/else statements to switch/case below:
+                // write on output stream based on the answer from the client
                 switch (receivedMessage.getText()) {
                     case "Date" :
                         toreturn = fordate.format(date);
-                        //users.add(fordate.format(date));
-                        //System.out.println("returning Date with users: " + users);
                         Message returnMessageDate = new Message("Automatic Message", toreturn, "Automated Message");
                         returnMessageDate.setUsers(users);
                         System.out.println("Message Object users: " + returnMessageDate.getUsers());
                         oos.writeObject(returnMessageDate);
                         oos.flush();
-                        //dos.writeUTF(toreturn);
-                        //oos.writeObject();
                         break;
 
                     case "Time" :
@@ -170,13 +142,11 @@ public class ClientHandler extends Thread {
                         Message returnMessageTime = new Message("Automatic Message", toreturn, "Automated Message");
                         oos.writeObject(returnMessageTime);
                         oos.flush();
-                        //dos.writeUTF(toreturn);
                         break;
 
                     case "myUsername" :
                         toreturn = fortime.format(date);
                         Message returnConnectedUsers = new Message("Automatic Message", toreturn, "Automated Message Print connected User on Server CMD");
-                        //returnConnectedUsers.setUsers(users);
                         returnConnectedUsers.setInternalInformation(true);
                         returnConnectedUsers.setUsers(users);
                         oos.writeObject(returnConnectedUsers);
@@ -214,7 +184,6 @@ public class ClientHandler extends Thread {
                 break;
             }
 
-            // reset object - cause issues in transferring array list
             try {
                 oos.reset();
             } catch (Exception e){

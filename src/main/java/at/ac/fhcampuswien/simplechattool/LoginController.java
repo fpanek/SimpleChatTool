@@ -110,6 +110,7 @@ public class LoginController {
             }
         }
 
+
         if (!input_server.getText().isEmpty()) {
             InetAddress host = InetAddress.getByName(input_server.getText());
             if (!host.isReachable(1000)) {
@@ -134,6 +135,7 @@ public class LoginController {
             myClient = client;
             client.setConnection(logindata.getServerIP(), logindata.getServerPort());
             client.setUsername(logindata.getUsername());
+
 
             changeScene("chatwindow.fxml");
         }
