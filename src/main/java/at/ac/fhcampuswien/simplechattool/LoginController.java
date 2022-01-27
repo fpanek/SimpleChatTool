@@ -131,6 +131,7 @@ public class LoginController implements Initializable {
             }
         }
 
+        // TODO: replace logindata with text
         if (!input_nickname.getText().isEmpty() && !input_server.getText().isEmpty()) {
             LoginData logindata = LoginData.getLoginData();
             logindata.setUsername(input_nickname.getText());
@@ -143,7 +144,6 @@ public class LoginController implements Initializable {
             myClient = client;
             client.setConnection(logindata.getServerIP(), logindata.getServerPort());
             client.setUsername(logindata.getUsername());
-
 
             changeScene("chatwindow.fxml");
         }

@@ -19,6 +19,7 @@ public class Client extends Application {
     private Socket clientSocket;
     private static Stage stg;
     boolean validData = true;
+    //TODO: remove static from variables
     private static ObjectOutputStream myObjectOutputStream;
     private static ObjectInputStream myObjectInputStream;
     private static Socket myClientSocket;
@@ -98,6 +99,7 @@ public class Client extends Application {
                 myObjectOutputStream.writeObject(myMessage);
                 myObjectOutputStream.flush();
             } else {
+                //TODO: Delete else because not necessary
                 myObjectOutputStream.writeObject(myMessage.getUsers());
                 ChatController chatcontroller = ChatController.getChatController();
                 chatcontroller.displayUsers(myMessage);

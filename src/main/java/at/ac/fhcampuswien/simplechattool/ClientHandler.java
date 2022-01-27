@@ -140,6 +140,7 @@ public class ClientHandler extends Thread {
                     case "Time" :
                         toreturn = fortime.format(date);
                         Message returnMessageTime = new Message("Automatic Message", toreturn, "Automated Message");
+                        returnMessageTime.setUsers(users);
                         oos.writeObject(returnMessageTime);
                         oos.flush();
                         break;
