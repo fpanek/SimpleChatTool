@@ -76,6 +76,7 @@ public class ClientHandler extends Thread {
                             System.out.println("Sending Users to: " + handler.getUsername() + "Users: " + users);
                             handler.oos.writeObject(receivedMessage);
                             handler.oos.flush();
+                            handler.oos.reset();
                         }
                     }
                 }
@@ -88,6 +89,7 @@ public class ClientHandler extends Thread {
                             System.out.println("Forwarding Message to All Clients: " + receivedMessage.getText() + " Users: " + receivedMessage.getUsers());
                             handler.oos.writeObject(receivedMessage);
                             handler.oos.flush();
+                            handler.oos.reset();
                         }
                     }
                 }
@@ -111,6 +113,7 @@ public class ClientHandler extends Thread {
                                 try {
                                     oos.writeObject(updatingUser);
                                     oos.flush();
+                                    oos.reset();
                                 } catch (IOException e) {
                                     System.out.println("Socket closed");
                                 }
@@ -159,23 +162,34 @@ public class ClientHandler extends Thread {
             } catch (Exception e) {
                 System.err.println("Client disconnected");
                 e.printStackTrace();
+                String userToRemove = "";
                 for (ClientHandler handler: ActiveClientHandlers) {
                     if (socketEqualWithClientHandler(handler, s)) {
                         System.out.println("Removing Client: " + handler.s.getPort());
+                        userToRemove = this.username;
                         ActiveClientHandlers.remove(handler);
-                        users.remove(this.username);
+                        break;
+                    }
+                }
+                users.remove(userToRemove);
+                System.out.println("All Clients still connected : " + ActiveClientHandlers);
+                for (ClientHandler handler: ActiveClientHandlers) {
+                        //System.out.println("Removing Client: " + handler.s.getPort());
+                        //ActiveClientHandlers.remove(handler);
+                        //userToRemove = this.username;
+                        //users.remove(this.username);
+                        System.out.println("Sending new users to User: " + handler.getUsername());
                         try{
                             Message updatingUser = new Message("Automatic Message", "Updating Users", "Automated Message updating users");
                             updatingUser.setInternalInformation(true);
                             updatingUser.setUsers(users);
-                            oos.writeObject(updatingUser);
-                            oos.flush();
+                            System.out.println("Forwarding UserList to All Clients: " + " Users: " + updatingUser.getUsers());
+                            handler.oos.writeObject(updatingUser);
+                            handler.oos.flush();
+                            handler.oos.reset();
                         } catch (Exception ex){
                             ex.printStackTrace();
                         }
-
-                        break;
-                    }
                 }
                 try {
                     this.s.close();

@@ -114,7 +114,7 @@ public class ChatController {
                 if (field_text.getText().isEmpty()) {
                         addOfflineMessage("Please enter a non-empty message!");
                 }
-                else if (field_text.getText().equals("CloseSocket") || field_text.getText().isBlank()){
+                else if (field_text.getText().equals("CloseSocket") || field_text.getText().isBlank()){ //TODO Sent Message Close Socket as internal Message - Adapt Server too!
                         field_text.clear();
                 }
                 else {
