@@ -145,7 +145,7 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         FadeTransition fadeTransition = new FadeTransition();
         fadeTransition.setNode(simpleLogo);
-        fadeTransition.setDuration(Duration.millis(3000));
+        fadeTransition.setDuration(Duration.millis(20000));
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
         fadeTransition.play();
