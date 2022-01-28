@@ -57,8 +57,6 @@ public class ClientHandler extends Thread {
             try {
                 receivedMessage = (Message) ois.readObject();
                 username = receivedMessage.getUsername();
-
-                System.out.println("Received Object Text: " + receivedMessage.getText());
                 System.out.println("Port: " + s.getPort() + ", InternalInformation: " + receivedMessage.getInternalInformation() +
                                     ", received message: " + receivedMessage.getText() + ", Users: " + receivedMessage.getUsername());
 
@@ -78,54 +76,6 @@ public class ClientHandler extends Thread {
                         }
                     }
                 }
-
-                /*
-                //Send received Message to All Clients except to itself
-                if (!(receivedMessage.getText().equals("CloseSocket"))) {
-                    for (ClientHandler handler: ActiveClientHandlers) {
-                        if (handler.s.getPort() != s.getPort()) {
-                            receivedMessage.setUsers(users);
-                            System.out.println("Forwarding Message to All Clients: " + receivedMessage.getText() + " Users: " + receivedMessage.getUsers());
-                            handler.oos.writeObject(receivedMessage);
-                            handler.oos.flush();
-                            handler.oos.reset();
-                        }
-                    }
-                }
-
-                //Client disconnects and closes Socket
-                if (receivedMessage.getText().equals("CloseSocket")) {
-                    System.out.println("Client " + this.s + " sends exit...");
-                    System.out.println("Closing this connection.");
-                    this.s.close();
-                    System.out.println("Connection closed");
-
-                    for (ClientHandler handler: ActiveClientHandlers) {
-                        if (socketEqualWithClientHandler(handler, s)) {
-                            System.out.println("Removing Client: " + handler.s.getPort());
-                            users.remove(username);
-                            ActiveClientHandlers.remove(handler);
-                            try {
-                                Message updatingUser = new Message("Automatic Message", "updating users", "Automated Message updating users");
-                                updatingUser.setInternalInformation(true);
-                                updatingUser.setUsers(users);
-                                try {
-                                    oos.writeObject(updatingUser);
-                                    oos.flush();
-                                    oos.reset();
-                                } catch (IOException e) {
-                                    System.out.println("Socket closed");
-                                }
-                            } catch (Exception ex){
-                                ex.printStackTrace();
-                            }
-                            break;
-                        }
-                    }
-                    break;
-                }
-
-                 */
 
                 // creating Date object
                 Date date = new Date();
@@ -173,9 +123,9 @@ public class ClientHandler extends Thread {
                                     updatingUser.setInternalInformation(true);
                                     updatingUser.setUsers(users);
                                     try {
-                                        oos.writeObject(updatingUser);
-                                        oos.flush();
-                                        oos.reset();
+                                        handler.oos.writeObject(updatingUser);
+                                        handler.oos.flush();
+                                        handler.oos.reset();
                                     } catch (IOException e) {
                                         System.out.println("Socket closed");
                                     }
@@ -186,7 +136,7 @@ public class ClientHandler extends Thread {
                             }
                         }
                         break;
-                    default:
+                    default:          //default = forward Message to all connected clients except to itself
                         for (ClientHandler handler: ActiveClientHandlers) {
                             if (handler.s.getPort() != s.getPort()) {
                                 receivedMessage.setUsers(users);
@@ -213,10 +163,6 @@ public class ClientHandler extends Thread {
                 users.remove(userToRemove);
                 System.out.println("All Clients still connected : " + ActiveClientHandlers);
                 for (ClientHandler handler: ActiveClientHandlers) {
-                        //System.out.println("Removing Client: " + handler.s.getPort());
-                        //ActiveClientHandlers.remove(handler);
-                        //userToRemove = this.username;
-                        //users.remove(this.username);
                         System.out.println("Sending new users to User: " + handler.getUsername());
                         try{
                             Message updatingUser = new Message("Automatic Message", "Updating Users", "Automated Message updating users");

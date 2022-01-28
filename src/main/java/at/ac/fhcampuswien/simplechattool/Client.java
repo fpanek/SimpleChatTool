@@ -90,21 +90,11 @@ public class Client extends Application {
         }
     }
 
-
     public void sendMessage(String msg) {
         try {
             Message myMessage = new Message(getUsername(), msg, "nothing");
-            if (!myMessage.getInternalInformation()) {
-                System.out.println("Sending Object to Server..." + myMessage.getText());
-                myObjectOutputStream.writeObject(myMessage);
-                myObjectOutputStream.flush();
-            } else {
-                //TODO: Delete else because not necessary
-                myObjectOutputStream.writeObject(myMessage.getUsers());
-                ChatController chatcontroller = ChatController.getChatController();
-                chatcontroller.displayUsers(myMessage);
-                myObjectOutputStream.flush();
-            }
+            myObjectOutputStream.writeObject(myMessage);
+            myObjectOutputStream.flush();
         } catch (Exception e) {
             System.err.println("ERROR: Error sending data");
             e.printStackTrace();
