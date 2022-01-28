@@ -62,15 +62,13 @@ public class ClientHandler extends Thread {
                 System.out.println("Port: " + s.getPort() + ", InternalInformation: " + receivedMessage.getInternalInformation() +
                                     ", received message: " + receivedMessage.getText() + ", Users: " + receivedMessage.getUsername());
 
+                //InternalInformation + Username is not in userlist = new User
                 if (receivedMessage.getInternalInformation() && !users.contains(receivedMessage.getUsername())) {
                     if (receivedMessage.getText().equals("myUsername")) {
                         System.out.println("New User: " + receivedMessage.getUsername());
                         users.add(receivedMessage.getUsername());
                         System.out.println(users);
                         this.username = receivedMessage.getUsername();
-
-                        System.out.println(ActiveClientHandlers);
-
                         for (ClientHandler handler : ActiveClientHandlers) {
                             receivedMessage.setUsers(users);
                             System.out.println("Sending Users to: " + handler.getUsername() + "Users: " + users);
@@ -81,6 +79,7 @@ public class ClientHandler extends Thread {
                     }
                 }
 
+                /*
                 //Send received Message to All Clients except to itself
                 if (!(receivedMessage.getText().equals("CloseSocket"))) {
                     for (ClientHandler handler: ActiveClientHandlers) {
@@ -126,9 +125,10 @@ public class ClientHandler extends Thread {
                     break;
                 }
 
+                 */
+
                 // creating Date object
                 Date date = new Date();
-
                 // write on output stream based on the answer from the client
                 switch (receivedMessage.getText()) {
                     case "Date" :
@@ -157,6 +157,45 @@ public class ClientHandler extends Thread {
                         oos.flush();
                         System.out.println("Connected Users requested on Server Side: " + users);
                         break;
+                    case "closeSocket":
+                        System.out.println("Client " + this.s + " sends exit...");
+                        System.out.println("Closing this connection.");
+                        this.s.close();
+                        System.out.println("Connection closed");
+
+                        for (ClientHandler handler: ActiveClientHandlers) {
+                            if (socketEqualWithClientHandler(handler, s)) {
+                                System.out.println("Removing Client: " + handler.s.getPort());
+                                users.remove(username);
+                                ActiveClientHandlers.remove(handler);
+                                try {
+                                    Message updatingUser = new Message("Automatic Message", "updating users", "Automated Message updating users");
+                                    updatingUser.setInternalInformation(true);
+                                    updatingUser.setUsers(users);
+                                    try {
+                                        oos.writeObject(updatingUser);
+                                        oos.flush();
+                                        oos.reset();
+                                    } catch (IOException e) {
+                                        System.out.println("Socket closed");
+                                    }
+                                } catch (Exception ex){
+                                    ex.printStackTrace();
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    default:
+                        for (ClientHandler handler: ActiveClientHandlers) {
+                            if (handler.s.getPort() != s.getPort()) {
+                                receivedMessage.setUsers(users);
+                                System.out.println("Forwarding Message to All Clients: " + receivedMessage.getText() + " Users: " + receivedMessage.getUsers());
+                                handler.oos.writeObject(receivedMessage);
+                                handler.oos.flush();
+                                handler.oos.reset();
+                            }
+                        }
                 }
 
             } catch (Exception e) {
