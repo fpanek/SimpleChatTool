@@ -131,20 +131,12 @@ public class LoginController implements Initializable {
             }
         }
 
-        // TODO: replace logindata with text
         if (!input_nickname.getText().isEmpty() && !input_server.getText().isEmpty()) {
-            LoginData logindata = LoginData.getLoginData();
-            logindata.setUsername(input_nickname.getText());
-            logindata.setServerIP(input_server.getText());
-            logindata.setServerPort(Integer.parseInt(port));
-
             System.out.println("Username from input: " + input_nickname.getText() + ", server: " + input_server.getText() + ", port: " + port);
-
             Client client = new Client();
             myClient = client;
-            client.setConnection(logindata.getServerIP(), logindata.getServerPort());
-            client.setUsername(logindata.getUsername());
-
+            client.setConnection(input_server.getText(), Integer.parseInt(port));
+            client.setUsername(input_nickname.getText());
             changeScene("chatwindow.fxml");
         }
     }
