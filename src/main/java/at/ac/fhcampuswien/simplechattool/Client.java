@@ -159,6 +159,13 @@ public class Client extends Application {
 
         stg.setOnCloseRequest(we -> {
             System.out.println("Stage is closing");
+            ChatController chatController = ChatController.getChatController();
+            try{
+                chatController.disconnectChat();
+                //closeConnection();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             stg.close();
             System.exit(0);
         });

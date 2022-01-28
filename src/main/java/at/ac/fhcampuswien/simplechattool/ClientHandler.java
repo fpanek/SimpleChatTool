@@ -80,72 +80,78 @@ public class ClientHandler extends Thread {
                 // creating Date object
                 Date date = new Date();
                 // write on output stream based on the answer from the client
-                switch (receivedMessage.getText()) {
-                    case "Date" :
-                        toreturn = fordate.format(date);
-                        Message returnMessageDate = new Message("Automatic Message", toreturn, "Automated Message");
-                        returnMessageDate.setUsers(users);
-                        System.out.println("Message Object users: " + returnMessageDate.getUsers());
-                        oos.writeObject(returnMessageDate);
-                        oos.flush();
-                        break;
+                if(!receivedMessage.getInternalInformation()){
+                    switch (receivedMessage.getText()) {
+                        case "Date" :
+                            toreturn = fordate.format(date);
+                            Message returnMessageDate = new Message("Automatic Message", toreturn, "Automated Message");
+                            returnMessageDate.setUsers(users);
+                            System.out.println("Message Object users: " + returnMessageDate.getUsers());
+                            oos.writeObject(returnMessageDate);
+                            oos.flush();
+                            break;
 
-                    case "Time" :
-                        toreturn = fortime.format(date);
-                        Message returnMessageTime = new Message("Automatic Message", toreturn, "Automated Message");
-                        returnMessageTime.setUsers(users);
-                        oos.writeObject(returnMessageTime);
-                        oos.flush();
-                        break;
+                        case "Time" :
+                            toreturn = fortime.format(date);
+                            Message returnMessageTime = new Message("Automatic Message", toreturn, "Automated Message");
+                            returnMessageTime.setUsers(users);
+                            oos.writeObject(returnMessageTime);
+                            oos.flush();
+                            break;
 
-                    case "myUsername" :
-                        toreturn = fortime.format(date);
-                        Message returnConnectedUsers = new Message("Automatic Message", toreturn, "Automated Message Print connected User on Server CMD");
-                        returnConnectedUsers.setInternalInformation(true);
-                        returnConnectedUsers.setUsers(users);
-                        oos.writeObject(returnConnectedUsers);
-                        oos.flush();
-                        System.out.println("Connected Users requested on Server Side: " + users);
-                        break;
-                    case "closeSocket":
-                        System.out.println("Client " + this.s + " sends exit...");
-                        System.out.println("Closing this connection.");
-                        this.s.close();
-                        System.out.println("Connection closed");
-
-                        for (ClientHandler handler: ActiveClientHandlers) {
-                            if (socketEqualWithClientHandler(handler, s)) {
-                                System.out.println("Removing Client: " + handler.s.getPort());
-                                users.remove(username);
-                                ActiveClientHandlers.remove(handler);
-                                try {
-                                    Message updatingUser = new Message("Automatic Message", "updating users", "Automated Message updating users");
-                                    updatingUser.setInternalInformation(true);
-                                    updatingUser.setUsers(users);
-                                    try {
-                                        handler.oos.writeObject(updatingUser);
-                                        handler.oos.flush();
-                                        handler.oos.reset();
-                                    } catch (IOException e) {
-                                        System.out.println("Socket closed");
-                                    }
-                                } catch (Exception ex){
-                                    ex.printStackTrace();
+                        case "myUsername" :
+                            toreturn = fortime.format(date);
+                            Message returnConnectedUsers = new Message("Automatic Message", toreturn, "Automated Message Print connected User on Server CMD");
+                            returnConnectedUsers.setInternalInformation(true);
+                            returnConnectedUsers.setUsers(users);
+                            oos.writeObject(returnConnectedUsers);
+                            oos.flush();
+                            System.out.println("Connected Users requested on Server Side: " + users);
+                            break;
+                        default:          //default = forward Message to all connected clients except to itself
+                            for (ClientHandler handler: ActiveClientHandlers) {
+                                if (handler.s.getPort() != s.getPort()) {
+                                    receivedMessage.setUsers(users);
+                                    System.out.println("Forwarding Message to All Clients: " + receivedMessage.getText() + " Users: " + receivedMessage.getUsers());
+                                    handler.oos.writeObject(receivedMessage);
+                                    handler.oos.flush();
+                                    handler.oos.reset();
                                 }
-                                break;
                             }
-                        }
-                        break;
-                    default:          //default = forward Message to all connected clients except to itself
-                        for (ClientHandler handler: ActiveClientHandlers) {
-                            if (handler.s.getPort() != s.getPort()) {
-                                receivedMessage.setUsers(users);
-                                System.out.println("Forwarding Message to All Clients: " + receivedMessage.getText() + " Users: " + receivedMessage.getUsers());
-                                handler.oos.writeObject(receivedMessage);
-                                handler.oos.flush();
-                                handler.oos.reset();
+                    }
+                }else {
+                    switch (receivedMessage.getText()) {
+                        case "closeSocket":
+                            System.out.println("Client " + this.s + " sends exit...");
+                            System.out.println("Closing this connection.");
+                            this.s.close();
+                            //socketToClose = this.s;
+                            System.out.println("Connection closed");
+
+                            for (ClientHandler handler: ActiveClientHandlers) {
+                                if (socketEqualWithClientHandler(handler, s)) {
+                                    System.out.println("Removing Client: " + handler.s.getPort());
+                                    users.remove(username);
+                                    ActiveClientHandlers.remove(handler);
+                                    try {
+                                        Message updatingUser = new Message("Automatic Message", "updating users", "Automated Message updating users");
+                                        updatingUser.setInternalInformation(true);
+                                        updatingUser.setUsers(users);
+                                        try {
+                                            handler.oos.writeObject(updatingUser);
+                                            handler.oos.flush();
+                                            handler.oos.reset();
+                                        } catch (IOException e) {
+                                            System.out.println("Socket closed");
+                                        }
+                                    } catch (Exception ex){
+                                        ex.printStackTrace();
+                                    }
+                                    break;
+                                }
                             }
-                        }
+                            break;
+                    }
                 }
 
             } catch (Exception e) {

@@ -114,7 +114,7 @@ public class ChatController {
                 if (field_text.getText().isEmpty()) {
                         addOfflineMessage("Please enter a non-empty message!");
                 }
-                else if (field_text.getText().equals("CloseSocket") || field_text.getText().isBlank()){ //TODO Sent Message Close Socket as internal Message - Adapt Server too!
+                else if ( field_text.getText().isBlank()){
                         field_text.clear();
                 }
                 else {
@@ -131,7 +131,10 @@ public class ChatController {
 
         @FXML
         public void disconnectChat() throws Exception {
-                client.sendMessage("CloseSocket");
+                System.out.println("Closing connection to Server.");
+                Message disconnectChatMessage = new Message(client.getUsername(), "closeSocket");
+                disconnectChatMessage.setInternalInformation(true);
+                client.sendObject(disconnectChatMessage);
                 client.closeConnection();
                 LoginController login = new LoginController();
                 login.changeScene("loginwindow.fxml");
@@ -139,6 +142,11 @@ public class ChatController {
 
         @FXML
         public void exitProgram() {
+                try{
+                        disconnectChat();
+                }catch (Exception e){
+                        e.printStackTrace();
+                }
                 Stage stg = Client.getStage();
                 System.out.println("Stage is closing");
                 stg.close();
