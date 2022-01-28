@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.simplechattool;
+package at.ac.fhcampuswien.simplechattool.client;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;

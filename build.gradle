@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'at.ac.fhcampuswien.simplechattool'
-    mainClass = 'at.ac.fhcampuswien.simplechattool.HelloApplication'
+    mainClass = 'at.ac.fhcampuswien.simplechattool.client.Client'
 }
 
 javafx {

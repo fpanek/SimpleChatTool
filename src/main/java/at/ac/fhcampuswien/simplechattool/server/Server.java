@@ -1,4 +1,4 @@
-package at.ac.fhcampuswien.simplechattool;
+package at.ac.fhcampuswien.simplechattool.server;
 
 import java.io.*;
 import java.net.ServerSocket;

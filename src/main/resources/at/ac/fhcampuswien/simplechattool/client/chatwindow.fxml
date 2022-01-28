@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="450.0" prefWidth="670.0" style="-fx-background-color: #ebe9f5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.simplechattool.ChatController">
+<VBox prefHeight="450.0" prefWidth="670.0" style="-fx-background-color: #ebe9f5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.simplechattool.client.ChatController">
   <children>
     <MenuBar prefHeight="12.0" prefWidth="670.0" VBox.vgrow="NEVER" />
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="438.0" prefWidth="746.0" VBox.vgrow="ALWAYS">

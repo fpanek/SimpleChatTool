@@ -1,5 +1,6 @@
-package at.ac.fhcampuswien.simplechattool;
+package at.ac.fhcampuswien.simplechattool.client;
 
+import at.ac.fhcampuswien.simplechattool.Message;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
