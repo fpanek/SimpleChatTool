@@ -121,13 +121,12 @@ public class ClientHandler extends Thread {
                                 }
                             }
                     }
-                }else {
+                }else { //internal Messsage = true
                     switch (receivedMessage.getText()) {
                         case "closeSocket":
                             System.out.println("Client " + this.s + " sends exit...");
                             System.out.println("Closing this connection.");
                             this.s.close();
-                            //socketToClose = this.s;
                             System.out.println("Connection closed");
 
                             for (ClientHandler handler: ActiveClientHandlers) {

@@ -20,9 +20,8 @@ public class Client extends Application {
     private Socket clientSocket;
     private static Stage stg;
     boolean validData = true;
-    //TODO: remove static from variables
-    private static ObjectOutputStream myObjectOutputStream;
-    private static ObjectInputStream myObjectInputStream;
+    private  ObjectOutputStream myObjectOutputStream;
+    private  ObjectInputStream myObjectInputStream;
     private static Socket myClientSocket;
 
     public Client() {
